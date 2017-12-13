@@ -1,7 +1,10 @@
 ﻿<Properties StartupConfiguration="{F3F43FDF-E28E-8ECB-9108-479C91F22EBF}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/WolfAttack.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/PlayerMovement.cs">
     <Files>
       <File FileName="Assets/Script/WolfAttack.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/PlayerMovement.cs" Line="41" Column="1" />
+      <File FileName="Assets/Script/TypeValue.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/PossessEffect.cs" Line="18" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
