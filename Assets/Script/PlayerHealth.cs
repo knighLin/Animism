@@ -32,18 +32,8 @@ public class PlayerHealth : MonoBehaviour {
         HP.SetHumanHP(currentHealth);
     }
 
-
-
     public void Hurt(float Amount, String AttackName)
 	{
-        if (AttackName == "Shoot")
-        {
-            animator.SetTrigger("ShootHit");
-        }
-        else
-        {
-        }
-
        if(PossessedSystem.OnPossessed)//如果附身，扣動物血量
         {
             PossessedSystem.AttachedBody.GetComponent<AnimalHealth>().currentHealth -= Amount;
@@ -52,23 +42,20 @@ public class PlayerHealth : MonoBehaviour {
         {
             currentHealth -= Amount;//扣血
         }
-
-       // Debug.Log(currentHealth+","+Amount);
-		//damaged = true;
-
 		if(currentHealth <= 0 && !isDead)
 		{
 			Death ();
 		}
-       // Debug.Log(currentHealth);
+       
         HP.SetHumanHP(currentHealth);
+        animator.SetFloat("Hurt", Amount);
 	}
 
 	void Death()
 	{
 		isDead = true;
 		playerMovement.enabled = false;
-		animator.enabled = false;//After Change DeadAnimation
+        animator.SetBool("Die",isDead);
 		Destroy(gameObject,4f);
 	}
 
