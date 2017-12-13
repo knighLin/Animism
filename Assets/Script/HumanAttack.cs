@@ -25,7 +25,7 @@ public class HumanAttack : MonoBehaviour {
       
         //set WeaponCollider
         //weaponCollider.enabled = false;
-        Physics.IgnoreCollision(GetComponent<Collider>(), weaponCollider);//讓兩個物體不會產生碰撞
+       // Physics.IgnoreCollision(GetComponent<Collider>(), weaponCollider);//讓兩個物體不會產生碰撞
     }
 
     private void Update()
