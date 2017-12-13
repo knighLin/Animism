@@ -43,6 +43,7 @@ public class PossessedSystem : MonoBehaviour
             if (PossessedCol.enabled == true)
             {
                 possessEffect.OpenPossessedEffectCam();
+                PlayerMovement.m_Animator.SetTrigger("Surgery");
                 //PossessedCol.enabled = true;
                 Time.timeScale = 0.5f;//遊戲慢動作
                 //清掉之前範圍的動物物件和Highlight
@@ -101,16 +102,20 @@ public class PossessedSystem : MonoBehaviour
             Possessor.tag = hit.collider.tag;//將目前人的tag轉為附身後動物的
             AttachedBody = hit.collider.gameObject;//讓新的附身物等於AttachedBody
             //附身者的位置到新被附身物的位置
-            Player.transform.position = new Vector3(AttachedBody.transform.position.x, AttachedBody.transform.position.y - (AttachedBody.transform.localScale.y / 2f), AttachedBody.transform.position.z);
-
+            Player.transform.position = new Vector3(AttachedBody.transform.position.x, 
+                                                    AttachedBody.transform.position.y ,
+                                                    AttachedBody.transform.position.z);
+            
             AttachedBody.transform.parent = gameObject.transform;//將新被附身物變為附身者的子物件
-
-            //AttachedBody.transform.localPosition = Vector3.zero;
-            AttachedBody.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0)); 
+            //- (AttachedBody.transform.localScale.y / 2f)
+            AttachedBody.transform.localPosition = Vector3.zero;
+            AttachedBody.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
             Possessor.SetActive(false);//關掉人型態的任何事
             OnPossessed = true;//已附身
 
-            if(AttachedBody.tag == "Wolf")
+            possessEffect.ClosePossessedEffectCam();
+
+            if (AttachedBody.tag == "Wolf")
             {
                 WolfCount++;
                 Debug.Log(WolfCount);
@@ -125,7 +130,7 @@ public class PossessedSystem : MonoBehaviour
             animalHealth.LinkHP();
 
             //附身後抓取動物的動畫
-           PlayerMovement.m_Animator = AttachedBody.GetComponent<Animator>();
+            PlayerMovement.m_Animator = AttachedBody.GetComponent<Animator>();
 
             switch (AttachedBody.transform.tag)
             {//將附身物的標籤傳到管理者，方便變換動物數值
@@ -144,6 +149,7 @@ public class PossessedSystem : MonoBehaviour
             }
         }
         CloseRangOnLight();//附身結束關掉Highlight
+       
     }
 
     void OnTriggerEnter(Collider Object)//送出訊息
@@ -163,7 +169,7 @@ public class PossessedSystem : MonoBehaviour
         //將範圍內可以被附身動物的Highlight打開
         highlighter.Add(Object.GetComponent<Highlighter>());
         highlighterConstant.Add(Object.GetComponent<HighlighterConstant>());
-       
+
         if (highlighter != null && highlighterConstant != null)
         {
             for (int i = 0; i < RangeObject.Count; i++)
@@ -172,7 +178,7 @@ public class PossessedSystem : MonoBehaviour
                 highlighter[i].enabled = true;
             }
         }
-       
+
     }
 
     public void LifedPossessed()//解除變身
