@@ -14,7 +14,7 @@ public class TypeValue : MonoBehaviour
 	{
 		_MoveSpeed = 1.0f;
 		_RunSpeed = 3.0f;
-		_JumpPower = 10f;
+		_JumpPower = 6f;
 		_playerAtk = 1f;
 		_playerDef = 1f;
 	}
@@ -32,7 +32,7 @@ public class TypeValue : MonoBehaviour
 	{
 		_MoveSpeed = 3.0f;
 		_RunSpeed = 6.0f;
-		_JumpPower = 15f;
+		_JumpPower = 10f;
 		_playerAtk = 7f;
 		_playerDef = 4f;
 	}

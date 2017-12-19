@@ -39,11 +39,11 @@ public class PossessedSystem : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.E))//打開關閉附身系統
         {
-            PossessedCol.enabled = !PossessedCol.enabled;
-            if (PossessedCol.enabled == true)
+            PossessedCol.enabled = !PossessedCol.enabled;//當附身範圍collider是關閉則打開，反之則打開
+            if (PossessedCol.enabled == true)//當附身範圍collider打開時
             {
-                possessEffect.OpenPossessedEffectCam();
-                PlayerMovement.m_Animator.SetTrigger("Surgery");
+                possessEffect.OpenPossessedEffectCam();//開啟附身的運鏡
+                PlayerMovement.m_Animator.SetTrigger("Surgery");//播放附身動畫
                 //PossessedCol.enabled = true;
                 Time.timeScale = 0.5f;//遊戲慢動作
                 //清掉之前範圍的動物物件和Highlight
@@ -51,10 +51,10 @@ public class PossessedSystem : MonoBehaviour
                 highlighter.Clear();
                 highlighterConstant.Clear();
             }
-            else
+            else//附身範圍collider關閉
             {
-                possessEffect.ClosePossessedEffectCam();
-                CloseRangOnLight();
+                possessEffect.ClosePossessedEffectCam();//關閉附身運鏡
+                CloseRangOnLight();//關掉附身物的附身效果shader
                 Time.timeScale = 1f;//取消慢動作
             }
         }
@@ -63,12 +63,12 @@ public class PossessedSystem : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.Q) && AttachedBody != null)//解除附身
         {
-            LifedPossessed();
-            animalHealth.CancelLink();
+            LifedPossessed();//離開附身物
+            animalHealth.CancelLink();//解除與附身物的血條連動
         }
     }
 
-    void MouseChoosePossessed()//新的
+    void MouseChoosePossessed()//滑鼠點擊附身物
     {
         if (Input.GetMouseButtonDown(0) && PossessedCol.enabled == true)
         {
@@ -83,7 +83,7 @@ public class PossessedSystem : MonoBehaviour
                         EnterPossessed();//執行附身
                         Time.timeScale = 1f;//慢動作回覆
                         PossessedCol.enabled = false;//關掉附身範圍
-                        possessEffect.ClosePossessedEffectCam();
+                        possessEffect.ClosePossessedEffectCam();//關閉附身運鏡
                     }
                 }
             }
@@ -103,17 +103,16 @@ public class PossessedSystem : MonoBehaviour
             AttachedBody = hit.collider.gameObject;//讓新的附身物等於AttachedBody
             //附身者的位置到新被附身物的位置
             Player.transform.position = new Vector3(AttachedBody.transform.position.x, 
-                                                    AttachedBody.transform.position.y ,
+                                                    AttachedBody.transform.position.y,
                                                     AttachedBody.transform.position.z);
             
             AttachedBody.transform.parent = gameObject.transform;//將新被附身物變為附身者的子物件
             //- (AttachedBody.transform.localScale.y / 2f)
-            AttachedBody.transform.localPosition = Vector3.zero;
+            //AttachedBody.transform.localPosition = Vector3.zero;
             AttachedBody.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
             Possessor.SetActive(false);//關掉人型態的任何事
             OnPossessed = true;//已附身
 
-            possessEffect.ClosePossessedEffectCam();
 
             if (AttachedBody.tag == "Wolf")
             {
