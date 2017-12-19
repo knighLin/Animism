@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
-{
-	public static string NowType;
-	public static string PreviousType;
+public class PlayerManager : MonoBehaviour
+{ 
+	public string NowType;
+	public string PreviousType;
 	private TypeValue typevalue;
 	
 	//GameObject Player;//控制的角色
@@ -44,6 +44,11 @@ public class GameManager : MonoBehaviour
 	public void TurnType (string TypeTag, string Previous)//收到物件的回饋
 	{
 		switch (TypeTag) {
+
+            case "Human":
+                NowType = "Human";
+                PreviousType = Previous;
+                break;
 
 		case "Bear":
 			NowType = "Bear";
