@@ -6,7 +6,7 @@ using UnityEngine;
 public class PossessedSystem : MonoBehaviour
 {
     //call other class
-    private GameManager gameManager;
+    private PlayerManager playerManager;
     private PossessEffect possessEffect;
     private AnimalHealth animalHealth;
     private List<Highlighter> highlighter = new List<Highlighter>();
@@ -28,7 +28,7 @@ public class PossessedSystem : MonoBehaviour
 
     void Awake()
     {
-        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        playerManager = GetComponent<PlayerManager>();
         possessEffect = GameObject.FindGameObjectWithTag("GameManager").GetComponent<PossessEffect>();
         Possessor = GameObject.Find("Human");
         PossessedCol = GetComponent<SphereCollider>();
@@ -102,10 +102,10 @@ public class PossessedSystem : MonoBehaviour
             Possessor.tag = hit.collider.tag;//將目前人的tag轉為附身後動物的
             AttachedBody = hit.collider.gameObject;//讓新的附身物等於AttachedBody
             //附身者的位置到新被附身物的位置
-            Player.transform.position = new Vector3(AttachedBody.transform.position.x, 
+            Player.transform.position = new Vector3(AttachedBody.transform.position.x,
                                                     AttachedBody.transform.position.y,
                                                     AttachedBody.transform.position.z);
-            
+
             AttachedBody.transform.parent = gameObject.transform;//將新被附身物變為附身者的子物件
             //- (AttachedBody.transform.localScale.y / 2f)
             //AttachedBody.transform.localPosition = Vector3.zero;
@@ -134,13 +134,13 @@ public class PossessedSystem : MonoBehaviour
             switch (AttachedBody.transform.tag)
             {//將附身物的標籤傳到管理者，方便變換動物數值
                 case "Bear":
-                    gameManager.TurnType("Bear", PreviousTag);
+                    playerManager.TurnType("Bear", PreviousTag);
                     deer.SetActive(false);
                     wolf.SetActive(false);
                     bear.SetActive(true);
                     break;
                 case "Wolf":
-                    gameManager.TurnType("Wolf", PreviousTag);
+                    playerManager.TurnType("Wolf", PreviousTag);
                     deer.SetActive(false);
                     wolf.SetActive(true);
                     bear.SetActive(false);
@@ -148,7 +148,7 @@ public class PossessedSystem : MonoBehaviour
             }
         }
         CloseRangOnLight();//附身結束關掉Highlight
-       
+
     }
 
     void OnTriggerEnter(Collider Object)//送出訊息
@@ -182,17 +182,16 @@ public class PossessedSystem : MonoBehaviour
 
     public void LifedPossessed()//解除變身
     {
-        GameManager.PreviousType = AttachedBody.tag;//儲存變回人之前的型態
         AttachedBody.transform.parent = null;//將玩家物件分離出被附身物
         Player.transform.position = new Vector3(AttachedBody.transform.position.x + 1.5f, transform.position.y + 0.5f, AttachedBody.transform.position.z + 1.5f);
         //將被附身物與人的位置分離
-        //PreviousTag = Possessor.tag;//將變回人形的型態存到上一個Tag
         PlayerMovement.m_Animator = Possessor.GetComponent<Animator>();//重新抓人的動畫
         Possessor.tag = "Human";//將型態變回Human
-        GameManager.NowType = "Human";//將現在型態變回Human
         Possessor.SetActive(true);//打開人型態的任何事
+        playerManager.TurnType("Human", AttachedBody.tag);//將標籤傳至管理者，變換數值
         AttachedBody = null;//解除附身後清除附身物，防止解除附身後按Ｑ還有反應
         OnPossessed = false;//取消附身
+
         deer.SetActive(false);
         wolf.SetActive(false);
         bear.SetActive(false);

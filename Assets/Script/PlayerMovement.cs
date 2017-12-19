@@ -5,9 +5,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     //use other class
-    private GameObject gameManager;
     private TypeValue value;
-
+    private AnimEvents animEvent;
     //方向位置
     private Transform m_Cam;//參考場景中地主相機位置
     private Vector3 m_CamForward;//相機當前面向的位置
@@ -33,10 +32,13 @@ public class PlayerMovement : MonoBehaviour
                            //Vector3 m_CapsuleCenter;//膠囊中心
                            //CapsuleCollider m_Capsule;
 
+
+
     void Awake()
     {
-        gameManager = GameObject.Find("GameManager");
-        value = gameManager.GetComponent<TypeValue>();
+        value = GetComponent<TypeValue>();
+        //animEvent = GameObject.FindWithTag("Human").GetComponent<AnimEvents>();
+        //animEvent.aaa = Jump;
         m_Rigidbody = GetComponent<Rigidbody>();
         m_Animator = GameObject.FindWithTag("Human").GetComponent<Animator>();
 
@@ -45,7 +47,9 @@ public class PlayerMovement : MonoBehaviour
         // m_CapsuleCenter = m_Capsule.center;
         m_OrigGroundCheckDistance = m_GroundCheckDistance;//保存一下地面检查值 
     }
-
+    //private void Jump(float a){
+    //    m_Rigidbody.velocity = new Vector3(m_Rigidbody.velocity.x, value.JumpPower, m_Rigidbody.velocity.z);//保存x、z轴速度，并给以y轴向上的速度  
+    //}
     private void Start()
     {
         // get the transform of the main camera
@@ -128,6 +132,7 @@ public class PlayerMovement : MonoBehaviour
             { // jump!
                 //m_Rigidbody.AddForce(Vector3.up * 150f);  
                 m_Rigidbody.velocity = new Vector3(m_Rigidbody.velocity.x, value.JumpPower, m_Rigidbody.velocity.z);//保存x、z轴速度，并给以y轴向上的速度  
+
                 m_IsGrounded = false;
                 m_Animator.applyRootMotion = false;
                 m_GroundCheckDistance = 0.1f;
@@ -153,7 +158,7 @@ public class PlayerMovement : MonoBehaviour
         m_Animator.SetFloat("Speed", m_Rigidbody.velocity.magnitude, 0.1f, Time.deltaTime);
         m_Animator.SetFloat("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
         m_Animator.SetBool("OnGround", m_IsGrounded);
-        if (!m_IsGrounded)
+        if (m_Jump)
         {
             m_Animator.SetFloat("Jump", m_Rigidbody.velocity.y);
         }
@@ -214,6 +219,7 @@ public class PlayerMovement : MonoBehaviour
             //m_Animator.applyRootMotion = false;
         }
     }
+
 }
 
 
