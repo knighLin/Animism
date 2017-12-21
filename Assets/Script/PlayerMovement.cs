@@ -131,8 +131,7 @@ public class PlayerMovement : MonoBehaviour
             // 确定当前是否能跳  ：
             if (Input.GetKeyDown(KeyCode.Space))
             { // jump!
-                //m_Rigidbody.AddForce(Vector3.up * 150f); 
-                m_Animator.SetTrigger("Jump");
+                //m_Animator.SetTrigger("Jump");
                 m_Rigidbody.velocity = new Vector3(m_Rigidbody.velocity.x, value.JumpPower, m_Rigidbody.velocity.z);//保存x、z轴速度，并给以y轴向上的速度  
                 //m_CapsuleHeight = m_Animator.GetFloat("ColliderHeight");
                 m_IsGrounded = false;
@@ -144,7 +143,6 @@ public class PlayerMovement : MonoBehaviour
         {//乘數增加重力：
             Vector3 extraGravityForce = (Physics.gravity * m_GravityMultiplier) - Physics.gravity;
             m_Rigidbody.AddForce(extraGravityForce);
-
             m_GroundCheckDistance = m_Rigidbody.velocity.y < 0 ? m_OrigGroundCheckDistance : 0.01f;//上升的时候不判断是否在地面上   
         }
 
@@ -160,23 +158,24 @@ public class PlayerMovement : MonoBehaviour
         m_Animator.SetFloat("Speed", m_Rigidbody.velocity.magnitude, 0.1f, Time.deltaTime);
         m_Animator.SetFloat("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
         m_Animator.SetBool("OnGround", m_IsGrounded);
-        //if (m_Jump)
-        //{
-        //    m_Animator.SetTrigger("Jump");
-        //}
+        if (!m_IsGrounded)
+        {
+            //m_Animator.SetTrigger("Jump");
+            m_Animator.SetFloat("Jump", m_Rigidbody.velocity.y);
+        }
 
         // 计算哪只脚是在后面的，所以可以判断跳跃动画中哪只脚先离开地面  
         // 这里的代码依赖于特殊的跑步循环，假设某只脚会在未来的0到0.5秒内超越另一只脚  获取当前是在哪个脚，Repeat相当于取模
-        //float runCycle =
-        //    Mathf.Repeat(
-        //        m_Animator.GetCurrentAnimatorStateInfo(0).normalizedTime + m_RunCycleLegOffset, 1);
-        //float jumpLeg = (runCycle < k_Half ? 1 : -1) * m_ForwardAmount;
-        //if (m_IsGrounded)
-        //{
-        //    m_Animator.SetFloat("JumpLeg", jumpLeg);
-        //}
+        float runCycle =
+            Mathf.Repeat(
+                m_Animator.GetCurrentAnimatorStateInfo(0).normalizedTime + m_RunCycleLegOffset, 1);
+        float jumpLeg = (runCycle < k_Half ? 1 : -1) * m_ForwardAmount;
+        if (m_IsGrounded)
+        {
+            m_Animator.SetFloat("JumpLeg", jumpLeg);
+        }
 
-        //// 这边的方法允许我们在inspector视图中调整动画的速率，他会因为根运动影响移动的速度  
+        // 这边的方法允许我们在inspector视图中调整动画的速率，他会因为根运动影响移动的速度  
         //if (m_IsGrounded && move.magnitude > 0)
         //{
         //    m_Animator.speed = m_AnimSpeedMultiplier;

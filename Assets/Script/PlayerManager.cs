@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 { 
-	public string NowType;
-	public string PreviousType;
+    private string NowType;
+    private string PreviousType;
 	private TypeValue typevalue;
 	
 	//GameObject Player;//控制的角色
@@ -15,15 +15,10 @@ public class PlayerManager : MonoBehaviour
 	{
 		NowType = "Human";//一開始型態為Human
 		typevalue = GetComponent<TypeValue> ();
-		//Player = GameObject.Find("Player");
-		
 	}
 
 	void Update ()
 	{
-        //Debug.Log ("N" + NowType);
-        //Debug.Log ("P" + PreviousType);
-
         if(NowType != PreviousType)//如果數值沒有變化就不做數值改變，反之則要
         {
             switch (NowType)

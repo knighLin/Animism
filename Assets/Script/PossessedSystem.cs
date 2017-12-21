@@ -30,9 +30,9 @@ public class PossessedSystem : MonoBehaviour
     {
         playerManager = GetComponent<PlayerManager>();
         possessEffect = GameObject.FindGameObjectWithTag("GameManager").GetComponent<PossessEffect>();
-        Possessor = GameObject.Find("Human");
+        Possessor = GameObject.FindWithTag("Human");
         PossessedCol = GetComponent<SphereCollider>();
-        Player = GameObject.Find("Player");
+        Player = GameObject.FindWithTag("Player");
     }
 
     private void Update()
@@ -123,13 +123,14 @@ public class PossessedSystem : MonoBehaviour
             {
                 WolfCount = 0;
             }
+            //附身後抓取動物的動畫
+            PlayerMovement.m_Animator = AttachedBody.GetComponent<Animator>();
 
             //附身後抓取附身動物的HP腳本，將動物血量跟主角血量做連動
             animalHealth = AttachedBody.GetComponent<AnimalHealth>();
             animalHealth.LinkHP();
 
-            //附身後抓取動物的動畫
-            PlayerMovement.m_Animator = AttachedBody.GetComponent<Animator>();
+
 
             switch (AttachedBody.transform.tag)
             {//將附身物的標籤傳到管理者，方便變換動物數值

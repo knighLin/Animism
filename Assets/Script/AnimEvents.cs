@@ -16,7 +16,6 @@ public class AnimEvents : MonoBehaviour
 
     public void JumpEvent()
     {
-        
         //Jump(typeValue.JumpPower);
         Debug.Log("5678");
     }
