@@ -136,9 +136,10 @@ public class PossessedSystem : MonoBehaviour
             {//將附身物的標籤傳到管理者，方便變換動物數值
                 case "Bear":
                     playerManager.TurnType("Bear", PreviousTag);
+                    bear.SetActive(true);
                     deer.SetActive(false);
                     wolf.SetActive(false);
-                    bear.SetActive(true);
+
                     break;
                 case "Wolf":
                     playerManager.TurnType("Wolf", PreviousTag);
