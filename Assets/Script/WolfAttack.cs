@@ -1,18 +1,23 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class WolfAttack : MonoBehaviour
 {
+    private EnemyHealth enemyHealth;
+    private TypeValue typeValue;
 
-    public Rigidbody WolfGuards;//召喚狼
     private Animator Anim;
+
+    [SerializeField] private Rigidbody WolfGuards;//召喚狼
+    [SerializeField] private Vector3 GuardPoint1;
+    [SerializeField] private Vector3 GuardPoint2;
 
     // Use this for initialization
     void Awake()
     {
-        Anim = gameObject.GetComponent<Animator>();
+        Anim = GetComponent<Animator>();
+        typeValue = GameObject.FindWithTag("Player").GetComponent<TypeValue>();
     }
 
     // Update is called once per frame
@@ -27,22 +32,29 @@ public class WolfAttack : MonoBehaviour
 
             if (Input.GetMouseButtonDown(1) && PossessedSystem.WolfCount >= 3)
             {
-                Vector3 InstantiatePoint = new Vector3(UnityEngine.Random.Range(PossessedSystem.AttachedBody.transform.position.x - 1.5f, transform.position.x + 1.5f),
-                                                       PossessedSystem.AttachedBody.transform.position.y,
-                                                       UnityEngine.Random.Range(PossessedSystem.AttachedBody.transform.position.z - 1.5f, PossessedSystem.AttachedBody.transform.position.z + 1.5f));
-
-                Instantiate(WolfGuards, InstantiatePoint, Quaternion.identity);
-
-                Vector3 InstantiatePoint2 = new Vector3(UnityEngine.Random.Range(PossessedSystem.AttachedBody.transform.position.x - 1.5f, transform.position.x + 1.5f),
-                                                       PossessedSystem.AttachedBody.transform.position.y,
-                                                       UnityEngine.Random.Range(PossessedSystem.AttachedBody.transform.position.z - 1.5f, PossessedSystem.AttachedBody.transform.position.z + 1.5f));
-
-                Instantiate(WolfGuards, InstantiatePoint2, Quaternion.identity);
+               
+                Instantiate(WolfGuards, GuardPoint1, Quaternion.identity);
+                Instantiate(WolfGuards, GuardPoint2, Quaternion.identity);
                 PossessedSystem.WolfCount = 0;
             }
         }
 
 
+    }
+    void OnTriggerEnter(Collider other)
+    {
+        
+        if (other.tag == "Enemy")
+        {
+            enemyHealth = other.GetComponent<EnemyHealth>();
+            // Debug.Log("Fuck");
+            if (enemyHealth.currentHealth > 0)
+            {//當Enemy的還有血量時
+                var damage = typeValue.PlayerAtk * Random.Range(0.9f, 1.1f);
+                damage = Mathf.Round(damage);
+                enemyHealth.Hurt(damage);
+            }
+        }
     }
 
 }

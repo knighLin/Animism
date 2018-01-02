@@ -100,7 +100,7 @@ public class PossessedSystem : MonoBehaviour
             }
             PreviousTag = Possessor.tag;//附身後將先前附身的tag存起來
             Possessor.tag = hit.collider.tag;//將目前人的tag轉為附身後動物的
-            AttachedBody = hit.collider.gameObject;//讓新的附身物等於AttachedBody
+            AttachedBody = hit.collider.gameObject.transform.parent.gameObject;//讓新的附身物等於AttachedBody
             //附身者的位置到新被附身物的位置
             Player.transform.position = new Vector3(AttachedBody.transform.position.x,
                                                     AttachedBody.transform.position.y,
@@ -149,7 +149,7 @@ public class PossessedSystem : MonoBehaviour
                     break;
             }
         }
-        CloseRangOnLight();//附身結束關掉Highlight
+       //CloseRangOnLight();//附身結束關掉Highlight
 
     }
 
@@ -168,8 +168,8 @@ public class PossessedSystem : MonoBehaviour
         RangeObject.Add(Object);
 
         //將範圍內可以被附身動物的Highlight打開
-        highlighter.Add(Object.GetComponent<Highlighter>());
-        highlighterConstant.Add(Object.GetComponent<HighlighterConstant>());
+        highlighter.Add(Object.transform.parent.GetComponent<Highlighter>());
+        highlighterConstant.Add(Object.transform.parent.GetComponent<HighlighterConstant>());
 
         if (highlighter != null && highlighterConstant != null)
         {

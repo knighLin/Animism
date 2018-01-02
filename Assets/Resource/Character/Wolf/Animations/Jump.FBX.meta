@@ -448,7 +448,7 @@ ModelImporter:
     - serializedVersion: 16
       name: JumpA
       takeName: Take 001
-      firstFrame: 10
+      firstFrame: 9
       lastFrame: 11
       wrapMode: 0
       orientationOffsetY: 0
@@ -838,7 +838,7 @@ ModelImporter:
     - serializedVersion: 16
       name: JumpB
       takeName: Take 001
-      firstFrame: 12
+      firstFrame: 14
       lastFrame: 17
       wrapMode: 0
       orientationOffsetY: 0

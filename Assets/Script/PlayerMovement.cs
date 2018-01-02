@@ -29,10 +29,9 @@ public class PlayerMovement : MonoBehaviour
     float m_TurnAmount;//轉向值
     float m_ForwardAmount;//前進值
     Vector3 m_GroundNormal;//地面法向量
-    float m_CapsuleHeight;//膠囊高度
-    Vector3 m_CapsuleCenter;//膠囊中心
-    CapsuleCollider m_Capsule;
-
+    //float m_CapsuleHeight;//膠囊高度
+    //Vector3 m_CapsuleCenter;//膠囊中心
+    //CapsuleCollider m_Capsule;
 
 
     void Awake()
@@ -43,9 +42,9 @@ public class PlayerMovement : MonoBehaviour
         m_Rigidbody = GetComponent<Rigidbody>();
         m_Animator = GameObject.FindWithTag("Human").GetComponent<Animator>();
 
-        m_Capsule = GameObject.FindWithTag("Human").GetComponent<CapsuleCollider>();
-         m_CapsuleHeight = m_Capsule.height;
-         m_CapsuleCenter = m_Capsule.center;
+        //m_Capsule = GameObject.FindWithTag("Human").GetComponent<CapsuleCollider>();
+         //m_CapsuleHeight = m_Capsule.height;
+         //m_CapsuleCenter = m_Capsule.center;
         m_OrigGroundCheckDistance = m_GroundCheckDistance;//保存一下地面检查值 
     }
     //public void Jump(){
@@ -64,6 +63,7 @@ public class PlayerMovement : MonoBehaviour
                 "Warning: no main camera found. Third person character needs a Camera tagged \"MainCamera\", for camera-relative controls.", gameObject);
             // we use self-relative controls in this case, which probably isn't what the user wants, but hey, we warned them!
         }
+
 
     }
     private void Update()
@@ -131,10 +131,9 @@ public class PlayerMovement : MonoBehaviour
             // 确定当前是否能跳  ：
             if (Input.GetKeyDown(KeyCode.Space))
             { // jump!
-                //m_Animator.SetTrigger("Jump");
                 m_Rigidbody.velocity = new Vector3(m_Rigidbody.velocity.x, value.JumpPower, m_Rigidbody.velocity.z);//保存x、z轴速度，并给以y轴向上的速度  
-                m_CapsuleHeight = m_Animator.GetFloat("ColliderHeight");
-                m_Capsule.height = m_CapsuleHeight;
+                //m_CapsuleHeight = m_Animator.GetFloat("ColliderHeight");
+                //m_Capsule.height = m_CapsuleHeight;
                 m_IsGrounded = false;
                 m_Animator.applyRootMotion = false;
                 m_GroundCheckDistance = 0.1f;
