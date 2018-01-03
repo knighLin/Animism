@@ -1,0 +1,256 @@
+fileFormatVersion: 2
+guid: c4b4afbb7ff6ad748bb3251e7848ab1c
+timeCreated: 1514679516
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: ArmRing
+    100002: Belt
+    100004: Body
+    100006: Earring_Left
+    100008: Earring_Right
+    100010: Earrings
+    100012: Eyes
+    100014: Feather
+    100016: Feather_Large
+    100018: HandRing_Left
+    100020: HandRing_Right
+    100022: Hat
+    100024: HatFeather
+    100026: HeadRing
+    100028: Necklace
+    100030: Pants
+    100032: Pants_Left
+    100034: Pants_Right
+    100036: //RootNode
+    100038: Pine
+    100040: Rings
+    100042: Skirt_Back
+    100044: Skirt_Front
+    100046: Skirts
+    100048: Weapon01
+    100050: Weapon1
+    100052: WeaponFeather01
+    100054: WeaponFeather02
+    100056: WeaponRing01
+    400000: ArmRing
+    400002: Belt
+    400004: Body
+    400006: Earring_Left
+    400008: Earring_Right
+    400010: Earrings
+    400012: Eyes
+    400014: Feather
+    400016: Feather_Large
+    400018: HandRing_Left
+    400020: HandRing_Right
+    400022: Hat
+    400024: HatFeather
+    400026: HeadRing
+    400028: Necklace
+    400030: Pants
+    400032: Pants_Left
+    400034: Pants_Right
+    400036: Pine
+    400038: //RootNode
+    400040: Rings
+    400042: Skirt_Back
+    400044: Skirt_Front
+    400046: Skirts
+    400048: Weapon01
+    400050: Weapon1
+    400052: WeaponFeather01
+    400054: WeaponFeather02
+    400056: WeaponRing01
+    2300000: ArmRing
+    2300002: Belt
+    2300004: Body
+    2300006: Earring_Left
+    2300008: Earring_Right
+    2300010: Eyes
+    2300012: Feather
+    2300014: Feather_Large
+    2300016: HandRing_Left
+    2300018: HandRing_Right
+    2300020: Hat
+    2300022: HeadRing
+    2300024: Necklace
+    2300026: Pants_Left
+    2300028: Pants_Right
+    2300030: Skirt_Back
+    2300032: Skirt_Front
+    2300034: Weapon01
+    2300036: WeaponFeather01
+    2300038: WeaponFeather02
+    2300040: WeaponRing01
+    3300000: ArmRing
+    3300002: Belt
+    3300004: Body
+    3300006: Earring_Left
+    3300008: Earring_Right
+    3300010: Eyes
+    3300012: Feather
+    3300014: Feather_Large
+    3300016: HandRing_Left
+    3300018: HandRing_Right
+    3300020: Hat
+    3300022: HeadRing
+    3300024: Necklace
+    3300026: Pants_Left
+    3300028: Pants_Right
+    3300030: Skirt_Back
+    3300032: Skirt_Front
+    3300034: Weapon01
+    3300036: WeaponFeather01
+    3300038: WeaponFeather02
+    3300040: WeaponRing01
+    4300000: Eyes
+    4300002: Body
+    4300004: Belt
+    4300006: Necklace
+    4300008: Earring_Left
+    4300010: Earring_Right
+    4300012: Pants_Left
+    4300014: Pants_Right
+    4300016: Skirt_Front
+    4300018: Skirt_Back
+    4300020: HeadRing
+    4300022: HandRing_Left
+    4300024: HandRing_Right
+    4300026: ArmRing
+    4300028: Hat
+    4300030: Feather_Large
+    4300032: Feather
+    4300034: Weapon01
+    4300036: WeaponFeather01
+    4300038: WeaponFeather02
+    4300040: WeaponRing01
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Eyes1
+    second: {fileID: 2100000, guid: d13083969cb172d4089136c05445975a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Feather1
+    second: {fileID: 2100000, guid: 1d082d8a922ed814aa49314f8874fbf8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Feather_Large1
+    second: {fileID: 2100000, guid: 1e47a24a691463843910adbf1f3bbdfc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hat1
+    second: {fileID: 2100000, guid: 1e47a24a691463843910adbf1f3bbdfc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pine1
+    second: {fileID: 2100000, guid: 1e47a24a691463843910adbf1f3bbdfc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Skin
+    second: {fileID: 2100000, guid: f330a8f34ca0d3447a5a8902e056ec44, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Skirt
+    second: {fileID: 2100000, guid: 7299e39c312735d4c85c0cd39cafe766, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Weapon2
+    second: {fileID: 2100000, guid: 585fc4f83833d0741bbd99f1d8140fb0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WeaponFeather
+    second: {fileID: 2100000, guid: f35e3a862450ada478eba0730bd9fb0a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WeaponRing
+    second: {fileID: 2100000, guid: 585fc4f83833d0741bbd99f1d8140fb0, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

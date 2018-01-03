@@ -275,57 +275,57 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: NMainCharacter_03_Eyes1
-    second: {fileID: 2100000, guid: c8ada69e1788d924b83ecb5ba041174a, type: 2}
+    second: {fileID: 2100000, guid: d13083969cb172d4089136c05445975a, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: NMainCharacter_03_Feather1
-    second: {fileID: 2100000, guid: a37ae269811a8224aaff2f37f7ab9410, type: 2}
+    second: {fileID: 2100000, guid: 1d082d8a922ed814aa49314f8874fbf8, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: NMainCharacter_03_Feather_Large1
-    second: {fileID: 2100000, guid: c1914f11c24c1f446b6224b7b02fd14b, type: 2}
+    second: {fileID: 2100000, guid: 1e47a24a691463843910adbf1f3bbdfc, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: NMainCharacter_03_Hat1
-    second: {fileID: 2100000, guid: dbe524658ab052b4c859ec473751df52, type: 2}
+    second: {fileID: 2100000, guid: 1e47a24a691463843910adbf1f3bbdfc, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: NMainCharacter_03_Pine1
-    second: {fileID: 2100000, guid: 3b7bf320979bb3e4db525f132b96af5f, type: 2}
+    second: {fileID: 2100000, guid: 1e47a24a691463843910adbf1f3bbdfc, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: NMainCharacter_03_Skin
-    second: {fileID: 2100000, guid: 8bca9d38fad75b0419ab34503e6195de, type: 2}
+    second: {fileID: 2100000, guid: f330a8f34ca0d3447a5a8902e056ec44, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: NMainCharacter_03_Skirt
-    second: {fileID: 2100000, guid: e7296fbd5525daf4bb6603333c491dbd, type: 2}
+    second: {fileID: 2100000, guid: 7299e39c312735d4c85c0cd39cafe766, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: NMainCharacter_04_Weapon2
-    second: {fileID: 2100000, guid: 652a1b047b70d3d4580be34999db36ab, type: 2}
+    second: {fileID: 2100000, guid: 585fc4f83833d0741bbd99f1d8140fb0, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: NMainCharacter_04_WeaponFeather
-    second: {fileID: 2100000, guid: 929554ac64c9b9644883ffa4fa68611b, type: 2}
+    second: {fileID: 2100000, guid: f35e3a862450ada478eba0730bd9fb0a, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: NMainCharacter_04_WeaponRing
-    second: {fileID: 2100000, guid: 86c28cc8f9ab7354f9962970f981cd0d, type: 2}
+    second: {fileID: 2100000, guid: 585fc4f83833d0741bbd99f1d8140fb0, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
