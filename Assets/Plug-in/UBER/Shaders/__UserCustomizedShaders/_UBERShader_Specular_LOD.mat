@@ -6,20 +6,21 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: PineEquipmentSkirt
-  m_Shader: {fileID: 4800000, guid: 610a7fc62a05d864f9debf6005e5e260, type: 3}
-  m_ShaderKeywords: _METALLICGLOSSMAP _NORMALMAP _SPECGLOSSMAP _WETNESS_NONE
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 1
+  m_Name: _UBERShader_Specular_LOD
+  m_Shader: {fileID: 4800000, guid: 8793935a89241024a8b9616db346a230, type: 3}
+  m_ShaderKeywords: _ALPHABLEND_ON _OCCLUSION_FROM_ALBEDO_ALPHA _WETNESS_NONE
+  m_LightmapFlags: 5
+  m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
+  m_CustomRenderQueue: 3000
+  stringTagMap:
+    RenderType: Transparent
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: f219cc0105e431643864feba73dece28, type: 3}
+        m_Texture: {fileID: 2800000, guid: 4e3d8f497b775904a831d67d046a03ab, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap2:
@@ -47,15 +48,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 46dcfde639fc79a4e87b76db8ebae5c6, type: 3}
+        m_Texture: {fileID: 2800000, guid: d23c1239fd402f740bd39cc90d86cdc4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex2:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: 2b14f840dd62404478f6aa8acd4b778d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMapDetail:
@@ -71,7 +68,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
-        m_Texture: {fileID: 2800000, guid: 3a09ef37d6777b0438cc341d0e36c396, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
@@ -107,7 +104,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
-        m_Texture: {fileID: 2800000, guid: a8f627f754b106a4ab672584256819fb, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6ba269a4bb6c6484d896a008207aba9b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap2:
@@ -147,7 +144,7 @@ Material:
     - _DistStepsShadows: 64
     - _DropletsAnimSpeed: 10
     - _DropletsTiling: 1
-    - _DstBlend: 0
+    - _DstBlend: 10
     - _EmissionPulsateSpeed: 0
     - _FlowCycleScale: 2
     - _Frost: 0
@@ -160,19 +157,15 @@ Material:
     - _GlitterMask: 0
     - _GlitterShown: 1
     - _GlitterTiling: 1
-    - _GlossMapScale: 1
-    - _GlossMax: 0
+    - _GlossMax: 1
     - _GlossMin: 0
-    - _Glossiness: 0.5
+    - _Glossiness: 0.563
     - _Glossiness2: 1
-    - _GlossyReflections: 1
     - _MainShown: 1
-    - _Metallic: 0
     - _MinPulseBrightness: 0
-    - _Mode: 0
-    - _OcclusionStrength: 0.2
+    - _Mode: 2
+    - _OcclusionStrength: 0
     - _OcclusionStrength2: 0
-    - _Occlusion_from_albedo_alpha: 0
     - _POM: 0
     - _POMCurvatureType: 0
     - _POMPrecomputedFlag: 0
@@ -184,7 +177,7 @@ Material:
     - _PanEmissionMask: 0
     - _PanUSpeed: 0
     - _PanVSpeed: 0
-    - _Parallax: 0.02
+    - _Parallax: 0.04
     - _Parallax2: 0.04
     - _Phong: 0
     - _Pierceable: 0
@@ -207,7 +200,6 @@ Material:
     - _ShadowCull: 2
     - _ShadowMIPbias: 0
     - _ShadowStrength: 1
-    - _SmoothnessTextureChannel: 0
     - _Snow: 0
     - _SnowBumpMacro: 0.1
     - _SnowBumpMicro: 0.08
@@ -230,8 +222,7 @@ Material:
     - _SnowWorldMapping: 0
     - _Softness: 2
     - _SoftnessFade: 0.4
-    - _SpecularHighlights: 1
-    - _SrcBlend: 1
+    - _SrcBlend: 5
     - _Tan2ObjCustomU: 1
     - _Tan2ObjCustomV: 1
     - _Tan2ObjMultU: 1
@@ -272,7 +263,7 @@ Material:
     - _WetnessNormalInfluence: 0.5
     - _WetnessShown: 1
     - _WetnessUVMult: 1
-    - _ZWrite: 1
+    - _ZWrite: 0
     - maxDist: 10
     - minDist: 1
     m_Colors:
@@ -289,18 +280,18 @@ Material:
     - _GlitterColor2: {r: 0.8, g: 0.8, b: 0.8, a: 0.2}
     - _SnowColorAndCoverage: {r: 1, g: 1, b: 1, a: 1}
     - _SnowDiffuseScatteringColor: {r: 1, g: 1, b: 1, a: 0}
-    - _SnowEmissionTransparency: {r: 0.1, g: 0.1, b: 0.1, a: 1}
+    - _SnowEmissionTransparency: {r: 0.09999997, g: 0.09999997, b: 0.09999997, a: 1}
     - _SnowGlitterColor: {r: 0.8, g: 0.8, b: 0.8, a: 0.2}
-    - _SnowSpecGloss: {r: 0.1, g: 0.1, b: 0.1, a: 0.15}
+    - _SnowSpecGloss: {r: 0.09999997, g: 0.09999997, b: 0.09999997, a: 0.15}
     - _SnowTranslucencyColor: {r: 0.75, g: 1, b: 1, a: 1}
-    - _SpecColor: {r: 0.19117647, g: 0.19117647, b: 0.19117647, a: 1}
+    - _SpecColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor2: {r: 1, g: 1, b: 1, a: 1}
     - _Tan2ObjectMultOffset: {r: 0, g: 0, b: 1, a: 1}
     - _TranslucencyColor: {r: 1, g: 1, b: 1, a: 1}
     - _TranslucencyColor2: {r: 1, g: 1, b: 1, a: 1}
     - _UV_Clip_Borders: {r: 0, g: 0, b: 1, a: 1}
     - _WetnessColor: {r: 0, g: 0, b: 0, a: 0}
-    - _WetnessSpecGloss: {r: 0.05, g: 0.05, b: 0.05, a: 0.7}
+    - _WetnessSpecGloss: {r: 0.049999982, g: 0.049999982, b: 0.049999982, a: 0.7}
     - bumpMap2TexelSize: {r: 1, g: 1, b: 1, a: 1}
     - bumpMapTexelSize: {r: 0.00048828125, g: 0.00048828125, b: 2048, a: 2048}
     - heightMapTexelSize: {r: 1, g: 1, b: 1, a: 1}

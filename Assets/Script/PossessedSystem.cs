@@ -136,20 +136,20 @@ public class PossessedSystem : MonoBehaviour
             {//將附身物的標籤傳到管理者，方便變換動物數值
                 case "Bear":
                     playerManager.TurnType("Bear", PreviousTag);
-                    bear.SetActive(true);
-                    deer.SetActive(false);
-                    wolf.SetActive(false);
+                    //bear.SetActive(true);
+                    //deer.SetActive(false);
+                    //wolf.SetActive(false);
 
                     break;
                 case "Wolf":
                     playerManager.TurnType("Wolf", PreviousTag);
-                    deer.SetActive(false);
-                    wolf.SetActive(true);
-                    bear.SetActive(false);
+                    //deer.SetActive(false);
+                    //wolf.SetActive(true);
+                    //bear.SetActive(false);
                     break;
             }
         }
-       //CloseRangOnLight();//附身結束關掉Highlight
+       CloseRangOnLight();//附身結束關掉Highlight
 
     }
 

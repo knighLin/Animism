@@ -28,8 +28,8 @@ public class PlayerHealth : MonoBehaviour {
     }
     void Start()
     {
-        HP = GameObject.FindGameObjectWithTag("HP").GetComponent<HPUI>();
-        HP.SetHumanHP(currentHealth);
+       // HP = GameObject.FindGameObjectWithTag("HP").GetComponent<HPUI>();
+       // HP.SetHumanHP(currentHealth);
     }
 
     public void Hurt(float Amount, String AttackName)

@@ -23,7 +23,7 @@ public class WolfAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!PossessedSystem.PossessedCol.enabled)
+        if (PossessedSystem.PossessedCol.enabled == false)
         {
             if (Input.GetMouseButtonDown(0) && PossessedSystem.AttachedBody == this.gameObject)
             {
