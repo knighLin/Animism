@@ -22,6 +22,11 @@ public class PossessCameraMove : MonoBehaviour {
         //讀取滑鼠的X、Y軸移動訊息
         rotX += Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime*2;
         rotY -= Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime*2;
+
+        rotX += Input.GetAxis("joy3") * sensitivity * Time.deltaTime;
+        rotY += Input.GetAxis("joy4") * sensitivity * Time.deltaTime;
+
+
         //保證X在360度以內
         if (rotX > 360)
         {

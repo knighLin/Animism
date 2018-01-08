@@ -70,7 +70,6 @@ public class EnemyAI : MonoBehaviour
              //isThink = false;
              animSpeed = nav.desiredVelocity.sqrMagnitude;
          }
-        animSpeed = nav.desiredVelocity.sqrMagnitude;
         animator.SetFloat("Speed", animSpeed);
     }
 

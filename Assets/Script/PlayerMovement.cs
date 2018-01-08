@@ -29,9 +29,11 @@ public class PlayerMovement : MonoBehaviour
     float m_TurnAmount;//轉向值
     float m_ForwardAmount;//前進值
     Vector3 m_GroundNormal;//地面法向量
-    //float m_CapsuleHeight;//膠囊高度
-    //Vector3 m_CapsuleCenter;//膠囊中心
-    //CapsuleCollider m_Capsule;
+                           //float m_CapsuleHeight;//膠囊高度
+                           //Vector3 m_CapsuleCenter;//膠囊中心
+                           //CapsuleCollider m_Capsule;
+
+
 
 
     void Awake()
@@ -43,9 +45,11 @@ public class PlayerMovement : MonoBehaviour
         m_Animator = GameObject.FindWithTag("Human").GetComponent<Animator>();
 
         //m_Capsule = GameObject.FindWithTag("Human").GetComponent<CapsuleCollider>();
-         //m_CapsuleHeight = m_Capsule.height;
-         //m_CapsuleCenter = m_Capsule.center;
+        //m_CapsuleHeight = m_Capsule.height;
+        //m_CapsuleCenter = m_Capsule.center;
         m_OrigGroundCheckDistance = m_GroundCheckDistance;//保存一下地面检查值 
+
+
     }
     //public void Jump(){
     //    m_Rigidbody.velocity = new Vector3(m_Rigidbody.velocity.x, value.JumpPower, m_Rigidbody.velocity.z);//保存x、z轴速度，并给以y轴向上的速度  
@@ -78,8 +82,11 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         //讀取輸入
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
+        float h = Input.GetAxis("Horizontal") - Input.GetAxis("joy5");
+       
+
+        float v = Input.GetAxis("Vertical") - Input.GetAxis("joy6");
+       
 
         //計算移動方向傳遞給角色
         if (m_Cam != null)
@@ -87,6 +94,8 @@ public class PlayerMovement : MonoBehaviour
             //計算相機相對方向移動：
             m_CamForward = Vector3.Scale(m_Cam.forward, new Vector3(1, 0, 1)).normalized;
             moveDirection = v * m_CamForward + h * m_Cam.right;
+
+           
         }
         else
         {
@@ -94,7 +103,7 @@ public class PlayerMovement : MonoBehaviour
             moveDirection = v * Vector3.forward + h * Vector3.right;
         }
 
-        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)|| joycontroller.joyfast == true)
         {//當按下shift，有跑步動作
             _Speed = value.RunSpeed;
         }
@@ -129,7 +138,7 @@ public class PlayerMovement : MonoBehaviour
         {
             m_Rigidbody.velocity = transform.forward * move.z * _Speed;
             // 确定当前是否能跳  ：
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space)|| joycontroller.joyjump == true)
             { // jump!
                 m_Rigidbody.velocity = new Vector3(m_Rigidbody.velocity.x, value.JumpPower, m_Rigidbody.velocity.z);//保存x、z轴速度，并给以y轴向上的速度  
                 //m_CapsuleHeight = m_Animator.GetFloat("ColliderHeight");

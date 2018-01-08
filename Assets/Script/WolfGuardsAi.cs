@@ -10,6 +10,7 @@ public class WolfGuardsAi : MonoBehaviour
     private GameObject Target;
     private NavMeshAgent Nav;
     private Animator Anim;
+    float m_TurnAmount;//轉向值
 
     void Awake()
     {
@@ -21,11 +22,23 @@ public class WolfGuardsAi : MonoBehaviour
 
     private void Update()
     {
-        if (Target == null)
+        if (Target != null)
         {
-            return;
+            Nav.SetDestination(Target.transform.position);
         }
-        Nav.SetDestination(Target.transform.position);
+
+        if (Nav.remainingDistance < Nav.stoppingDistance) //如果移動位置小於停止位置，不跑步
+        {
+            Nav.isStopped = true;
+        }
+        else
+        {
+            Nav.isStopped = false;
+            Anim.SetFloat("Speed", Nav.desiredVelocity.sqrMagnitude, 0.1f, Time.deltaTime);
+            m_TurnAmount = Mathf.Atan2(Target.transform.position.x, Target.transform.position.z);
+            Anim.SetFloat("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
+        }
+
     }
 
     private void OnTriggerEnter(Collider other)

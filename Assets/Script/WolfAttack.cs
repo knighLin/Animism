@@ -8,15 +8,17 @@ public class WolfAttack : MonoBehaviour
     private TypeValue typeValue;
 
     private Animator Anim;
-
+    private AudioSource audioSource;
+    public AudioClip attack;
     [SerializeField] private Rigidbody WolfGuards;//召喚狼
-    [SerializeField] private Vector3 GuardPoint1;
-    [SerializeField] private Vector3 GuardPoint2;
+    [SerializeField] private Transform GuardPoint1;
+    [SerializeField] private Transform GuardPoint2;
 
     // Use this for initialization
     void Awake()
     {
         Anim = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
         typeValue = GameObject.FindWithTag("Player").GetComponent<TypeValue>();
     }
 
@@ -27,14 +29,15 @@ public class WolfAttack : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0) && PossessedSystem.AttachedBody == this.gameObject)
             {
+                audioSource.PlayOneShot(attack);
                 Anim.SetTrigger("Attack");
             }
 
-            if (Input.GetMouseButtonDown(1) && PossessedSystem.WolfCount >= 3)
+            if (Input.GetMouseButtonDown(1) && PossessedSystem.WolfCount >= 1)
             {
                
-                Instantiate(WolfGuards, GuardPoint1, Quaternion.identity);
-                Instantiate(WolfGuards, GuardPoint2, Quaternion.identity);
+                Instantiate(WolfGuards, GuardPoint1.position, Quaternion.identity);
+                Instantiate(WolfGuards, GuardPoint2.position, Quaternion.identity);
                 PossessedSystem.WolfCount = 0;
             }
         }
