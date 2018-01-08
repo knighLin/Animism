@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 { 
-    private string NowType;
+    public string NowType;
     private string PreviousType;
 	private TypeValue typevalue;
 	

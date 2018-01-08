@@ -7,7 +7,7 @@ public class PossessedSystem : MonoBehaviour
 {
     //call other class
     private PlayerManager playerManager;
-    private PossessEffect possessEffect;
+    private CameraMove CameraMove;
     private AnimalHealth animalHealth;
     private List<Highlighter> highlighter = new List<Highlighter>();
     private List<HighlighterConstant> highlighterConstant = new List<HighlighterConstant>();
@@ -24,8 +24,10 @@ public class PossessedSystem : MonoBehaviour
     private RaycastHit hit;//點擊的動物物件
     public GameObject bear, deer, wolf;//UI的
     public static int WolfCount;//狼的連續附身次數
-
+    private bool clear = true;
+    public float AnimationTime;
     //  public joycontroller Joycontroller;
+
 
     //audio
     private AudioSource audioSource;
@@ -35,7 +37,7 @@ public class PossessedSystem : MonoBehaviour
     void Awake()
     {
         playerManager = GetComponent<PlayerManager>();
-        possessEffect = GameObject.FindGameObjectWithTag("GameManager").GetComponent<PossessEffect>();
+        CameraMove = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraMove>();
         Possessor = GameObject.FindWithTag("Human");
         PossessedCol = GetComponent<SphereCollider>();
         Player = GameObject.FindWithTag("Player");
@@ -45,45 +47,52 @@ public class PossessedSystem : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.E) || joycontroller.joypossessed == true)//打開關閉附身系統---------------
+
+        if (CameraMove.pressingE || joycontroller.joypossessed == true)//打開關閉附身系統，如按著E鍵pressingE為true
         {
-            PossessedCol.enabled = !PossessedCol.enabled;//當附身範圍collider是關閉則打開，反之則打開
-            if (PossessedCol.enabled == true)//當附身範圍collider打開時
+            if (clear)//開啟附身系統只清一次，播放一次動畫
             {
-                possessEffect.OpenPossessedEffectCam();//開啟附身的運鏡
                 PlayerMovement.m_Animator.SetTrigger("Surgery");//播放附身動畫
-                if(Possessor.tag == "Human")//判斷目前形體，播放不同附身的音效
-                {
-                    audioSource.PlayOneShot(HumanSurgery);
-                }
-                else if(Possessor.tag == "Wolf")
-                {
-                    audioSource.PlayOneShot(WolfSurgery);
-                }
-                //PossessedCol.enabled = true;
-                Time.timeScale = 0.5f;//遊戲慢動作
                 //清掉之前範圍的動物物件和Highlight
                 RangeObject.Clear();
                 highlighter.Clear();
                 highlighterConstant.Clear();
-
-
+                if (Possessor.tag == "Human")//判斷目前形體，播放不同附身的音效
+                {
+                    audioSource.PlayOneShot(HumanSurgery);
+                }
+                else if (Possessor.tag == "Wolf")
+                {
+                    audioSource.PlayOneShot(WolfSurgery);
+                }
+                clear = false;
             }
-            else//附身範圍collider關閉
-            {
-                possessEffect.ClosePossessedEffectCam();//關閉附身運鏡
-                CloseRangOnLight();//關掉附身物的附身效果shader
-                Time.timeScale = 1f;//取消慢動作
-            }
-            joycontroller.joypossessed = false;
+            if (AnimationTime < 0.05)//0.1秒後才拉近
+                AnimationTime += Time.deltaTime;
+            else if (AnimationTime >= 0.05)
+                CameraMove.AnimationOver = true;
+            PossessedCol.enabled = true;
+            Time.timeScale = 0.5f;//遊戲慢動作
+            MouseChoosePossessed();//當開啟附身系統，才能點選要附身物
+            
+
         }
-        MouseChoosePossessed();//當開啟附身系統，才能點選要附身物
+        else
+        {
+            AnimationTime = 0;
+            clear = true;//讓下次開啟附身清理範圍物件
+            PossessedCol.enabled = false;//附身範圍collider關閉
+            CloseRangOnLight();//關掉附身物的附身效果shader
+            Time.timeScale = 1f;//取消慢動作
+            //joycontroller.joypossessed = false; //搖桿
+        }
 
 
         if (Input.GetKeyUp(KeyCode.Q) && AttachedBody != null || joycontroller.leftpossessed == true)//解除附身
         {
             LifedPossessed();//離開附身物
             animalHealth.CancelLink();//解除與附身物的血條連動
+            CameraMove.LoadCharacter();//重置鏡頭位置
         }
     }
 
@@ -100,9 +109,11 @@ public class PossessedSystem : MonoBehaviour
                     if (hit.collider == RangeObject[i])//當點擊的物件是附身範圍裡的物件時
                     {
                         EnterPossessed();//執行附身
+                        CameraMove.canCameraMove = false;
+                        CameraMove.LoadCharacter();//讀取動物鏡頭位置
+                        CameraMove.cameraFollow();
                         Time.timeScale = 1f;//慢動作回覆
                         PossessedCol.enabled = false;//關掉附身範圍
-                        possessEffect.ClosePossessedEffectCam();//關閉附身運鏡
                     }
                 }
             }
