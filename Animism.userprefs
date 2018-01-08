@@ -1,0 +1,22 @@
+﻿<Properties StartupConfiguration="{F3F43FDF-E28E-8ECB-9108-479C91F22EBF}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/WolfGuardsAi.cs">
+    <Files>
+      <File FileName="Assets/Script/PlayerMovement.cs" Line="167" Column="1" />
+      <File FileName="Assets/Script/CameraMove.cs" Line="72" Column="22" />
+      <File FileName="Assets/Script/PossessedSystem.cs" Line="108" Column="1" />
+      <File FileName="Assets/Script/HumanAttack.cs" Line="36" Column="1" />
+      <File FileName="Assets/Script/EnemyAI.cs" Line="61" Column="1" />
+      <File FileName="Assets/Script/WolfGuardsAi.cs" Line="40" Column="10" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/knight/Animism/Assets/Script/EnemyHealth.cs" relfile="Assets/Script/EnemyHealth.cs" line="34" column="1" />
+      <Breakpoint file="/Users/knight/Animism/Assets/Script/EnemyAI.cs" relfile="Assets/Script/EnemyAI.cs" line="61" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.Animism PreferredExecutionTarget="Unity.Editor" />
+</Properties>

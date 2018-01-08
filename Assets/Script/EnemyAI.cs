@@ -50,7 +50,7 @@ public class EnemyAI : MonoBehaviour
         isThink = true;
         nav = GetComponent<NavMeshAgent>();
         OriginPoint = transform.position;//敵人最初的位置
-        animator = GetComponentInChildren<Animator>();
+        animator = GetComponent<Animator>();
         
     }
 
@@ -58,19 +58,20 @@ public class EnemyAI : MonoBehaviour
     {
         ThinkState();
         TargetInRange();
-        if (nav.remainingDistance <= nav.stoppingDistance) //如果移動位置小於停止位置，不跑步
+        if (nav.remainingDistance < nav.stoppingDistance) //如果移動位置小於停止位置，不跑步
          {
             
-            //animSpeed = 0f;
             nav.isStopped = true;
              // isThink = true;//走到巡邏點後再開始思考
          }
          else
          {
              //isThink = false;
+            nav.isStopped = false;
              animSpeed = nav.desiredVelocity.sqrMagnitude;
+            animator.SetFloat("Speed", animSpeed);
          }
-        animator.SetFloat("Speed", animSpeed);
+
     }
 
     void ThinkState()
@@ -156,14 +157,14 @@ public class EnemyAI : MonoBehaviour
                // Debug.Log("Walk");
                 //isThink = false;
                 nav.SetDestination(PatrolPoint());
-                nav.stoppingDistance = 0;
+
                 nav.isStopped = false;
                 break;
             case EnemyState.Enemy_Catch:
                 //Debug.Log("Catch");
                 nav.isStopped = false;
                 transform.LookAt(Target);
-                nav.stoppingDistance = 1;
+             
                 nav.SetDestination(Target.position);
                 break;
             case EnemyState.Enemy_NormalAttack:

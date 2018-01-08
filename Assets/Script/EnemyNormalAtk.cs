@@ -66,7 +66,7 @@ public class EnemyNormalAtk : MonoBehaviour
             
             var damage = (EnemyAtk - value.PlayerDef) * Random.Range(0.9f, 1.1f);
             damage = Mathf.Round(damage);
-            playerHealth.Hurt (damage, AttackName: "NormalAtk");//敵人的攻擊扣掉主角的防禦，然後＊隨機小數點，就是主角要被扣掉的血
+            playerHealth.Hurt (damage);//敵人的攻擊扣掉主角的防禦，然後＊隨機小數點，就是主角要被扣掉的血
 		}
 
 	}

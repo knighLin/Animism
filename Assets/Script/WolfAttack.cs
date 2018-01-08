@@ -22,18 +22,25 @@ public class WolfAttack : MonoBehaviour
         typeValue = GameObject.FindWithTag("Player").GetComponent<TypeValue>();
     }
 
+    int AttackRender()
+    {
+        int AttackCount = Random.Range(0, 3);
+        return AttackCount;
+    }
+
     // Update is called once per frame
     void Update()
     {
         if (PossessedSystem.PossessedCol.enabled == false)
         {
-            if (Input.GetMouseButtonDown(0) && PossessedSystem.AttachedBody == this.gameObject)
+            if (Input.GetMouseButtonDown(0) && PossessedSystem.AttachedBody == this.gameObject && PossessedSystem.OnPossessed == true)
             {
                 audioSource.PlayOneShot(attack);
                 Anim.SetTrigger("Attack");
+                Anim.SetInteger("Render",AttackRender());
             }
 
-            if (Input.GetMouseButtonDown(1) && PossessedSystem.WolfCount >= 1)
+            if (Input.GetMouseButtonDown(1) && PossessedSystem.WolfCount >= 1 && PossessedSystem.OnPossessed == true)
             {
                
                 Instantiate(WolfGuards, GuardPoint1.position, Quaternion.identity);
@@ -41,23 +48,9 @@ public class WolfAttack : MonoBehaviour
                 PossessedSystem.WolfCount = 0;
             }
         }
-
-
     }
-    void OnTriggerEnter(Collider other)
-    {
-        
-        if (other.tag == "Enemy")
-        {
-            enemyHealth = other.GetComponent<EnemyHealth>();
-            // Debug.Log("Fuck");
-            if (enemyHealth.currentHealth > 0)
-            {//當Enemy的還有血量時
-                var damage = typeValue.PlayerAtk * Random.Range(0.9f, 1.1f);
-                damage = Mathf.Round(damage);
-                enemyHealth.Hurt(damage);
-            }
-        }
-    }
+
+   
+
 
 }

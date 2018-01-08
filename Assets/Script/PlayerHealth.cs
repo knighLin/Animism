@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,12 +18,17 @@ public class PlayerHealth : MonoBehaviour {
     [SerializeField]
     private HPUI HP;
 
+
+    //audio
+    private AudioSource audioSource;
+    public AudioClip hurt;
+
     void Awake()
 	{
         playerMovement = GetComponent<PlayerMovement>();
        // possessedSystem = GetComponent<PossessedSystem>();
 		currentHealth = MaxHealth;//開始時，當前ＨＰ回最大ＨＰ
-        
+        audioSource = GetComponent<AudioSource>();
         animator = GameObject.FindWithTag ("Human").GetComponent<Animator> ();
     }
     void Start()
@@ -32,7 +37,7 @@ public class PlayerHealth : MonoBehaviour {
        // HP.SetHumanHP(currentHealth);
     }
 
-    public void Hurt(float Amount, String AttackName)
+    public void Hurt(float Amount)
 	{
        if(PossessedSystem.OnPossessed)//如果附身，扣動物血量
         {
@@ -41,15 +46,24 @@ public class PlayerHealth : MonoBehaviour {
         else
         {
             currentHealth -= Amount;//扣血
+            audioSource.PlayOneShot(hurt);
         }
 		if(currentHealth <= 0 && !isDead)
 		{
 			Death ();
 		}
        
-        HP.SetHumanHP(currentHealth);
-        animator.SetFloat("Hurt", Amount);
+       // HP.SetHumanHP(currentHealth);
+
+        animator.SetTrigger("Hurt");
+        animator.SetInteger("Render",HurtRender());
 	}
+
+    int HurtRender()
+    {
+        int HurtCount = Random.Range(0, 2);
+        return HurtCount;
+    }
 
 	void Death()
 	{

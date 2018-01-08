@@ -26,7 +26,6 @@ public class PossessedSystem : MonoBehaviour
     public static int WolfCount;//狼的連續附身次數
     private bool clear = true;
     public float AnimationTime;
-    //  public joycontroller Joycontroller;
 
 
     //audio
@@ -42,21 +41,21 @@ public class PossessedSystem : MonoBehaviour
         PossessedCol = GetComponent<SphereCollider>();
         Player = GameObject.FindWithTag("Player");
         audioSource = GetComponent<AudioSource>();
-        // Joycontroller = GameObject.FindGameObjectWithTag("GameManager").GetComponent<joycontroller>();
+
     }
 
     private void Update()
     {
-
         if (CameraMove.pressingE || joycontroller.joypossessed == true)//打開關閉附身系統，如按著E鍵pressingE為true
         {
             if (clear)//開啟附身系統只清一次，播放一次動畫
             {
-                PlayerMovement.m_Animator.SetTrigger("Surgery");//播放附身動畫
+                PlayerMovement.m_Animator.SetBool("Surgery",true);//播放附身動畫
                 //清掉之前範圍的動物物件和Highlight
                 RangeObject.Clear();
                 highlighter.Clear();
                 highlighterConstant.Clear();
+
                 if (Possessor.tag == "Human")//判斷目前形體，播放不同附身的音效
                 {
                     audioSource.PlayOneShot(HumanSurgery);
@@ -67,6 +66,7 @@ public class PossessedSystem : MonoBehaviour
                 }
                 clear = false;
             }
+
             if (AnimationTime < 0.05)//0.1秒後才拉近
                 AnimationTime += Time.deltaTime;
             else if (AnimationTime >= 0.05)
@@ -79,6 +79,7 @@ public class PossessedSystem : MonoBehaviour
         }
         else
         {
+            PlayerMovement.m_Animator.SetBool("Surgery", false);//關閉附身動畫
             AnimationTime = 0;
             clear = true;//讓下次開啟附身清理範圍物件
             PossessedCol.enabled = false;//附身範圍collider關閉

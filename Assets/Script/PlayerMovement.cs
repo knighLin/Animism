@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float m_StationaryTurnSpeed = 180;//站立時轉向速度
     [Range(1f, 4f)] [SerializeField] float m_GravityMultiplier = 2f;//重力乘數(落下速度)
     [SerializeField] float m_RunCycleLegOffset = 0.2f; //特定於樣本資產中的字符，需要修改才能與他人合作
-    [SerializeField] float m_AnimSpeedMultiplier = 1f;//動畫播放速度的乘數
+    //[SerializeField] float m_AnimSpeedMultiplier = 1f;//動畫播放速度的乘數
     [SerializeField] float m_GroundCheckDistance = 0.2f;//地面距離檢查
 
     Rigidbody m_Rigidbody;
