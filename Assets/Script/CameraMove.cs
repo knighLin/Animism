@@ -57,9 +57,7 @@ public class CameraMove : MonoBehaviour
 
     private void Start()
     {
-        startPoint = possessStart.transform.localPosition;
-
-        PossessEffect.SetActive(false);
+        startPoint = possessStart.transform.localPosition; 
     }
 
     // LateUpdate is called once per frame after other Update
@@ -171,7 +169,7 @@ public class CameraMove : MonoBehaviour
             }
             stopBack = time;
         }
-        else
+        else if (!canCameraMove)
         {
             Crosshairs.SetActive(false);
             PossessEffect.SetActive(false);
@@ -181,17 +179,19 @@ public class CameraMove : MonoBehaviour
 
     public void LoadCharacter()
     {
-        if (PlayerManager.NowType == "Wolf")
+        switch (PlayerManager.NowType)
         {
-            possessStart = GameObject.Find("WolfCamStartPoint");
-            possessEnd = GameObject.Find("WolfCamEndPoint");
-            ray = GameObject.Find("WolfFirstPersonCamPoint").transform;
-        }
-        else if (PlayerManager.NowType == "Human")
-        {
-            possessStart = GameObject.Find("CamStartPoint");
-            possessEnd = GameObject.Find("CamEndPoint");
-            ray = GameObject.Find("FirstPersonCamPoint").transform;
+            case "Human":
+                possessStart = GameObject.Find("CamStartPoint");
+                possessEnd = GameObject.Find("CamEndPoint");
+                ray = GameObject.Find("FirstPersonCamPoint").transform;
+                break;
+            case "Wolf":
+                possessStart = GameObject.Find("WolfCamStartPoint");
+                possessEnd = GameObject.Find("WolfCamEndPoint");
+                ray = GameObject.Find("WolfFirstPersonCamPoint").transform;
+                break;
+
         }
 
     }
@@ -214,13 +214,13 @@ public class CameraMove : MonoBehaviour
         {
             rotX += 360;
         }
-        if (rotY > 20)
+        if (rotY > 45)
         {
-            rotY = 20;
+            rotY = 45;
         }
-        else if (rotY < -20)
+        else if (rotY < -45)
         {
-            rotY = -20;
+            rotY = -45;
         }
         //運算攝影機旋轉
         rotationEuler = Quaternion.Euler(rotY, rotX, 0);
@@ -235,10 +235,10 @@ public class CameraMove : MonoBehaviour
         if (Physics.Linecast(ray.position, rotationEuler * (new Vector3(0, 0, -distance) + startPoint) + target.position, out hit))
         {
             string name = hit.collider.gameObject.tag;
-            if (name != "MainCamera")
+            if (name != "MainCamera"&& name != "Wolf"&& name != "Human" && name != "Player" && name != "CamPoint" && name != "Collider")
             {
-                //  Debug.Log(hit.point);
-                Debug.DrawLine(ray.position, hit.point, Color.red);
+                //Debug.Log(name);
+                //Debug.DrawLine(ray.position, hit.point, Color.red);
                 //if (Vector3.Distance(hit.point, target.position) < Vector3.Distance(rayend.transform.position, target.position))
                 raydistance = rotationEuler * (new Vector3(0, 0, -distance) + startPoint) + target.position - hit.point;
                 isHit = true;
@@ -248,7 +248,7 @@ public class CameraMove : MonoBehaviour
         {
             raydistance = Vector3.zero;
             isHit = false;
-            Debug.DrawLine(ray.position, transform.position, Color.green);
+            //Debug.DrawLine(ray.position, transform.position, Color.green);
         }
         //攝影機移動
         //限制距離

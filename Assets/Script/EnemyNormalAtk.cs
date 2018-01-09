@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyNormalAtk : MonoBehaviour
 {
 	//call other class
-	private PlayerHealth playerHealth;
+	private PlayerHealth PlayerHealth;
 
 	private TypeValue value;
 
@@ -26,7 +26,7 @@ public class EnemyNormalAtk : MonoBehaviour
 		//set class var
 		Player = GameObject.Find ("Player");
 		gameManager = GameObject.Find ("GameManager");
-		playerHealth = Player.GetComponent <PlayerHealth> ();
+        PlayerHealth = Player.GetComponent <PlayerHealth> ();
 		
 		value = gameManager.GetComponent<TypeValue> ();
 
@@ -66,7 +66,7 @@ public class EnemyNormalAtk : MonoBehaviour
             
             var damage = (EnemyAtk - value.PlayerDef) * Random.Range(0.9f, 1.1f);
             damage = Mathf.Round(damage);
-            playerHealth.Hurt (damage);//敵人的攻擊扣掉主角的防禦，然後＊隨機小數點，就是主角要被扣掉的血
+            PlayerHealth.Hurt (damage);//敵人的攻擊扣掉主角的防禦，然後＊隨機小數點，就是主角要被扣掉的血
 		}
 
 	}

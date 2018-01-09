@@ -7,6 +7,7 @@ public class PossessedSystem : MonoBehaviour
 {
     //call other class
     private PlayerManager playerManager;
+    private HPcontroller HPcontroller;
     private CameraMove CameraMove;
     private AnimalHealth animalHealth;
     private List<Highlighter> highlighter = new List<Highlighter>();
@@ -35,6 +36,7 @@ public class PossessedSystem : MonoBehaviour
 
     void Awake()
     {
+        HPcontroller = GameObject.Find("GameManager").GetComponent<HPcontroller>();
         playerManager = GetComponent<PlayerManager>();
         CameraMove = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraMove>();
         Possessor = GameObject.FindWithTag("Human");
@@ -93,7 +95,6 @@ public class PossessedSystem : MonoBehaviour
         {
             LifedPossessed();//離開附身物
             animalHealth.CancelLink();//解除與附身物的血條連動
-            CameraMove.LoadCharacter();//重置鏡頭位置
         }
     }
 
@@ -105,10 +106,11 @@ public class PossessedSystem : MonoBehaviour
             Physics.Raycast(ray, out hit, 10, PossessedLayerMask);
             for (int i = 0; i < RangeObject.Count; i++)
             {
-                if (!hit.collider.CompareTag("Player"))//如果是自己本身不執行
-                {
+                //if (!hit.collider.CompareTag("Player"))//如果是自己本身不執行
+                //{
                     if (hit.collider == RangeObject[i])//當點擊的物件是附身範圍裡的物件時
                     {
+                        HPcontroller.CharacterSwitch = true;//換圖片
                         EnterPossessed();//執行附身
                         CameraMove.canCameraMove = false;
                         CameraMove.LoadCharacter();//讀取動物鏡頭位置
@@ -116,7 +118,7 @@ public class PossessedSystem : MonoBehaviour
                         Time.timeScale = 1f;//慢動作回覆
                         PossessedCol.enabled = false;//關掉附身範圍
                     }
-                }
+                //}
             }
         }
     }
@@ -215,6 +217,7 @@ public class PossessedSystem : MonoBehaviour
 
     public void LifedPossessed()//解除變身
     {
+
         AttachedBody.transform.parent = null;//將玩家物件分離出被附身物
         Player.transform.position = new Vector3(AttachedBody.transform.position.x + 1.5f, transform.position.y + 0.5f, AttachedBody.transform.position.z + 1.5f);
         //將被附身物與人的位置分離
@@ -224,10 +227,10 @@ public class PossessedSystem : MonoBehaviour
         playerManager.TurnType("Human", AttachedBody.tag);//將標籤傳至管理者，變換數值
         AttachedBody = null;//解除附身後清除附身物，防止解除附身後按Ｑ還有反應
         OnPossessed = false;//取消附身
+        HPcontroller.CharacterSwitch = true;//換圖片
+        CameraMove.LoadCharacter();//重置鏡頭位置
 
-        deer.SetActive(false);
-        wolf.SetActive(false);
-        bear.SetActive(false);
+
     }
 
     private void CloseRangOnLight()

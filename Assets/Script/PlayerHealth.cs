@@ -7,16 +7,18 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour {
 
+    private HPcontroller HPcontroller;
     private PlayerMovement playerMovement;//角色的移動
    // private PossessedSystem possessedSystem;
 	public float MaxHealth = 100; //最大HP
-    [SerializeField]
-	public static float currentHealth; //當前HP
-	
-	private Animator animator;
+
+
+	public  float currentHealth; //當前HP
+
+    private Animator animator;
 	private bool isDead;//是否死亡
     [SerializeField]
-    private HPUI HP;
+
 
 
     //audio
@@ -33,19 +35,37 @@ public class PlayerHealth : MonoBehaviour {
     }
     void Start()
     {
-       // HP = GameObject.FindGameObjectWithTag("HP").GetComponent<HPUI>();
-       // HP.SetHumanHP(currentHealth);
+
+        // HP.SetHumanHP(currentHealth);
+        HPcontroller = GameObject.Find("GameManager").GetComponent<HPcontroller>();
     }
+
+    //void Update()
+    //{
+
+    //    HPcontroller.CharacterHpControll();
+    //    if (currentHealth <= 0 && !isDead)
+    //    {
+    //        Death();
+    //    }
+
+    //}
 
     public void Hurt(float Amount)
 	{
-       if(PossessedSystem.OnPossessed)//如果附身，扣動物血量
+
+        
+        if (PossessedSystem.OnPossessed)//如果附身，扣動物血量
         {
             PossessedSystem.AttachedBody.GetComponent<AnimalHealth>().currentHealth -= Amount;
+            HPcontroller.Blink = true;
+            HPcontroller.CharacterHpControll();
         }
         else
         {
             currentHealth -= Amount;//扣血
+            HPcontroller.CharacterHpControll();
+            HPcontroller.Blink = true;
             audioSource.PlayOneShot(hurt);
         }
 		if(currentHealth <= 0 && !isDead)
