@@ -117,17 +117,20 @@ public class HPcontroller : MonoBehaviour {
             case "Human":
                 PineHpMax = PlayerHealth.MaxHealth;
                 PineHpNow = PlayerHealth.currentHealth;
-                HpB.fillAmount = (PineHpNow * 0.75f + PineHpMax * 0.25f) / PineHpMax;//因血量條只有0.75圈 血量條計算方式為
+               
                 HpW.fillAmount = (PineHpNow * 0.75f + PineHpMax * 0.25f) / PineHpMax;//(75%當前血量+25%血量最大值)/血量最大值
                 HpR.fillAmount = (PineHpNow * 0.75f + PineHpMax * 0.25f) / PineHpMax;//Ex:當前血20 血量最大值100 為 (20*75%+100*25%)/100 = 0.4
                 break;
             case "Wolf":
-                AnimalHealth = GameObject.Find("Player/Wolf").GetComponent<AnimalHealth>();
-                WolfHpMax = AnimalHealth.MaxHealth;
-                WolfHpNow = AnimalHealth.currentHealth;
-                HpB.fillAmount = (WolfHpNow * 0.75f + WolfHpMax * 0.25f) / WolfHpMax;
-                HpW.fillAmount = (WolfHpNow * 0.75f + WolfHpMax * 0.25f) / WolfHpMax;
-                HpR.fillAmount = (WolfHpNow * 0.75f + WolfHpMax * 0.25f) / WolfHpMax;
+                if (PossessedSystem.AttachedBody == this.gameObject)
+                {
+                    AnimalHealth = GameObject.Find("Player/Wolf").GetComponent<AnimalHealth>();
+                    WolfHpMax = AnimalHealth.MaxHealth;
+                    WolfHpNow = AnimalHealth.currentHealth;
+                   
+                    HpW.fillAmount = (WolfHpNow * 0.75f + WolfHpMax * 0.25f) / WolfHpMax;
+                    HpR.fillAmount = (WolfHpNow * 0.75f + WolfHpMax * 0.25f) / WolfHpMax;
+                }
                 break;
             //case "Bear":
             //    AnimalHealth = GameObject.Find("Player/Bear").GetComponent<AnimalHealth>();

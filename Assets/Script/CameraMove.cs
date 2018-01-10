@@ -11,11 +11,13 @@ public class CameraMove : MonoBehaviour
     public GameObject Blood;
     public GameObject Crosshairs;
     public GameObject possessStart, possessEnd, PossessEffect;
-    // private PossessedSystem PossessedSystem;
+    public GameObject EnergyExplosion, PlayerExplosion, Smoke, PossessState, Pointlight;
+    private PossessedSystem PossessedSystem;
     private PlayerManager PlayerManager;
     private Quaternion rotationEuler;
     public Transform target;//跟隨目標
     public Transform ray;//射線起始位置(FirstPersonCamPoint)
+    public Transform ChooseTarget;//選定目標的位置
     private Vector3 cameraPosition;
     public Vector3 raydistance;
     public Vector3 startPoint;
@@ -29,8 +31,7 @@ public class CameraMove : MonoBehaviour
     public float disSpeed = 20f;//滾輪靈敏度
     public float minDistence = 0;//攝影機與主角的最小距離
     public float maxDistence = 5;//攝影機與主角的最大距離
-    public float shakePower;
-    public float shakeDelay = 0.05f;
+    public float EffectTime;//特效鏡頭
     public int time;//附身鏡頭前進後退時間
     public int stopFoward;//附身鏡頭前進停止時間
     public int stopBack = 0;//附身鏡頭後退停止時間
@@ -40,14 +41,16 @@ public class CameraMove : MonoBehaviour
     public bool canCameraMove = true;//判斷鏡頭是否可移動 附身後為false 防止按著附身鍵不放鏡頭出問題
     public bool isBacking = false;//鏡頭正在後退
     public bool AnimationOver = false;//動畫播完
-
+    public bool CanPressE;
+    public bool Reset = true;
+    public bool CanPossess = true;
 
     void Awake()
     {
 
         target = GameObject.Find("Player").transform;
         PlayerManager = GameObject.Find("Player").GetComponent<PlayerManager>();
-        //PossessedSystem = GetComponent<PossessedSystem>();
+        PossessedSystem = GameObject.Find("Player").GetComponent<PossessedSystem>();
         possessStart = GameObject.Find("CamStartPoint");
         possessEnd = GameObject.Find("CamEndPoint");
         ray = GameObject.Find("FirstPersonCamPoint").transform;
@@ -57,36 +60,37 @@ public class CameraMove : MonoBehaviour
 
     private void Start()
     {
-        startPoint = possessStart.transform.localPosition; 
+        PlayerExplosion.SetActive(false);
+        EnergyExplosion.SetActive(false);
+        Smoke.SetActive(false);
+        PossessState.SetActive(false);
+        Pointlight.SetActive(false);
+        startPoint = possessStart.transform.localPosition;
+        Reset = true;
+        CanPressE = true;
     }
 
-    // LateUpdate is called once per frame after other Update
-    void LateUpdate()
+    
+    void Update()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            if (shakePower == 0)
-                shakePower = 0.1f;
-            shakePower *= -1;
-        }
-        else
-            shakePower = 0;
 
 
 
 
-        if (!isBacking)//如果不是在後退則鏡頭可以轉動
+
+        if (!isBacking&&!PossessedSystem.Effect)//如果不是在後退則鏡頭或特效鏡頭才可以轉動
             cameraRotate();
 
+        if ((Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("joy15"))&&!PossessedSystem.Effect)//結束特效放開E才能再繼續按著E
+            CanPressE = true;
 
 
-        if (Input.GetKey(KeyCode.E))
+        if (CanPressE && (Input.GetKey(KeyCode.E) || joycontroller.joypossessed))
         {
+            Reset = true;
             Foward();
         }
-        else
+        else if (!PossessedSystem.Effect)//若不在附身特效鏡頭執行中才執行
         {
 
             if (pressingE)//pressingE在進入附身模式後會持續為true 退出後也不會false
@@ -96,6 +100,7 @@ public class CameraMove : MonoBehaviour
                 pressingE = false;
                 PossessEffect.SetActive(false);
                 Crosshairs.SetActive(false);
+                CanPossess = false;
             }
             if (isBacking && canCameraMove)//退出附身模式後將鏡頭拉回 若為附身之後canCameraMove會等於false不執行
             {
@@ -115,24 +120,41 @@ public class CameraMove : MonoBehaviour
                 {
                     stopBack = 0;
                     time = 0;
+                    Reset = true;
                     canCameraMove = false;//跳出鏡頭後退
                 }
             }
-            else
+            else if (!PossessedSystem.Effect)//如果在特效中不執行
             {
-                Crosshairs.SetActive(false);
-                PossessEffect.SetActive(false);
-                time = 0;
-                AnimationOver = false;
-                isBacking = false;
-                pressingE = false;
-                canCameraMove = true;//可以進入附身模式 若為附身之後canCameraMove會等於false
-                move = Vector3.zero;
+                if (Reset)
+                {
+                    ResetValue();//重置一些參數
+                }
+
+
                 //讀取滑鼠滾輪的數值
                 distance -= Input.GetAxis("Mouse ScrollWheel") * disSpeed * Time.deltaTime;
                 cameraFollow();
             }
         }
+    }
+
+    public void ResetValue()
+    {
+        
+        Pointlight.SetActive(false);
+        PossessState.SetActive(false);
+        CanPossess = false;
+        Crosshairs.SetActive(false);
+        PossessEffect.SetActive(false);
+        EffectTime = 0;
+        time = 0;
+        AnimationOver = false;
+        isBacking = false;
+        pressingE = false;
+        canCameraMove = true;//可以進入附身模式 若為附身之後canCameraMove會等於false
+        Reset = false;
+        move = Vector3.zero;
     }
 
     public void Foward()
@@ -145,7 +167,7 @@ public class CameraMove : MonoBehaviour
         }
         if (canCameraMove && AnimationOver)
         {
-            target.rotation = Quaternion.Euler(0, rotX, 0);//鏡頭旋轉
+            
             if (resetCameraMove)//重置鏡頭移動設定
             {
                 stopFoward = 5;//預設停止時間
@@ -154,18 +176,22 @@ public class CameraMove : MonoBehaviour
             }
             if (time < stopFoward)
             {
+                PossessState.SetActive(true);
+                Pointlight.SetActive(true);
                 move = effectdistance / stopFoward;
-                transform.position += move + rotationEuler * (new Vector3(0, 0, 0));
+                transform.position += move;
                 possessingCamera = transform.position;
                 time += 1;
             }
             else if (time >= stopFoward)
             {
+                target.rotation = Quaternion.Euler(0, rotX, 0);//鏡頭旋轉
                 move = effectdistance;
                 possessingCamera = possessEnd.transform.position;
                 transform.position = possessEnd.transform.position;
                 PossessEffect.SetActive(true);
                 Crosshairs.SetActive(true);
+                CanPossess = true;
             }
             stopBack = time;
         }
@@ -174,6 +200,54 @@ public class CameraMove : MonoBehaviour
             Crosshairs.SetActive(false);
             PossessEffect.SetActive(false);
             cameraFollow();//附身之後canCameraMove為false 執行cameraFollow重置鏡頭至主角身上
+        }
+    }
+
+    public void EffectCameraMove()
+    {
+        //Debug.Log(EffectTime);  
+        CanPressE = false;
+        PossessEffect.SetActive(false);
+        Crosshairs.SetActive(false);
+        CanPossess = false;
+        EffectTime +=Time.deltaTime;
+        if (EffectTime < 0.1f)
+        {
+            PossessState.SetActive(false);
+            effectdistance = rotationEuler * (new Vector3(0, 0, -distance) + startPoint) + target.position - possessingCamera;
+            move = effectdistance/2.5f;
+            transform.position += move;
+        }
+        else if (EffectTime >= 0.1f&& EffectTime < 0.4f )
+        {
+            if (EffectTime >= 0.1f && EffectTime < 0.2f)
+            {
+                PlayerExplosion.SetActive(true);
+            }
+
+            Smoke.SetActive(true);
+            effectdistance = ChooseTarget.position - transform.position;
+            Smoke.transform.position += effectdistance / 20;
+
+        }
+        else if (EffectTime >= 0.4f && EffectTime < 0.5f)
+        {
+            PlayerExplosion.SetActive(false);
+            Smoke.transform.localPosition = Vector3.zero;
+            Smoke.SetActive(false);
+            effectdistance = ChooseTarget.position - transform.position;
+            move = effectdistance/5;
+            transform.position += move;
+            if (EffectTime >= 0.45f)
+                EnergyExplosion.SetActive(true);
+        }
+        else if (EffectTime >= 0.8f)
+        {
+                Pointlight.SetActive(false);
+                EnergyExplosion.SetActive(false);
+                PossessedSystem.Effect = false;
+                PossessedSystem.EffectEnd();
+            
         }
     }
 
@@ -187,9 +261,14 @@ public class CameraMove : MonoBehaviour
                 ray = GameObject.Find("FirstPersonCamPoint").transform;
                 break;
             case "Wolf":
-                possessStart = GameObject.Find("WolfCamStartPoint");
-                possessEnd = GameObject.Find("WolfCamEndPoint");
-                ray = GameObject.Find("WolfFirstPersonCamPoint").transform;
+                if(PossessedSystem.AttachedBody == this.gameObject)
+                {
+
+                    possessStart = GameObject.Find("WolfCamStartPoint");
+                    possessEnd = GameObject.Find("WolfCamEndPoint");
+                    ray = GameObject.Find("WolfFirstPersonCamPoint").transform;
+                        
+                }
                 break;
 
         }
@@ -205,6 +284,11 @@ public class CameraMove : MonoBehaviour
         //讀取滑鼠的X、Y軸移動訊息
         rotX += Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
         rotY -= Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
+
+        rotX -= Input.GetAxis("joy3") * sensitivity * Time.deltaTime*5;
+        rotY -= Input.GetAxis("joy4") * sensitivity * Time.deltaTime*5;
+
+      
         //保證X在360度以內
         if (rotX > 360)
         {
@@ -254,7 +338,7 @@ public class CameraMove : MonoBehaviour
         //限制距離
         distance = Mathf.Clamp(distance, minDistence, maxDistence);
         //運算攝影機座標
-        cameraPosition = rotationEuler * (new Vector3(0, 0, -distance) + startPoint) + target.position - raydistance + new Vector3(-shakePower, shakePower, 0);
+        cameraPosition = rotationEuler * (new Vector3(0, 0, -distance) + startPoint) + target.position - raydistance ;
         //應用
         //target.transform.localRotation = Quaternion.AngleAxis(rotX, target.transform.up);//人物轉向 但ASD不能用
         transform.position = cameraPosition;

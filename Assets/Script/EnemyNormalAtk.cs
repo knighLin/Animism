@@ -67,7 +67,10 @@ public class EnemyNormalAtk : MonoBehaviour
             var damage = (EnemyAtk - value.PlayerDef) * Random.Range(0.9f, 1.1f);
             damage = Mathf.Round(damage);
             PlayerHealth.Hurt (damage);//敵人的攻擊扣掉主角的防禦，然後＊隨機小數點，就是主角要被扣掉的血
-		}
+
+            
+
+        }
 
 	}
 	public void OnAttackTrigger()//避免走路時碰到武器，觸發事件，所以只有攻擊時，才開啟觸發

@@ -9,7 +9,7 @@ public class joycontroller: MonoBehaviour
     //private Transform thisTransform;
     //private MeshRenderer mr;
     //public string[] buttonName = new string[1];
-    public GameObject player_ball;
+    //public GameObject player_ball;
     // public Transform targetball;
 
 
@@ -37,7 +37,7 @@ public class joycontroller: MonoBehaviour
         //joy5=btu_left_leftright 分1,-1 沒感壓
         //joy6=btu_left_updown    分1,-1 沒感壓
 
-        //joy7=L2   =joystick button 6 =4th 分1,-1 沒壓-1
+        //joy7=L2   =joystick button 6 =4th 分1,-1 沒壓-1  
         //joy8=R2   =joystick button 7 =5th 分1,-1 沒壓-1
 
 
@@ -183,7 +183,7 @@ public class joycontroller: MonoBehaviour
             //正方
             // AccumulatePush("z", "joy9", -1);
 
-            Debug.Log("Fire1");
+            //Debug.Log("Fire1");
         }
         else
         {
@@ -252,7 +252,7 @@ public class joycontroller: MonoBehaviour
             joyfast = false;
 
         }
-        if (Input.GetButtonUp("joy15") )
+        if (Input.GetButton("joy15") )
         {
 
             //R1
@@ -263,7 +263,14 @@ public class joycontroller: MonoBehaviour
         }
         else { joypossessed = false; }
 
+        if (Input.GetButtonUp("joy17"))
+        {
 
+            //OPTION
+            // AccumulatePush("z", "joy17", -1);
+
+            Debug.Log("joy17");
+        }
 
 
 
@@ -332,7 +339,7 @@ public class joycontroller: MonoBehaviour
         }
 
         // thisTransform.position = startPos + inputDirection;//虛擬手把
-        player_ball.transform.position += inputDirection / 5;//球球走路
+        //player_ball.transform.position += inputDirection / 5;//球球走路
 
     }
 

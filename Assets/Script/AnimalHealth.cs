@@ -27,8 +27,6 @@ public class AnimalHealth : MonoBehaviour {
 
         if (PossessedSystem.OnPossessed && PossessedSystem.AttachedBody == this.gameObject)
         {
-   
-
             if (currentHealth < MaxHealth * 0.3f)//當動物血量小於30%，分離主角，並扣出主角原本血量的一半
             {
               
@@ -47,13 +45,14 @@ public class AnimalHealth : MonoBehaviour {
         Debug.Log(PossessedSystem.AttachedBody + ":" + currentHealth);
         StorePlayerHealth = PlayerHealth.currentHealth;//當附身後將角色的生命先儲存起來
         PlayerHealth.currentHealth = currentHealth;//讓動物的血條變成角色的血量
-        Debug.Log("PlayerStore:" +StorePlayerHealth);
+        HPcontroller.CharacterHpControll();
+        //Debug.Log("PlayerStore:" +StorePlayerHealth);
     }
 
     public void CancelLink()
     {
         PlayerHealth.currentHealth = StorePlayerHealth;
-        Debug.Log(PossessedSystem.AttachedBody + ":"  + currentHealth);
+        //Debug.Log(PossessedSystem.AttachedBody + ":"  + currentHealth);
     }
 
 }

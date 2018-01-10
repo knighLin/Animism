@@ -29,11 +29,11 @@ public class PlayerMovement : MonoBehaviour
     float m_TurnAmount;//轉向值
     float m_ForwardAmount;//前進值
     Vector3 m_GroundNormal;//地面法向量
-                           //float m_CapsuleHeight;//膠囊高度
-                           //Vector3 m_CapsuleCenter;//膠囊中心
-                           //CapsuleCollider m_Capsule;
+                          //float m_CapsuleHeight;//膠囊高度
+                          // Vector3 m_CapsuleCenter;//膠囊中心
+                          // CapsuleCollider m_Capsule;
 
-
+   
 
 
     void Awake()
@@ -76,6 +76,7 @@ public class PlayerMovement : MonoBehaviour
         //{
         //    m_Jump = Input.GetKeyDown(KeyCode.Space);
         //}
+       
     }
 
     //固定更新與物理同步調用
@@ -140,9 +141,10 @@ public class PlayerMovement : MonoBehaviour
             // 确定当前是否能跳  ：
             if (Input.GetKeyDown(KeyCode.Space)|| joycontroller.joyjump == true)
             { // jump!
-                m_Rigidbody.velocity = new Vector3(m_Rigidbody.velocity.x, value.JumpPower, m_Rigidbody.velocity.z);//保存x、z轴速度，并给以y轴向上的速度  
-                //m_CapsuleHeight = m_Animator.GetFloat("ColliderHeight");
-                //m_Capsule.height = m_CapsuleHeight;
+                
+                m_Rigidbody.velocity = new Vector3(m_Rigidbody.velocity.x, value.JumpPower, m_Rigidbody.velocity.z);//保存x、z轴速度，并给以y轴向上的速度 
+                //m_Rigidbody.AddForce(Vector3.up * value.JumpPower*100f);
+                
                 m_IsGrounded = false;
                 m_Animator.applyRootMotion = false;
                 m_GroundCheckDistance = 0.1f;
@@ -152,6 +154,7 @@ public class PlayerMovement : MonoBehaviour
         {//乘數增加重力：
             Vector3 extraGravityForce = (Physics.gravity * m_GravityMultiplier) - Physics.gravity;
             m_Rigidbody.AddForce(extraGravityForce);
+            
             m_GroundCheckDistance = m_Rigidbody.velocity.y < 0 ? m_OrigGroundCheckDistance : 0.01f;//上升的时候不判断是否在地面上   
         }
 

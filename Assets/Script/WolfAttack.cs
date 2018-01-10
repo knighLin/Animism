@@ -33,18 +33,21 @@ public class WolfAttack : MonoBehaviour
     {
         if (PossessedSystem.PossessedCol.enabled == false)
         {
-            if (Input.GetMouseButtonDown(0) && PossessedSystem.AttachedBody == this.gameObject && PossessedSystem.OnPossessed == true)
+            if ((Input.GetMouseButtonDown(0)|| Input.GetButtonDown("Fire1")) && PossessedSystem.AttachedBody == this.gameObject && PossessedSystem.OnPossessed == true)
             {
                 audioSource.PlayOneShot(attack);
                 Anim.SetTrigger("Attack");
                 Anim.SetInteger("Render",AttackRender());
             }
 
-            if (Input.GetMouseButtonDown(1) && PossessedSystem.WolfCount >= 1 && PossessedSystem.OnPossessed == true)
+            if ((Input.GetMouseButtonDown(1) || Input.GetButtonDown("joy12")) && PossessedSystem.WolfCount >= 1 && PossessedSystem.OnPossessed == true)
             {
-               
-                Instantiate(WolfGuards, GuardPoint1.position, Quaternion.identity);
-                Instantiate(WolfGuards, GuardPoint2.position, Quaternion.identity);
+                
+                Vector3 MovePoint = new Vector3(Random.Range(this.transform.position.x - 2, this.transform.position.x + 2), this.transform.position.y, Random.Range(this.transform.position.z - 2, this.transform.position.x + 2));
+                Vector3 MovePoint2 = new Vector3(Random.Range(this.transform.position.x - 2, this.transform.position.x + 2), this.transform.position.y, Random.Range(this.transform.position.z - 2, this.transform.position.x + 2));
+                Instantiate(WolfGuards, MovePoint, Quaternion.identity);
+                Instantiate(WolfGuards, MovePoint2, Quaternion.identity);
+              
                 PossessedSystem.WolfCount = 0;
             }
         }

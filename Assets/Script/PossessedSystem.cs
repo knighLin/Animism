@@ -17,17 +17,18 @@ public class PossessedSystem : MonoBehaviour
     public static bool OnPossessed = false;//附身狀態
     public static GameObject AttachedBody;//附身物
     public static SphereCollider PossessedCol;//附身範圍
+    public static int WolfCount;//狼的連續附身次數
     private List<Collider> RangeObject = new List<Collider>();//範圍附身物
     private GameObject Player;
     private GameObject Possessor;//人的型態
-    private string PreviousTag;//附身前的標籤
     public LayerMask PossessedLayerMask;//可被附身物的階層
     private RaycastHit hit;//點擊的動物物件
-    public GameObject bear, deer, wolf;//UI的
-    public static int WolfCount;//狼的連續附身次數
-    private bool clear = true;
+    private string PreviousTag;//附身前的標籤
     public float AnimationTime;
-
+    public bool Effect;//特效鏡頭開關;
+    public bool ChooseRightObject;
+    private bool clear = true;
+    
 
     //audio
     private AudioSource audioSource;
@@ -48,7 +49,7 @@ public class PossessedSystem : MonoBehaviour
 
     private void Update()
     {
-        if (CameraMove.pressingE || joycontroller.joypossessed == true)//打開關閉附身系統，如按著E鍵pressingE為true
+        if (CameraMove.pressingE)//打開關閉附身系統，如按著E鍵pressingE為true
         {
             if (clear)//開啟附身系統只清一次，播放一次動畫
             {
@@ -69,14 +70,15 @@ public class PossessedSystem : MonoBehaviour
                 clear = false;
             }
 
-            if (AnimationTime < 0.05)//0.1秒後才拉近
+            if (AnimationTime < 0.05)//0.05秒後才拉近
                 AnimationTime += Time.deltaTime;
             else if (AnimationTime >= 0.05)
                 CameraMove.AnimationOver = true;
             PossessedCol.enabled = true;
-            Time.timeScale = 0.5f;//遊戲慢動作
-            MouseChoosePossessed();//當開啟附身系統，才能點選要附身物
-            
+            if (Time.timeScale == 1f)
+            Time.timeScale = 0.45f;//如果時間正常則遊戲慢動作
+            MouseChoosePossessed();
+
 
         }
         else
@@ -86,7 +88,8 @@ public class PossessedSystem : MonoBehaviour
             clear = true;//讓下次開啟附身清理範圍物件
             PossessedCol.enabled = false;//附身範圍collider關閉
             CloseRangOnLight();//關掉附身物的附身效果shader
-            Time.timeScale = 1f;//取消慢動作
+            if (Time.timeScale == 0.45f)
+            Time.timeScale = 1f;//如果有變慢 才取消慢動作
             //joycontroller.joypossessed = false; //搖桿
         }
 
@@ -98,9 +101,13 @@ public class PossessedSystem : MonoBehaviour
         }
     }
 
-    void MouseChoosePossessed()//滑鼠點擊附身物
+    public void MouseChoosePossessed()//滑鼠點擊附身物
     {
-        if (Input.GetMouseButtonDown(0) && PossessedCol.enabled == true || joycontroller.joyattack == true && PossessedCol.enabled)
+        if (ChooseRightObject)
+        {
+            CameraMove.EffectCameraMove();
+        }
+        else if(((Input.GetMouseButtonUp(0) || joycontroller.joyattack == true) && PossessedSystem.PossessedCol.enabled == true) && CameraMove.CanPossess)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             Physics.Raycast(ray, out hit, 10, PossessedLayerMask);
@@ -108,20 +115,41 @@ public class PossessedSystem : MonoBehaviour
             {
                 //if (!hit.collider.CompareTag("Player"))//如果是自己本身不執行
                 //{
-                    if (hit.collider == RangeObject[i])//當點擊的物件是附身範圍裡的物件時
-                    {
-                        HPcontroller.CharacterSwitch = true;//換圖片
-                        EnterPossessed();//執行附身
-                        CameraMove.canCameraMove = false;
-                        CameraMove.LoadCharacter();//讀取動物鏡頭位置
-                        CameraMove.cameraFollow();
-                        Time.timeScale = 1f;//慢動作回覆
-                        PossessedCol.enabled = false;//關掉附身範圍
-                    }
+                if (hit.collider == RangeObject[i])//當點擊的物件是附身範圍裡的物件時
+                {
+                    ChooseRightObject = true;
+                    Effect = true;
+                    CameraMove.ChooseTarget = hit.collider.gameObject.transform;
+                    CameraMove.CanPressE = false;
+                }
+                else
+                {
+                    ChooseRightObject = false;
+                }
+
                 //}
             }
         }
+        
     }
+
+    public void EffectEnd()
+    {
+        if (!Effect)//特效跑完
+        {
+            ChooseRightObject = false;
+            HPcontroller.CharacterSwitch = true;//換圖片
+            EnterPossessed();//執行附身
+            CameraMove.CanPressE = false;//防止持續按著E出問題
+            CameraMove.Reset = true;//重置參數
+            CameraMove.canCameraMove = false;//附身後放開E鏡頭不會後退
+            CameraMove.LoadCharacter();//讀取動物鏡頭位置
+            CameraMove.cameraFollow();//鏡頭跟隨改成附身的動物
+            Time.timeScale = 1f;//慢動作回覆
+            PossessedCol.enabled = false;//關掉附身範圍
+        }
+    }
+
 
     public void EnterPossessed()//附身
     {
@@ -150,7 +178,7 @@ public class PossessedSystem : MonoBehaviour
             if (AttachedBody.tag == "Wolf")
             {
                 WolfCount++;
-                Debug.Log(WolfCount);
+                //Debug.Log(WolfCount);
             }
             else
             {
@@ -229,6 +257,7 @@ public class PossessedSystem : MonoBehaviour
         OnPossessed = false;//取消附身
         HPcontroller.CharacterSwitch = true;//換圖片
         CameraMove.LoadCharacter();//重置鏡頭位置
+        CameraMove.ResetValue();
 
 
     }

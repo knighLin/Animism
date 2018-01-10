@@ -14,7 +14,7 @@ public class AttackHit : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Hit");
+        //Debug.Log("Hit");
         if (other.tag == "Enemy")
         {
             enemyHealth = other.GetComponent<EnemyHealth>();

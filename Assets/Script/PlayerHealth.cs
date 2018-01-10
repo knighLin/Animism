@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour {
 
+    //private EnemyPosition EnemyPosition;
     private HPcontroller HPcontroller;
     private PlayerMovement playerMovement;//角色的移動
    // private PossessedSystem possessedSystem;
@@ -27,6 +28,7 @@ public class PlayerHealth : MonoBehaviour {
 
     void Awake()
 	{
+
         playerMovement = GetComponent<PlayerMovement>();
        // possessedSystem = GetComponent<PossessedSystem>();
 		currentHealth = MaxHealth;//開始時，當前ＨＰ回最大ＨＰ
@@ -35,7 +37,7 @@ public class PlayerHealth : MonoBehaviour {
     }
     void Start()
     {
-
+        //EnemyPosition = GameObject.Find("Enemy").GetComponent<EnemyPosition>();
         // HP.SetHumanHP(currentHealth);
         HPcontroller = GameObject.Find("GameManager").GetComponent<HPcontroller>();
     }
@@ -55,6 +57,7 @@ public class PlayerHealth : MonoBehaviour {
 	{
 
         
+
         if (PossessedSystem.OnPossessed)//如果附身，扣動物血量
         {
             PossessedSystem.AttachedBody.GetComponent<AnimalHealth>().currentHealth -= Amount;
@@ -63,10 +66,12 @@ public class PlayerHealth : MonoBehaviour {
         }
         else
         {
+
             currentHealth -= Amount;//扣血
             HPcontroller.CharacterHpControll();
             HPcontroller.Blink = true;
             audioSource.PlayOneShot(hurt);
+            //EnemyPosition.AttackPosition();
         }
 		if(currentHealth <= 0 && !isDead)
 		{
