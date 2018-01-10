@@ -6,6 +6,7 @@ using UnityEngine;
 public class PossessedSystem : MonoBehaviour
 {
     //call other class
+    private PlayerMovement playerMovement;
     private PlayerManager playerManager;
     private HPcontroller HPcontroller;
     private CameraMove CameraMove;
@@ -37,6 +38,7 @@ public class PossessedSystem : MonoBehaviour
 
     void Awake()
     {
+        playerMovement = GetComponent<PlayerMovement>();
         HPcontroller = GameObject.Find("GameManager").GetComponent<HPcontroller>();
         playerManager = GetComponent<PlayerManager>();
         CameraMove = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraMove>();
@@ -54,6 +56,7 @@ public class PossessedSystem : MonoBehaviour
             if (clear)//開啟附身系統只清一次，播放一次動畫
             {
                 PlayerMovement.m_Animator.SetBool("Surgery",true);//播放附身動畫
+                playerMovement.enabled = false;
                 //清掉之前範圍的動物物件和Highlight
                 RangeObject.Clear();
                 highlighter.Clear();
@@ -66,6 +69,7 @@ public class PossessedSystem : MonoBehaviour
                 else if (Possessor.tag == "Wolf")
                 {
                     audioSource.PlayOneShot(WolfSurgery);
+                   
                 }
                 clear = false;
             }
@@ -83,6 +87,7 @@ public class PossessedSystem : MonoBehaviour
         }
         else
         {
+            playerMovement.enabled = true;
             PlayerMovement.m_Animator.SetBool("Surgery", false);//關閉附身動畫
             AnimationTime = 0;
             clear = true;//讓下次開啟附身清理範圍物件
