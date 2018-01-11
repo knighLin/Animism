@@ -1,0 +1,16 @@
+﻿<Properties StartupConfiguration="{F3F43FDF-E28E-8ECB-9108-479C91F22EBF}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/HumanAttack.cs">
+    <Files>
+      <File FileName="Assets/Script/AttackHit.cs" Line="27" Column="31" />
+      <File FileName="Assets/Script/HumanAttack.cs" Line="19" Column="26" />
+      <File FileName="Assets/Script/EnemyHealth.cs" Line="28" Column="14" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.Animism PreferredExecutionTarget="Unity.Editor" />
+</Properties>
