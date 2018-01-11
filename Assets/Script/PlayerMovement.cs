@@ -72,6 +72,8 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Update()
     {
+        if(m_IsGrounded == false)
+        Debug.Log(m_Rigidbody.velocity.y);
         //if (!m_Jump)//不在跳跃状态下，如果读到跳跃则更新变量  
         //{
         //    m_Jump = Input.GetKeyDown(KeyCode.Space);
@@ -142,8 +144,8 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space)|| joycontroller.joyjump == true)
             { // jump!
                 
-                m_Rigidbody.velocity = new Vector3(m_Rigidbody.velocity.x, value.JumpPower, m_Rigidbody.velocity.z);//保存x、z轴速度，并给以y轴向上的速度 
-                //m_Rigidbody.AddForce(Vector3.up * value.JumpPower*100f);
+               // m_Rigidbody.velocity = new Vector3(m_Rigidbody.velocity.x, value.JumpPower, m_Rigidbody.velocity.z);//保存x、z轴速度，并给以y轴向上的速度 
+                m_Rigidbody.AddForce(Vector3.up * value.JumpPower*60f);
                 
                 m_IsGrounded = false;
                 m_Animator.applyRootMotion = false;

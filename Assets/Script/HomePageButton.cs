@@ -8,6 +8,7 @@ public class HomePageButton : MonoBehaviour
     public float time;
     private bool Fade;
     public Image FadeOut;
+    public AudioSource audioSource;
     // Use this for initialization
     void Start () {
 		
@@ -24,6 +25,7 @@ public class HomePageButton : MonoBehaviour
         }
         else if (time >= 1)
         {
+            //AudioFadeOut(audioSource, time);
             time = 0;
             Fade = false;
             Debug.Log("LoadSence");
@@ -37,6 +39,7 @@ public class HomePageButton : MonoBehaviour
         {
             case "Start":
                 Fade = true;
+                
                 break;
             case "Exit":
                 if (Time.timeScale == 0)//如果暫停狀態下回到主畫面則讓時間恢復
@@ -45,6 +48,22 @@ public class HomePageButton : MonoBehaviour
                 break;
         }
     }
+
+    public static IEnumerator AudioFadeOut(AudioSource audioSource, float FadeTime)
+    {
+        float startVolume = audioSource.volume;
+
+        while (audioSource.volume > 0)
+        {
+            audioSource.volume -= startVolume * Time.deltaTime / FadeTime;
+
+            yield return null;
+        }
+
+        audioSource.Stop();
+        audioSource.volume = startVolume;
+    }
+
 }
 
 

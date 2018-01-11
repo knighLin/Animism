@@ -55,7 +55,7 @@ public class PossessedSystem : MonoBehaviour
         {
             if (clear)//開啟附身系統只清一次，播放一次動畫
             {
-                PlayerMovement.m_Animator.SetBool("Surgery",true);//播放附身動畫
+                PlayerMovement.m_Animator.SetTrigger("Surgery");//播放附身動畫
                 playerMovement.enabled = false;
                 //清掉之前範圍的動物物件和Highlight
                 RangeObject.Clear();
@@ -88,7 +88,7 @@ public class PossessedSystem : MonoBehaviour
         else
         {
             playerMovement.enabled = true;
-            PlayerMovement.m_Animator.SetBool("Surgery", false);//關閉附身動畫
+            
             AnimationTime = 0;
             clear = true;//讓下次開啟附身清理範圍物件
             PossessedCol.enabled = false;//附身範圍collider關閉
@@ -101,6 +101,7 @@ public class PossessedSystem : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.Q) && AttachedBody != null || joycontroller.leftpossessed == true)//解除附身
         {
+          
             LifedPossessed();//離開附身物
             animalHealth.CancelLink();//解除與附身物的血條連動
         }
@@ -112,7 +113,7 @@ public class PossessedSystem : MonoBehaviour
         {
             CameraMove.EffectCameraMove();
         }
-        else if(((Input.GetMouseButtonUp(0) || joycontroller.joyattack == true) && PossessedSystem.PossessedCol.enabled == true) && CameraMove.CanPossess)
+        else if(((Input.GetMouseButtonUp(1) || Input.GetButtonDown("joy12")) && PossessedSystem.PossessedCol.enabled == true) && CameraMove.CanPossess)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             Physics.Raycast(ray, out hit, 10, PossessedLayerMask);

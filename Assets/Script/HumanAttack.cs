@@ -31,7 +31,7 @@ public class HumanAttack : MonoBehaviour {
 
     private void Update()
     {
-        if ((Input.GetMouseButtonDown(1)|| Input.GetButtonDown("joy12")) && Time.time - timer >1)//Attack
+        if ((Input.GetMouseButtonDown(0)|| Input.GetButtonDown("Fire1") ) && Time.time - timer >1)//Attack
         {
             StartCoroutine(DamageTime());
 

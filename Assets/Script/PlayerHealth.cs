@@ -19,7 +19,7 @@ public class PlayerHealth : MonoBehaviour {
     private Animator animator;
 	private bool isDead;//是否死亡
     [SerializeField]
-
+    CapsuleCollider m_Capsule;
 
 
     //audio
@@ -34,6 +34,8 @@ public class PlayerHealth : MonoBehaviour {
 		currentHealth = MaxHealth;//開始時，當前ＨＰ回最大ＨＰ
         audioSource = GetComponent<AudioSource>();
         animator = GameObject.FindWithTag ("Human").GetComponent<Animator> ();
+
+       m_Capsule = GameObject.FindWithTag("Human").GetComponent<CapsuleCollider>();
     }
     void Start()
     {
@@ -95,6 +97,7 @@ public class PlayerHealth : MonoBehaviour {
 		isDead = true;
 		playerMovement.enabled = false;
         animator.SetBool("Die",isDead);
+        m_Capsule.direction = 2;
 		Destroy(gameObject,4f);
 	}
 

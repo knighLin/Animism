@@ -14,6 +14,8 @@ public class WolfAttack : MonoBehaviour
     [SerializeField] private Transform GuardPoint1;
     [SerializeField] private Transform GuardPoint2;
 
+   
+
     // Use this for initialization
     void Awake()
     {
