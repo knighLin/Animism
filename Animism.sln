@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio for Mac
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Animism", "Animism.csproj", "{F3F43FDF-E28E-8ECB-9108-479C91F22EBF}"
-EndProject
+# Visual Studio 2017
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Animism.Plugins", "Animism.Plugins.csproj", "{F33082FC-0039-1CDF-2FBB-141091849DD1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Animism", "Animism.csproj", "{F3F43FDF-E28E-8ECB-9108-479C91F22EBF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Animism.Editor", "Animism.Editor.csproj", "{A8DDB199-9F71-DDD0-6832-5102FF755FF9}"
 EndProject
@@ -15,14 +15,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F3F43FDF-E28E-8ECB-9108-479C91F22EBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F3F43FDF-E28E-8ECB-9108-479C91F22EBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F3F43FDF-E28E-8ECB-9108-479C91F22EBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F3F43FDF-E28E-8ECB-9108-479C91F22EBF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F33082FC-0039-1CDF-2FBB-141091849DD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F33082FC-0039-1CDF-2FBB-141091849DD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F33082FC-0039-1CDF-2FBB-141091849DD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F33082FC-0039-1CDF-2FBB-141091849DD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3F43FDF-E28E-8ECB-9108-479C91F22EBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3F43FDF-E28E-8ECB-9108-479C91F22EBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3F43FDF-E28E-8ECB-9108-479C91F22EBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3F43FDF-E28E-8ECB-9108-479C91F22EBF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A8DDB199-9F71-DDD0-6832-5102FF755FF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A8DDB199-9F71-DDD0-6832-5102FF755FF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8DDB199-9F71-DDD0-6832-5102FF755FF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
