@@ -23,6 +23,7 @@ public class PlayerHealth : MonoBehaviour {
     private AudioSource audioSource;
     public AudioClip hurt;
 
+    int a = 1;
     void Awake()
 	{
 
@@ -44,6 +45,7 @@ public class PlayerHealth : MonoBehaviour {
     {
         if (currentHealth <= 0 && isDead == false)
         {
+           // StopCoroutine(HurtAnimation());
             Death();
         }
 
@@ -80,18 +82,24 @@ public class PlayerHealth : MonoBehaviour {
         animator.enabled = false;
         ragdollBehavior.ToggleRagdoll(true);
         yield return new WaitForSeconds(0.5f);
-        animator.enabled = true;
+        if(isDead == false)
+        {
+            animator.enabled = true;
+            print(a++);
+        }
         ragdollBehavior.ToggleRagdoll(false);
         StopCoroutine(HurtAnimation());
     }
     void Death()
 	{
-       // m_collider.enabled = false;
+        isDead = true;
+        // m_collider.enabled = false;
         ragdollBehavior.ToggleRagdoll(true);
         animator.enabled = false;
+        print("END");
         playerMovement.enabled = false;
-      //  enabled = false;
-        isDead = true;
+        enabled = false;
+        
         //animator.SetBool("Die",isDead);
 		//Destroy(gameObject,4f);
 	}
