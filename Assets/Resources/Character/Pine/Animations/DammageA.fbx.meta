@@ -176,7 +176,7 @@ ModelImporter:
     - serializedVersion: 16
       name: DammageA
       takeName: mixamo.com
-      firstFrame: 0
+      firstFrame: 15
       lastFrame: 53
       wrapMode: 0
       orientationOffsetY: 0

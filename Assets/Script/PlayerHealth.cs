@@ -6,21 +6,18 @@ using UnityEngine.UI;
 
 
 public class PlayerHealth : MonoBehaviour {
-
-    //private EnemyPosition EnemyPosition;
+    
     private HPcontroller HPcontroller;
     private PlayerMovement playerMovement;//角色的移動
+    private RagdollBehavior ragdollBehavior;
    // private PossessedSystem possessedSystem;
 	public float MaxHealth = 100; //最大HP
-
-
 	public  float currentHealth; //當前HP
-
     private Animator animator;
-	private bool isDead;//是否死亡
-    [SerializeField]
-    CapsuleCollider m_Capsule;
+	public static bool isDead;//是否死亡
 
+    private float timer;//開啟ragdoll的時間
+    public CapsuleCollider m_collider;
 
     //audio
     private AudioSource audioSource;
@@ -30,75 +27,73 @@ public class PlayerHealth : MonoBehaviour {
 	{
 
         playerMovement = GetComponent<PlayerMovement>();
-       // possessedSystem = GetComponent<PossessedSystem>();
-		currentHealth = MaxHealth;//開始時，當前ＨＰ回最大ＨＰ
+        ragdollBehavior = GetComponent<RagdollBehavior>();
+        // possessedSystem = GetComponent<PossessedSystem>();
+        currentHealth = MaxHealth;//開始時，當前ＨＰ回最大ＨＰ
         audioSource = GetComponent<AudioSource>();
-        animator = GameObject.FindWithTag ("Human").GetComponent<Animator> ();
+        animator = GetComponent<Animator> ();
 
-       m_Capsule = GameObject.FindWithTag("Human").GetComponent<CapsuleCollider>();
     }
     void Start()
     {
-        //EnemyPosition = GameObject.Find("Enemy").GetComponent<EnemyPosition>();
-        // HP.SetHumanHP(currentHealth);
-        HPcontroller = GameObject.Find("GameManager").GetComponent<HPcontroller>();
+       
+       // HPcontroller = GameObject.Find("GameManager").GetComponent<HPcontroller>();
     }
 
-    //void Update()
-    //{
+    void Update()
+    {
+        if (currentHealth <= 0 && isDead == false)
+        {
+            Death();
+        }
 
-    //    HPcontroller.CharacterHpControll();
-    //    if (currentHealth <= 0 && !isDead)
-    //    {
-    //        Death();
-    //    }
-
-    //}
+    }
 
     public void Hurt(float Amount)
 	{
-
-        
-
-        if (PossessedSystem.OnPossessed)//如果附身，扣動物血量
-        {
-            PossessedSystem.AttachedBody.GetComponent<AnimalHealth>().currentHealth -= Amount;
-            HPcontroller.Blink = true;
-            HPcontroller.CharacterHpControll();
-        }
-        else
-        {
+        //if (PossessedSystem.OnPossessed)//如果附身，扣動物血量
+        //{
+        //    PossessedSystem.AttachedBody.GetComponent<AnimalHealth>().currentHealth -= Amount;
+        //    HPcontroller.Blink = true;
+        //    HPcontroller.CharacterHpControll();
+        //}
+        //else
+        //{
 
             currentHealth -= Amount;//扣血
-            HPcontroller.CharacterHpControll();
-            HPcontroller.Blink = true;
+        StartCoroutine(HurtAnimation());
+           // HPcontroller.CharacterHpControll();
+            //HPcontroller.Blink = true;
             audioSource.PlayOneShot(hurt);
-            //EnemyPosition.AttackPosition();
-        }
-		if(currentHealth <= 0 && !isDead)
-		{
-			Death ();
-		}
-       
-       // HP.SetHumanHP(currentHealth);
 
-        animator.SetTrigger("Hurt");
-        animator.SetInteger("Render",HurtRender());
-	}
+        //      }
+        
 
-    int HurtRender()
-    {
-        int HurtCount = Random.Range(0, 2);
-        return HurtCount;
+        //animator.SetTrigger("Hurt");
+        //animator.SetInteger("Render",HurtRender());
     }
 
-	void Death()
+    
+
+    IEnumerator HurtAnimation()
+    {
+        animator.enabled = false;
+        ragdollBehavior.ToggleRagdoll(true);
+        yield return new WaitForSeconds(0.5f);
+        animator.enabled = true;
+        ragdollBehavior.ToggleRagdoll(false);
+        StopCoroutine(HurtAnimation());
+    }
+    void Death()
 	{
-		isDead = true;
-		playerMovement.enabled = false;
-        animator.SetBool("Die",isDead);
-        m_Capsule.direction = 2;
-		Destroy(gameObject,4f);
+       // m_collider.enabled = false;
+        ragdollBehavior.ToggleRagdoll(true);
+        animator.enabled = false;
+        playerMovement.enabled = false;
+      //  enabled = false;
+        isDead = true;
+        //animator.SetBool("Die",isDead);
+		//Destroy(gameObject,4f);
 	}
 
 }

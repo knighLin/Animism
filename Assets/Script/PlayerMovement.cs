@@ -29,31 +29,19 @@ public class PlayerMovement : MonoBehaviour
     float m_TurnAmount;//轉向值
     float m_ForwardAmount;//前進值
     Vector3 m_GroundNormal;//地面法向量
-                          //float m_CapsuleHeight;//膠囊高度
-                          // Vector3 m_CapsuleCenter;//膠囊中心
-                          // CapsuleCollider m_Capsule;
-
-   
-
+                          
+    
 
     void Awake()
     {
         value = GetComponent<TypeValue>();
-        //animEvent = GameObject.FindWithTag("Human").GetComponent<AnimEvents>();
-        //animEvent.Jump = Jump;
+
         m_Rigidbody = GetComponent<Rigidbody>();
-        m_Animator = GameObject.FindWithTag("Human").GetComponent<Animator>();
-
-        //m_Capsule = GameObject.FindWithTag("Human").GetComponent<CapsuleCollider>();
-        //m_CapsuleHeight = m_Capsule.height;
-        //m_CapsuleCenter = m_Capsule.center;
+        m_Animator = GetComponent<Animator>();
+        
         m_OrigGroundCheckDistance = m_GroundCheckDistance;//保存一下地面检查值 
-
-
     }
-    //public void Jump(){
-    //    m_Rigidbody.velocity = new Vector3(m_Rigidbody.velocity.x, value.JumpPower, m_Rigidbody.velocity.z);//保存x、z轴速度，并给以y轴向上的速度  
-    //}
+    
     private void Start()
     {
         // get the transform of the main camera
@@ -67,18 +55,6 @@ public class PlayerMovement : MonoBehaviour
                 "Warning: no main camera found. Third person character needs a Camera tagged \"MainCamera\", for camera-relative controls.", gameObject);
             // we use self-relative controls in this case, which probably isn't what the user wants, but hey, we warned them!
         }
-
-
-    }
-    private void Update()
-    {
-        if(m_IsGrounded == false)
-        Debug.Log(m_Rigidbody.velocity.y);
-        //if (!m_Jump)//不在跳跃状态下，如果读到跳跃则更新变量  
-        //{
-        //    m_Jump = Input.GetKeyDown(KeyCode.Space);
-        //}
-       
     }
 
     //固定更新與物理同步調用
@@ -86,19 +62,14 @@ public class PlayerMovement : MonoBehaviour
     {
         //讀取輸入
         float h = Input.GetAxis("Horizontal") - Input.GetAxis("joy5");
-       
-
         float v = Input.GetAxis("Vertical") - Input.GetAxis("joy6");
-       
-
+      
         //計算移動方向傳遞給角色
         if (m_Cam != null)
         {
             //計算相機相對方向移動：
             m_CamForward = Vector3.Scale(m_Cam.forward, new Vector3(1, 0, 1)).normalized;
             moveDirection = v * m_CamForward + h * m_Cam.right;
-
-           
         }
         else
         {
@@ -174,7 +145,6 @@ public class PlayerMovement : MonoBehaviour
         m_Animator.SetBool("OnGround", m_IsGrounded);
         if (!m_IsGrounded)
         {
-            //m_Animator.SetTrigger("Jump");
             m_Animator.SetFloat("Jump", m_Rigidbody.velocity.y);
         }
 

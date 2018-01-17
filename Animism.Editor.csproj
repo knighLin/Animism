@@ -271,18 +271,24 @@
     <Reference Include="SimpleMatrixLibrary">
       <HintPath>Assets\Plug-in\UBER\Editor\SimpleMatrixLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="AssetStoreTools">
+      <HintPath>Assets\AssetStoreTools\Editor\AssetStoreTools.dll</HintPath>
+    </Reference>
+    <Reference Include="AssetStoreToolsExtra">
+      <HintPath>Assets\AssetStoreTools\Editor\AssetStoreToolsExtra.dll</HintPath>
+    </Reference>
     <Reference Include="Assembly-UnityScript">
       <HintPath>Library\ScriptAssemblies\Assembly-UnityScript.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Animism.Plugins.csproj">
-      <Project>{F33082FC-0039-1CDF-2FBB-141091849DD1}</Project>
-      <Name>Animism.Plugins</Name>
-    </ProjectReference>
     <ProjectReference Include="Animism.csproj">
       <Project>{F3F43FDF-E28E-8ECB-9108-479C91F22EBF}</Project>
       <Name>Animism</Name>
+    </ProjectReference>
+    <ProjectReference Include="Animism.Plugins.csproj">
+      <Project>{F33082FC-0039-1CDF-2FBB-141091849DD1}</Project>
+      <Name>Animism.Plugins</Name>
     </ProjectReference>
     <ProjectReference Include="Animism.Editor.Plugins.csproj">
       <Project>{997BDCF8-12ED-1D67-5620-B7B25F60FA0B}</Project>

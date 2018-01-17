@@ -15,15 +15,15 @@ public class Bullet : MonoBehaviour {
 
     void Awake()
 	{
-        typeValue = GameObject.Find ("Player").GetComponent<TypeValue> ();
-        PlayerHealth = GameObject.Find("Player").GetComponent <PlayerHealth> ();
+        typeValue = GameObject.FindWithTag("Human").GetComponent<TypeValue> ();
+        PlayerHealth = GameObject.FindWithTag("Human").GetComponent <PlayerHealth> ();
         audioSource = GetComponent<AudioSource>();
 
     }
 
 	void OnCollisionEnter(Collision Target)
 	{
-		if (Target.transform.tag == "Player")
+		if (Target.transform.tag == "Human")
 		{
 			if (PlayerHealth.currentHealth > 0) 
 			{//當主角的還有血量時

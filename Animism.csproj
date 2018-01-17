@@ -225,6 +225,26 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\AnimFollow\Scripts\CameraScripts\CameraMovement_AF.cs" />
+    <Compile Include="Assets\AnimFollow\Scripts\CameraScripts\CameraMovement1_AF.cs" />
+    <Compile Include="Assets\AnimFollow\Scripts\CameraScripts\ToggleSlomo_AF.cs" />
+    <Compile Include="Assets\AnimFollow\Scripts\MasterScripts\HashIDs_AF.cs" />
+    <Compile Include="Assets\AnimFollow\Scripts\MasterScripts\PlayerMovement_AF.cs" />
+    <Compile Include="Assets\AnimFollow\Scripts\RagdollScripts\AnimFollow_AF.cs" />
+    <Compile Include="Assets\AnimFollow\Scripts\RagdollScripts\Limb_AF.cs" />
+    <Compile Include="Assets\AnimFollow\Scripts\RagdollScripts\RagdollControl_AF.cs" />
+    <Compile Include="Assets\AnimFollow\Scripts\RagdollScripts\ReplaceJoints_AF.cs" />
+    <Compile Include="Assets\AnimFollow\Scripts\RagdollScripts\ResizeProfiles_AF.cs" />
+    <Compile Include="Assets\AnimFollow\Scripts\SimpleFootIKScripts_AF\IK_PositionFeet_AF.cs" />
+    <Compile Include="Assets\AnimFollow\Scripts\SimpleFootIKScripts_AF\IK_Properties_AF.cs" />
+    <Compile Include="Assets\AnimFollow\Scripts\SimpleFootIKScripts_AF\IK_Setup_AF.cs" />
+    <Compile Include="Assets\AnimFollow\Scripts\SimpleFootIKScripts_AF\IK_ShootRays_AF.cs" />
+    <Compile Include="Assets\AnimFollow\Scripts\SimpleFootIKScripts_AF\SimpleFootIK_AF.cs" />
+    <Compile Include="Assets\AnimFollow\Scripts\TestScripts\BallTest_AF.cs" />
+    <Compile Include="Assets\AnimFollow\Scripts\TestScripts\BoxHitByBullet_AF.cs" />
+    <Compile Include="Assets\AnimFollow\Scripts\TestScripts\BulletHitInfo_AF.cs" />
+    <Compile Include="Assets\AnimFollow\Scripts\TestScripts\ragdollHitByBullet_AF.cs" />
+    <Compile Include="Assets\AnimFollow\Scripts\TestScripts\ShootStuff_AF.cs" />
     <Compile Include="Assets\HighlightingSystem\HighlightingSystemDemo\Scripts\Advanced\CameraTargeting.cs" />
     <Compile Include="Assets\HighlightingSystem\HighlightingSystemDemo\Scripts\Advanced\HighlighterBase.cs" />
     <Compile Include="Assets\HighlightingSystem\HighlightingSystemDemo\Scripts\Advanced\HighlighterConstant.cs" />
@@ -334,6 +354,7 @@
     <Compile Include="Assets\Script\PlayerMovement.cs" />
     <Compile Include="Assets\Script\PlayerTurnaround.cs" />
     <Compile Include="Assets\Script\PossessedSystem.cs" />
+    <Compile Include="Assets\Script\RagdollBehavior.cs" />
     <Compile Include="Assets\Script\TypeValue.cs" />
     <Compile Include="Assets\Script\WolfAttack.cs" />
     <Compile Include="Assets\Script\WolfGuardsAi.cs" />

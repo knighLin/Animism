@@ -111,10 +111,10 @@ public class EnemyAI : MonoBehaviour
     private void TargetInRange()
     {
         EnemyToPlayerDis = Vector3.Distance(transform.position, Target.position);//去判斷跟主角的範圍
-        if (EnemyToPlayerDis <= 10)
+        if (EnemyToPlayerDis <= 10 && PlayerHealth.isDead == false)
         {
             isThink = false;//Stop think
-           // Debug.Log("player in range");
+          
             if (EnemyToPlayerDis <= 8 && EnemyToPlayerDis >= 3)//小於8大於3的距離射擊
             {
                 SetEnemyState(EnemyState.Enemy_Shooting);
