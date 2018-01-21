@@ -184,11 +184,8 @@
     <Reference Include="UnityEngine.WindModule">
       <HintPath>Library\UnityAssemblies\UnityEngine.WindModule.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Networking">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
+    <Reference Include="UnityEngine.UIAutomation">
+      <HintPath>Library\UnityAssemblies\UnityEngine.UIAutomation.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.TestRunner">
       <HintPath>Library\UnityAssemblies\UnityEngine.TestRunner.dll</HintPath>
@@ -196,11 +193,14 @@
     <Reference Include="nunit.framework">
       <HintPath>Library\UnityAssemblies\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.Networking">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.Timeline">
       <HintPath>Library\UnityAssemblies\UnityEngine.Timeline.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UIAutomation">
-      <HintPath>Library\UnityAssemblies\UnityEngine.UIAutomation.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.GoogleAudioSpatializer">
       <HintPath>Library\UnityAssemblies\UnityEngine.GoogleAudioSpatializer.dll</HintPath>
@@ -245,6 +245,7 @@
     <Compile Include="Assets\AnimFollow\Scripts\TestScripts\BulletHitInfo_AF.cs" />
     <Compile Include="Assets\AnimFollow\Scripts\TestScripts\ragdollHitByBullet_AF.cs" />
     <Compile Include="Assets\AnimFollow\Scripts\TestScripts\ShootStuff_AF.cs" />
+    <Compile Include="Assets\CameraScript.cs" />
     <Compile Include="Assets\HighlightingSystem\HighlightingSystemDemo\Scripts\Advanced\CameraTargeting.cs" />
     <Compile Include="Assets\HighlightingSystem\HighlightingSystemDemo\Scripts\Advanced\HighlighterBase.cs" />
     <Compile Include="Assets\HighlightingSystem\HighlightingSystemDemo\Scripts\Advanced\HighlighterConstant.cs" />
