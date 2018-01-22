@@ -9,7 +9,7 @@ public class PossessedSystem : MonoBehaviour
     private PlayerMovement playerMovement;
     private PlayerManager playerManager;
     private HPcontroller HPcontroller;
-    private CameraMove CameraMove;
+    private CameraScript CameraScript;
     private AnimalHealth animalHealth;
     private List<Highlighter> highlighter = new List<Highlighter>();
     private List<HighlighterConstant> highlighterConstant = new List<HighlighterConstant>();
@@ -26,10 +26,8 @@ public class PossessedSystem : MonoBehaviour
     private RaycastHit hit;//點擊的動物物件
     private string PreviousTag;//附身前的標籤
     public float AnimationTime;
-    public bool Effect;//特效鏡頭開關;
     public bool ChooseRightObject;
     private bool clear = true;
-    
 
     //audio
     private AudioSource audioSource;
@@ -41,7 +39,7 @@ public class PossessedSystem : MonoBehaviour
         playerMovement = GetComponent<PlayerMovement>();
         HPcontroller = GameObject.Find("GameManager").GetComponent<HPcontroller>();
         playerManager = GetComponent<PlayerManager>();
-        CameraMove = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraMove>();
+        CameraScript = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraScript>();
         Possessor = GameObject.FindWithTag("Human");
         PossessedCol = GetComponent<SphereCollider>();
         Player = GameObject.FindWithTag("Player");
@@ -51,11 +49,11 @@ public class PossessedSystem : MonoBehaviour
 
     private void Update()
     {
-        if (CameraMove.pressingE)//打開關閉附身系統，如按著E鍵pressingE為true
+        if (CameraScript.CanPossess)//打開附身系統
         {
             if (clear)//開啟附身系統只清一次，播放一次動畫
             {
-                PlayerMovement.m_Animator.SetTrigger("Surgery");//播放附身動畫
+                //PlayerMovement.m_Animator.SetTrigger("Surgery");//播放附身動畫
                 playerMovement.enabled = false;
                 //清掉之前範圍的動物物件和Highlight
                 RangeObject.Clear();
@@ -74,10 +72,7 @@ public class PossessedSystem : MonoBehaviour
                 clear = false;
             }
 
-            if (AnimationTime < 0.05)//0.05秒後才拉近
-                AnimationTime += Time.deltaTime;
-            else if (AnimationTime >= 0.05)
-                CameraMove.AnimationOver = true;
+
             PossessedCol.enabled = true;
             if (Time.timeScale == 1f)
             Time.timeScale = 0.45f;//如果時間正常則遊戲慢動作
@@ -88,7 +83,6 @@ public class PossessedSystem : MonoBehaviour
         else
         {
             playerMovement.enabled = true;
-            
             AnimationTime = 0;
             clear = true;//讓下次開啟附身清理範圍物件
             PossessedCol.enabled = false;//附身範圍collider關閉
@@ -109,11 +103,16 @@ public class PossessedSystem : MonoBehaviour
 
     public void MouseChoosePossessed()//滑鼠點擊附身物
     {
-        if (ChooseRightObject)
+        if (ChooseRightObject)//如果點到可附身物件
         {
-            CameraMove.EffectCameraMove();
+            ChooseRightObject = false;//重置
+            CameraScript.CanPossess = false;//重置
+            CameraScript.PossessEffect.SetActive(false);//重置
+            CameraScript.Crosshairs.SetActive(false);//重置
+            CameraScript.IsPossessing = true;//正在附身模式
+            CameraScript.CameraState = "GettingPossess";//轉為附身模式
         }
-        else if(((Input.GetMouseButtonUp(1) || Input.GetButtonDown("joy12")) && PossessedSystem.PossessedCol.enabled == true) && CameraMove.CanPossess)
+        else if(((Input.GetMouseButtonUp(0) || Input.GetButtonDown("joy12")) && PossessedSystem.PossessedCol.enabled == true))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             Physics.Raycast(ray, out hit, 10, PossessedLayerMask);
@@ -122,38 +121,21 @@ public class PossessedSystem : MonoBehaviour
                 //if (!hit.collider.CompareTag("Player"))//如果是自己本身不執行
                 //{
                 if (hit.collider == RangeObject[i])//當點擊的物件是附身範圍裡的物件時
-                {
                     ChooseRightObject = true;
-                    Effect = true;
-                    CameraMove.ChooseTarget = hit.collider.gameObject.transform;
-                    CameraMove.CanPressE = false;
-                }
                 else
-                {
                     ChooseRightObject = false;
-                }
-
                 //}
             }
         }
         
     }
 
-    public void EffectEnd()
+    public void InToPossess()
     {
-        if (!Effect)//特效跑完
-        {
-            ChooseRightObject = false;
-            HPcontroller.CharacterSwitch = true;//換圖片
             EnterPossessed();//執行附身
-            CameraMove.CanPressE = false;//防止持續按著E出問題
-            CameraMove.Reset = true;//重置參數
-            CameraMove.canCameraMove = false;//附身後放開E鏡頭不會後退
-            CameraMove.LoadCharacter();//讀取動物鏡頭位置
-            CameraMove.cameraFollow();//鏡頭跟隨改成附身的動物
+            HPcontroller.CharacterSwitch();//換圖片
             Time.timeScale = 1f;//慢動作回覆
             PossessedCol.enabled = false;//關掉附身範圍
-        }
     }
 
 
@@ -261,11 +243,8 @@ public class PossessedSystem : MonoBehaviour
         playerManager.TurnType("Human", AttachedBody.tag);//將標籤傳至管理者，變換數值
         AttachedBody = null;//解除附身後清除附身物，防止解除附身後按Ｑ還有反應
         OnPossessed = false;//取消附身
-        HPcontroller.CharacterSwitch = true;//換圖片
-        CameraMove.LoadCharacter();//重置鏡頭位置
-        CameraMove.ResetValue();
-
-
+        HPcontroller.CharacterSwitch();//換圖片
+        CameraScript.LoadCharacterPosition();//重置鏡頭位置
     }
 
     private void CloseRangOnLight()

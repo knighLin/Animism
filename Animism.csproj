@@ -245,7 +245,6 @@
     <Compile Include="Assets\AnimFollow\Scripts\TestScripts\BulletHitInfo_AF.cs" />
     <Compile Include="Assets\AnimFollow\Scripts\TestScripts\ragdollHitByBullet_AF.cs" />
     <Compile Include="Assets\AnimFollow\Scripts\TestScripts\ShootStuff_AF.cs" />
-    <Compile Include="Assets\CameraScript.cs" />
     <Compile Include="Assets\HighlightingSystem\HighlightingSystemDemo\Scripts\Advanced\CameraTargeting.cs" />
     <Compile Include="Assets\HighlightingSystem\HighlightingSystemDemo\Scripts\Advanced\HighlighterBase.cs" />
     <Compile Include="Assets\HighlightingSystem\HighlightingSystemDemo\Scripts\Advanced\HighlighterConstant.cs" />
@@ -337,7 +336,7 @@
     <Compile Include="Assets\Script\AttackHit.cs" />
     <Compile Include="Assets\Script\BearAttack.cs" />
     <Compile Include="Assets\Script\Bullet.cs" />
-    <Compile Include="Assets\Script\CameraMove.cs" />
+    <Compile Include="Assets\Script\CameraScript.cs" />
     <Compile Include="Assets\Script\EnemyAI.cs" />
     <Compile Include="Assets\Script\EnemyHealth.cs" />
     <Compile Include="Assets\Script\EnemyNormalAtk.cs" />
