@@ -217,6 +217,9 @@
     <Reference Include="UnityEngine.Purchasing">
       <HintPath>Library\UnityAssemblies\UnityEngine.Purchasing.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Assets\JsonDotNet\Assemblies\Standalone\Newtonsoft.Json.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Animism.Plugins.csproj">
@@ -345,6 +348,7 @@
     <Compile Include="Assets\Script\HomePageButton.cs" />
     <Compile Include="Assets\Script\HPcontroller.cs" />
     <Compile Include="Assets\Script\HumanAttack.cs" />
+    <Compile Include="Assets\Script\IOHelper.cs" />
     <Compile Include="Assets\Script\joystick\joycontroller.cs" />
     <Compile Include="Assets\Script\Nouse\PossessCameraMove.cs" />
     <Compile Include="Assets\Script\Pause.cs" />
@@ -355,6 +359,9 @@
     <Compile Include="Assets\Script\PlayerTurnaround.cs" />
     <Compile Include="Assets\Script\PossessedSystem.cs" />
     <Compile Include="Assets\Script\RagdollBehavior.cs" />
+    <Compile Include="Assets\Script\SaveData.cs" />
+    <Compile Include="Assets\Script\SaveObjectState.cs" />
+    <Compile Include="Assets\Script\SpawnObject.cs" />
     <Compile Include="Assets\Script\TypeValue.cs" />
     <Compile Include="Assets\Script\WolfAttack.cs" />
     <Compile Include="Assets\Script\WolfGuardsAi.cs" />
@@ -444,6 +451,10 @@
     <None Include="Assets\HighlightingSystem\Plugins\HighlightingSystem\Resources\HighlightingOpaque.shader" />
     <None Include="Assets\HighlightingSystem\Plugins\HighlightingSystem\Resources\HighlightingTransparent.shader" />
     <None Include="Assets\HighlightingSystem\Plugins\HighlightingSystem\link.xml" />
+    <None Include="Assets\JsonDotNet\Assemblies\AOT\Newtonsoft.Json.XML" />
+    <None Include="Assets\JsonDotNet\Assemblies\Standalone\Newtonsoft.Json.XML" />
+    <None Include="Assets\JsonDotNet\Assemblies\Windows\Newtonsoft.Json.XML" />
+    <None Include="Assets\JsonDotNet\link.xml" />
     <None Include="Assets\Plug-in\CameraEffect\ScreenSpaceSSS\CP_SSSSS\CP_SSSSS_Replacement.shader" />
     <None Include="Assets\Plug-in\CameraEffect\ScreenSpaceSSS\CP_SSSSS\CP_SSSSS_Shader.shader" />
     <None Include="Assets\Plug-in\CameraEffect\ScreenSpaceSSS\CP_SSSSS\Readme.txt" />

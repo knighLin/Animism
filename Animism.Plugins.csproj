@@ -217,6 +217,9 @@
     <Reference Include="UnityEngine.Purchasing">
       <HintPath>Library\UnityAssemblies\UnityEngine.Purchasing.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Assets\JsonDotNet\Assemblies\Standalone\Newtonsoft.Json.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Standard Assets\CrossPlatformInput\Scripts\AxisTouchButton.cs" />
@@ -275,6 +278,10 @@
     <None Include="Assets\HighlightingSystem\Plugins\HighlightingSystem\Resources\HighlightingOpaque.shader" />
     <None Include="Assets\HighlightingSystem\Plugins\HighlightingSystem\Resources\HighlightingTransparent.shader" />
     <None Include="Assets\HighlightingSystem\Plugins\HighlightingSystem\link.xml" />
+    <None Include="Assets\JsonDotNet\Assemblies\AOT\Newtonsoft.Json.XML" />
+    <None Include="Assets\JsonDotNet\Assemblies\Standalone\Newtonsoft.Json.XML" />
+    <None Include="Assets\JsonDotNet\Assemblies\Windows\Newtonsoft.Json.XML" />
+    <None Include="Assets\JsonDotNet\link.xml" />
     <None Include="Assets\Plug-in\CameraEffect\ScreenSpaceSSS\CP_SSSSS\CP_SSSSS_Replacement.shader" />
     <None Include="Assets\Plug-in\CameraEffect\ScreenSpaceSSS\CP_SSSSS\CP_SSSSS_Shader.shader" />
     <None Include="Assets\Plug-in\CameraEffect\ScreenSpaceSSS\CP_SSSSS\Readme.txt" />

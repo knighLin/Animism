@@ -265,6 +265,9 @@
     <Reference Include="UnityEditor.Purchasing">
       <HintPath>Library\UnityAssemblies\UnityEditor.Purchasing.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Assets\JsonDotNet\Assemblies\Standalone\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="SimpleMatrixLibrary">
       <HintPath>Assets\Plug-in\UBER\Editor\SimpleMatrixLibrary.dll</HintPath>
     </Reference>
@@ -287,6 +290,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Editor\AutoReplacePrefab.cs" />
     <Compile Include="Assets\HighlightingSystem\Plugins\Editor\HighlightingBaseEditor.cs" />
     <Compile Include="Assets\HighlightingSystem\Plugins\Editor\HighlightingBlitterEditor.cs" />
     <Compile Include="Assets\HighlightingSystem\Plugins\Editor\HighlightingRendererEditor.cs" />
@@ -344,6 +348,10 @@
     <None Include="Assets\HighlightingSystem\Plugins\HighlightingSystem\Resources\HighlightingOpaque.shader" />
     <None Include="Assets\HighlightingSystem\Plugins\HighlightingSystem\Resources\HighlightingTransparent.shader" />
     <None Include="Assets\HighlightingSystem\Plugins\HighlightingSystem\link.xml" />
+    <None Include="Assets\JsonDotNet\Assemblies\AOT\Newtonsoft.Json.XML" />
+    <None Include="Assets\JsonDotNet\Assemblies\Standalone\Newtonsoft.Json.XML" />
+    <None Include="Assets\JsonDotNet\Assemblies\Windows\Newtonsoft.Json.XML" />
+    <None Include="Assets\JsonDotNet\link.xml" />
     <None Include="Assets\Plug-in\CameraEffect\ScreenSpaceSSS\CP_SSSSS\CP_SSSSS_Replacement.shader" />
     <None Include="Assets\Plug-in\CameraEffect\ScreenSpaceSSS\CP_SSSSS\CP_SSSSS_Shader.shader" />
     <None Include="Assets\Plug-in\CameraEffect\ScreenSpaceSSS\CP_SSSSS\Readme.txt" />

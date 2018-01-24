@@ -14,7 +14,7 @@ public class AnimalHealth : MonoBehaviour {
     //private bool BeLifePossessed = false;
     //private Animator animator;
    
-    void Awake()
+    void Start()
     {
         HPcontroller= GameObject.Find("GameManager").GetComponent<HPcontroller>();
         possessedSystem = GameObject.Find("Player").GetComponent<PossessedSystem>();
