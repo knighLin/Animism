@@ -298,8 +298,16 @@
     <Reference Include="UnityEditor.Purchasing">
       <HintPath>/Users/knight/Library/Unity/cache/packages/packages.unity.com/com.unity.purchasing@1.0.1/Editor/UnityEditor.Purchasing.dll</HintPath>
     </Reference>
+<<<<<<< HEAD
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>/Applications/Unity/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
+=======
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Assets\JsonDotNet\Assemblies\Standalone\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleMatrixLibrary">
+      <HintPath>Assets\Plug-in\UBER\Editor\SimpleMatrixLibrary.dll</HintPath>
+>>>>>>> b3339fa494cab87d8929e533682ad01a06f7015e
     </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Common">
       <HintPath>/Applications/Unity/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Common.dll</HintPath>
@@ -322,6 +330,10 @@
     <None Include="Assets\HighlightingSystem\Plugins\HighlightingSystem\Resources\HighlightingOpaque.shader" />
     <None Include="Assets\HighlightingSystem\Plugins\HighlightingSystem\Resources\HighlightingTransparent.shader" />
     <None Include="Assets\HighlightingSystem\Plugins\HighlightingSystem\link.xml" />
+    <None Include="Assets\JsonDotNet\Assemblies\AOT\Newtonsoft.Json.XML" />
+    <None Include="Assets\JsonDotNet\Assemblies\Standalone\Newtonsoft.Json.XML" />
+    <None Include="Assets\JsonDotNet\Assemblies\Windows\Newtonsoft.Json.XML" />
+    <None Include="Assets\JsonDotNet\link.xml" />
     <None Include="Assets\Plug-in\CameraEffect\ScreenSpaceSSS\CP_SSSSS\CP_SSSSS_Replacement.shader" />
     <None Include="Assets\Plug-in\CameraEffect\ScreenSpaceSSS\CP_SSSSS\CP_SSSSS_Shader.shader" />
     <None Include="Assets\Plug-in\CameraEffect\ScreenSpaceSSS\CP_SSSSS\Readme.txt" />

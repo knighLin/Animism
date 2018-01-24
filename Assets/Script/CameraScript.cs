@@ -36,6 +36,7 @@ public class CameraScript : MonoBehaviour {
         Crosshairs.SetActive(false);//開始時準心關閉
         CameraState = "NormalState";//初始狀態為正常狀態
         AttachedBodyChildren = new Transform[3];//只抓前四個物件(包含本身)
+        LoadCharacterPosition();//一開始取正確腳色位置
     }
 	
 	// Update is called once per frame
@@ -60,7 +61,7 @@ public class CameraScript : MonoBehaviour {
 
         if (Input.GetKey(KeyCode.E)&& !IsPossessing)//持續按著靈視鍵可以進入靈視 但附身過程或附身後還按著無效(IsPossessing為true)
             CameraState = "SoulVision";
-        else if (Input.GetKeyUp(KeyCode.E)&& !IsPossessing)//如果放開E則鏡頭後退 如果是附身過程或附身後才放開(IsPossessing為true) 則不執行
+        if (Input.GetKeyUp(KeyCode.E)&& !IsPossessing)//如果放開E則鏡頭後退 如果是附身過程或附身後才放開(IsPossessing為true) 則不執行
             CameraState = "SoulVisionOver";
     }
     public void ResetValue()//重置一些前進後退中用到的值 以防下次進入其他模式出問題
