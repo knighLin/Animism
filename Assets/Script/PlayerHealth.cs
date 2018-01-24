@@ -23,7 +23,7 @@ public class PlayerHealth : MonoBehaviour {
     private AudioSource audioSource;
     public AudioClip hurt;
 
-    int a = 1;
+
     void Awake()
 	{
 
@@ -85,7 +85,7 @@ public class PlayerHealth : MonoBehaviour {
         if(isDead == false)
         {
             animator.enabled = true;
-            print(a++);
+
         }
         ragdollBehavior.ToggleRagdoll(false);
         StopCoroutine(HurtAnimation());
