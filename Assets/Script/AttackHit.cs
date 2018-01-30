@@ -7,9 +7,9 @@ public class AttackHit : MonoBehaviour {
     private EnemyHealth enemyHealth;
     private TypeValue typeValue;
 
-    void Awake()
+    void Start()
     {
-        typeValue = GameObject.FindWithTag("Player").GetComponent<TypeValue>();
+        typeValue = GameObject.FindWithTag("Human").GetComponent<TypeValue>();
     }
 
     void OnTriggerEnter(Collider other)

@@ -5,8 +5,7 @@ using UnityEngine.UI;
 
 public class Pause : MonoBehaviour {
 
-    public GameObject canvasPrefab;
-    public GameObject canvas;
+    public GameObject PauseCanvas;
     public Image FadeIn;
     public float time=1;
     private bool Fade;
@@ -19,7 +18,7 @@ public class Pause : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
  
-        if (Fade && time <=1)
+        if (Fade && time <=1&& time>0)
         {
             FadeIn.color = new Color(0, 0, 0, time);
             time -= Time.deltaTime * 0.8f;
@@ -44,16 +43,26 @@ public class Pause : MonoBehaviour {
         {
             if (!IsPause)
             {
-                canvas =Instantiate(canvasPrefab, Vector2.zero, Quaternion.identity);
-                Time.timeScale = 0f;
-                IsPause = true;
+                CreatPauseCanvas();
             }
             else
             {
-                Destroy(canvas);
-                Time.timeScale = 1;
-                IsPause = false;
+                DestroyPauseCanvas();
             }
         }
+    }
+    public void CreatPauseCanvas()
+    {
+        //Instantiate(canvasPrefab, Vector2.zero, Quaternion.identity).name= "PauseCanvas";
+        PauseCanvas.SetActive(true);
+        Time.timeScale = 0f;
+        IsPause = true;
+    }
+    public void DestroyPauseCanvas()
+    {
+        //Destroy(GameObject.Find("PauseCanvas"));
+        PauseCanvas.SetActive(false);
+        Time.timeScale = 1;
+        IsPause = false;
     }
 }
