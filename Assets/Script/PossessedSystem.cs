@@ -75,7 +75,7 @@ public class PossessedSystem : MonoBehaviour
 
             PossessedCol.enabled = true;
             if (Time.timeScale == 1f)
-            Time.timeScale = 0.45f;//如果時間正常則遊戲慢動作
+            Time.timeScale = 0.5f;//如果時間正常則遊戲慢動作
             MouseChoosePossessed();
 
 
@@ -87,7 +87,7 @@ public class PossessedSystem : MonoBehaviour
             clear = true;//讓下次開啟附身清理範圍物件
             PossessedCol.enabled = false;//附身範圍collider關閉
             CloseRangOnLight();//關掉附身物的附身效果shader
-            if (Time.timeScale == 0.45f)
+            if (Time.timeScale == 0.5f)
             Time.timeScale = 1f;//如果有變慢 才取消慢動作
             //joycontroller.joypossessed = false; //搖桿
         }
@@ -114,6 +114,7 @@ public class PossessedSystem : MonoBehaviour
         }
         else if(((Input.GetMouseButtonUp(0) || Input.GetButtonDown("joy12")) && PossessedSystem.PossessedCol.enabled == true))
         {
+            
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             Physics.Raycast(ray, out hit, 10, PossessedLayerMask);
             for (int i = 0; i < RangeObject.Count; i++)
@@ -121,9 +122,13 @@ public class PossessedSystem : MonoBehaviour
                 //if (!hit.collider.CompareTag("Player"))//如果是自己本身不執行
                 //{
                 if (hit.collider == RangeObject[i])//當點擊的物件是附身範圍裡的物件時
+                {
                     ChooseRightObject = true;
+                }
                 else
+                {
                     ChooseRightObject = false;
+                }
                 //}
             }
         }
@@ -204,6 +209,7 @@ public class PossessedSystem : MonoBehaviour
 
     void OnTriggerEnter(Collider Object)//送出訊息
     {
+
         switch (Object.transform.tag)
         {//判斷是不是可以附身的物件
          //case "Human":
@@ -215,7 +221,6 @@ public class PossessedSystem : MonoBehaviour
                 return;
         }
         RangeObject.Add(Object);
-
         //將範圍內可以被附身動物的Highlight打開
         highlighter.Add(Object.transform.parent.GetComponent<Highlighter>());
         highlighterConstant.Add(Object.transform.parent.GetComponent<HighlighterConstant>());

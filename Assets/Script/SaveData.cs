@@ -4,44 +4,31 @@ using System.Collections.Generic;
 
 public class SaveData : MonoBehaviour
 {
+    public GameObject[] Wolf, Enemy;
     private PossessedSystem PossessedSystem;
-    private PlayerManager PlayerManager;
-    public Data D = new Data();//創一個新的Data物件 用來儲存各種資料
     public string filename;
-
+    public int SaveNumber;
 
     public class Data
     {
         public List<int> AnimalState;
         public List<Vector3> AnimalVector3;
+        public List<Quaternion> AnimalQuaternion;
         public List<int> EnemyState;
         public List<Vector3> EnemyVector3;
+        public List<Quaternion> EnemyQuaternion;
         public string PlayerState;
         public Vector3 PlayerVector3;
+        public Quaternion PlayerQuaternion;
     }
 
     void Start()
     {
-        PossessedSystem = GameObject.Find("Player").GetComponent<PossessedSystem>();
-        PlayerManager = GameObject.Find("Player").GetComponent<PlayerManager>();
+        PossessedSystem = GameObject.Find("Pine").GetComponent<PossessedSystem>();
+
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            //定义存档路径
-            string dirpath = Application.persistentDataPath + "/Save";
-            //创建存档文件夹
-            IOHelper.CreateDirectory(dirpath);
-            //定义存档文件路径
-            filename = dirpath + "/GameData.sav";
-            //儲存檔案
-            SaveDataValue();
-
-            //保存数据
-            IOHelper.SetData(filename, D);
-            Debug.Log("存檔路徑為"+ filename );
-        }
         if (Input.GetKeyDown(KeyCode.U))
         {
             //读取数据
@@ -59,15 +46,47 @@ public class SaveData : MonoBehaviour
 
     public void SaveDataValue()
     {
-
-        D.AnimalState = new List<int>{ 1 , 1 , 1 } ;
-        D.AnimalVector3 = new List<Vector3> { new Vector3(232,23,46), new Vector3(232, 23, 43), new Vector3(232, 23, 40) };
-        D.EnemyState = new List<int> { 1, 1, 1 };
-        D.EnemyVector3 = new List<Vector3> { new Vector3(226, 23, 46), new Vector3(226, 23, 43), new Vector3(226, 23, 40) };
-        D.PlayerState = PlayerManager.NowType;
-        D.PlayerVector3 = GameObject.Find("Player").transform.position;
-
-    }
-
+        SaveNumber = 1;
+        Data Save = new Data();
+        //定义存档路径
+        string dirpath = Application.persistentDataPath + "/Save";
+        //创建存档文件夹
+        IOHelper.CreateDirectory(dirpath);
+        //定义存档文件路径
+        filename = dirpath + "/GameData"+ SaveNumber + ".sav";
+        //儲存檔案
+        if (GameObject.FindGameObjectsWithTag("Wolf1")[0] != null)//抓現在所有狼
+            Wolf = GameObject.FindGameObjectsWithTag("Wolf1");
+        if (GameObject.FindGameObjectsWithTag("Enemy1")[0] != null) //抓現在所有敵人
+            Enemy = GameObject.FindGameObjectsWithTag("Enemy1");
+        Save.AnimalState = new List<int> { };                     //創新的List用來存數值
+        Save.AnimalVector3 = new List<Vector3> { };               //創新的List用來存數值
+        Save.AnimalQuaternion = new List<Quaternion> { };         //創新的List用來存數值
+        Save.EnemyState = new List<int> { };                      //創新的List用來存數值
+        Save.EnemyVector3 = new List<Vector3> { };                //創新的List用來存數值
+        Save.EnemyQuaternion = new List<Quaternion> { };          //創新的List用來存數值
+        for (int A = 0; A < Wolf.Length; A++)                     //抓動物
+        {
+            Save.AnimalState.Add(1);                              //抓動物狀態
+            Save.AnimalVector3.Add(Wolf[A].transform.position);   //抓動物座標
+            Save.AnimalQuaternion.Add(Wolf[A].transform.rotation);//抓動物旋轉角度
+            Debug.Log("保存了第" + (A + 1) + "隻狼," + "狀態為" + Save.AnimalState[A] + "座標為" + Save.AnimalVector3[A]);
+        }
+        for (int E = 0; E < Enemy.Length; E++)                    //抓敵人
+        {
+            Save.EnemyState.Add(1);                               //抓敵人狀態
+            Save.EnemyVector3.Add(Enemy[E].transform.position);   //抓敵人座標
+            Save.EnemyQuaternion.Add(Enemy[E].transform.rotation);//抓敵人旋轉角度
+            Debug.Log("保存了第" + (E + 1) + "個敵人," + "狀態為" + Save.EnemyState[E] + "座標為" + Save.EnemyVector3[E]);
+        }
+        Save.PlayerState = GameObject.Find("Pine").GetComponent<PlayerManager>().NowType;
+        Save.PlayerVector3 = GameObject.Find("Pine").transform.position;
+        Save.PlayerQuaternion = GameObject.Find("Pine").transform.rotation;
+        Debug.Log("保存了派恩的位置,座標為" + Save.PlayerVector3);
+        //保存数据
+        IOHelper.SetData(filename, Save);
+        Debug.Log("保存了GameData" + SaveNumber );
+        Debug.Log("存檔路徑為" + filename);
+        }
 
 }
