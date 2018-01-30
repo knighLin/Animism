@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class RagdollBehavior : MonoBehaviour {
 
-    private Rigidbody[] allRigids;
+    public Rigidbody[] allRigids;
     
     public Transform Root;
 
     private void Awake()
     {
-        allRigids = Root.GetComponentsInChildren<Rigidbody>();
+        //allRigids = Root.GetComponentsInChildren<Rigidbody>();
         ToggleRagdoll(false);
     }
 

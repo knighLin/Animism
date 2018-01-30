@@ -280,6 +280,9 @@
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>/Applications/Visual Studio.app/Contents/Resources/lib/monodevelop/AddIns/MonoDevelop.Unity/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Assets/JsonDotNet/Assemblies/Standalone/Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="SimpleMatrixLibrary">
       <HintPath>Assets/Plug-in/UBER/Editor/SimpleMatrixLibrary.dll</HintPath>
     </Reference>
@@ -298,16 +301,8 @@
     <Reference Include="UnityEditor.Purchasing">
       <HintPath>/Users/knight/Library/Unity/cache/packages/packages.unity.com/com.unity.purchasing@1.0.1/Editor/UnityEditor.Purchasing.dll</HintPath>
     </Reference>
-<<<<<<< HEAD
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>/Applications/Unity/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
-=======
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>Assets\JsonDotNet\Assemblies\Standalone\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="SimpleMatrixLibrary">
-      <HintPath>Assets\Plug-in\UBER\Editor\SimpleMatrixLibrary.dll</HintPath>
->>>>>>> b3339fa494cab87d8929e533682ad01a06f7015e
     </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Common">
       <HintPath>/Applications/Unity/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Common.dll</HintPath>
