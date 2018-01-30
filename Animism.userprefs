@@ -1,16 +1,20 @@
 ﻿<Properties StartupConfiguration="{F3F43FDF-E28E-8ECB-9108-479C91F22EBF}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/RagdollBehavior.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/AttackHit.cs">
     <Files>
-      <File FileName="Assets/Script/AttackHit.cs" Line="27" Column="31" />
-      <File FileName="Assets/Script/HumanAttack.cs" Line="19" Column="26" />
-      <File FileName="Assets/Script/EnemyHealth.cs" Line="28" Column="14" />
+      <File FileName="Assets/Script/AttackHit.cs" Line="35" Column="1" />
+      <File FileName="Assets/Script/HumanAttack.cs" Line="59" Column="30" />
       <File FileName="Assets/Script/PlayerHealth.cs" Line="92" Column="6" />
-      <File FileName="Assets/Script/RagdollBehavior.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/AnimalHealth.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/PlayerMovement.cs" Line="157" Column="9" />
+      <File FileName="Assets/Script/PossessedSystem.cs" Line="24" Column="1" />
+      <File FileName="Assets/Script/EnemyAI.cs" Line="25" Column="22" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/knight/Animism/Assets/Script/RagdollBehavior.cs" relfile="Assets/Script/RagdollBehavior.cs" line="21" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MultiItemStartupConfigurations />

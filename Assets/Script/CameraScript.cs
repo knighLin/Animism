@@ -185,7 +185,7 @@ public class CameraScript : MonoBehaviour {
         }
         else if (PossessTime >= 1)
         {
-            PossessedSystem.InToPossess();
+            //PossessedSystem.InToPossess();
             LoadCharacterPosition();//讀取動物鏡頭位置
             CameraState = "NormalState";
         }

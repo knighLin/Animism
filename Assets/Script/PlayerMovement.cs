@@ -29,12 +29,12 @@ public class PlayerMovement : MonoBehaviour
     float m_TurnAmount;//轉向值
     float m_ForwardAmount;//前進值
     Vector3 m_GroundNormal;//地面法向量
-                          
-    
 
-    void Awake()
+    float time;
+
+    void OnEnable()
     {
-        value = GetComponent<TypeValue>();
+        value = GameObject.Find("PlayerManager").GetComponent<TypeValue>();
 
         m_Rigidbody = GetComponent<Rigidbody>();
         m_Animator = GetComponent<Animator>();
@@ -55,6 +55,13 @@ public class PlayerMovement : MonoBehaviour
                 "Warning: no main camera found. Third person character needs a Camera tagged \"MainCamera\", for camera-relative controls.", gameObject);
             // we use self-relative controls in this case, which probably isn't what the user wants, but hey, we warned them!
         }
+    }
+
+    private void Update()
+    {
+        if (m_IsGrounded == false)
+            Debug.Log(m_Rigidbody.velocity.y) ;
+
     }
 
     //固定更新與物理同步調用
@@ -87,12 +94,12 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //將所有參數傳遞給角色控制腳本
-        PlayerMove(moveDirection, m_Jump);
-        m_Jump = false;
+        PlayerMove(moveDirection);
+        //m_Jump = false;
     }
 
     // 移动！ 
-    void PlayerMove(Vector3 move, bool jump)
+    void PlayerMove(Vector3 move)
     {
         // 将一个世界坐标的输入转换为本地相关的转向和前进速度，这需要考虑到角色头部的方向
         if (move.magnitude > 1f)
@@ -114,20 +121,18 @@ public class PlayerMovement : MonoBehaviour
             // 确定当前是否能跳  ：
             if (Input.GetKeyDown(KeyCode.Space)|| joycontroller.joyjump == true)
             { // jump!
-                
-               // m_Rigidbody.velocity = new Vector3(m_Rigidbody.velocity.x, value.JumpPower, m_Rigidbody.velocity.z);//保存x、z轴速度，并给以y轴向上的速度 
-                m_Rigidbody.AddForce(Vector3.up * value.JumpPower*60f);
-                
-                m_IsGrounded = false;
+                // m_Rigidbody.velocity = new Vector3(m_Rigidbody.velocity.x, value.JumpPower, m_Rigidbody.velocity.z);//保存x、z轴速度，并给以y轴向上的速度 
+                m_Rigidbody.AddForce(Vector3.up * value.JumpPower * 60f);
+                m_IsGrounded = false;    
                 m_Animator.applyRootMotion = false;
                 m_GroundCheckDistance = 0.1f;
             }
         }
         else
         {//乘數增加重力：
-            Vector3 extraGravityForce = (Physics.gravity * m_GravityMultiplier) - Physics.gravity;
-            m_Rigidbody.AddForce(extraGravityForce);
-            
+            //Vector3 extraGravityForce = (Physics.gravity * m_GravityMultiplier) - Physics.gravity;
+            m_Rigidbody.AddForce(Physics.gravity);
+           
             m_GroundCheckDistance = m_Rigidbody.velocity.y < 0 ? m_OrigGroundCheckDistance : 0.01f;//上升的时候不判断是否在地面上   
         }
 
@@ -135,6 +140,8 @@ public class PlayerMovement : MonoBehaviour
         UpdateAnimator(move);
 
     }
+
+   
 
     // 更新动画组件 
     void UpdateAnimator(Vector3 move)
