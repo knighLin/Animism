@@ -7,7 +7,6 @@ public class SaveData : MonoBehaviour
     public GameObject[] Wolf, Enemy;
     private PossessedSystem PossessedSystem;
     public string filename;
-    public int SaveNumber;
 
     public class Data
     {
@@ -44,16 +43,15 @@ public class SaveData : MonoBehaviour
         }
     }
 
-    public void SaveDataValue()
+    public void SaveDataValue(string SaveDataName)//按鈕給字串
     {
-        SaveNumber = 1;
         Data Save = new Data();
         //定义存档路径
-        string dirpath = Application.persistentDataPath + "/Save";
+        string dirpath = Application.persistentDataPath + @"\Save\";
         //创建存档文件夹
         IOHelper.CreateDirectory(dirpath);
         //定义存档文件路径
-        filename = dirpath + "/GameData"+ SaveNumber + ".sav";
+        filename = dirpath+ SaveDataName + ".sav";
         //儲存檔案
         if (GameObject.FindGameObjectsWithTag("Wolf1")[0] != null)//抓現在所有狼
             Wolf = GameObject.FindGameObjectsWithTag("Wolf1");
@@ -85,7 +83,7 @@ public class SaveData : MonoBehaviour
         Debug.Log("保存了派恩的位置,座標為" + Save.PlayerVector3);
         //保存数据
         IOHelper.SetData(filename, Save);
-        Debug.Log("保存了GameData" + SaveNumber );
+        Debug.Log("保存了" + SaveDataName);
         Debug.Log("存檔路徑為" + filename);
         }
 

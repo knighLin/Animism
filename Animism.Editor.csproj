@@ -248,17 +248,7 @@
       <HintPath>Library\UnityAssemblies\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
-<<<<<<< HEAD
-      <HintPath>/Applications/Visual Studio.app/Contents/Resources/lib/monodevelop/AddIns/MonoDevelop.Unity/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>Assets/JsonDotNet/Assemblies/Standalone/Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="SimpleMatrixLibrary">
-      <HintPath>Assets/Plug-in/UBER/Editor/SimpleMatrixLibrary.dll</HintPath>
-=======
       <HintPath>Library\UnityAssemblies\SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
->>>>>>> bdb32e98166df432dcf9190b42f4bd50a25fda48
     </Reference>
     <Reference Include="UnityEditor.Advertisements">
       <HintPath>Library\UnityAssemblies\UnityEditor.Advertisements.dll</HintPath>
@@ -275,16 +265,11 @@
     <Reference Include="UnityEditor.Purchasing">
       <HintPath>Library\UnityAssemblies\UnityEditor.Purchasing.dll</HintPath>
     </Reference>
-<<<<<<< HEAD
-    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
-      <HintPath>/Applications/Unity/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
-=======
     <Reference Include="Newtonsoft.Json">
       <HintPath>Assets\JsonDotNet\Assemblies\Standalone\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="SimpleMatrixLibrary">
       <HintPath>Assets\Plug-in\UBER\Editor\SimpleMatrixLibrary.dll</HintPath>
->>>>>>> bdb32e98166df432dcf9190b42f4bd50a25fda48
     </Reference>
     <Reference Include="Assembly-UnityScript">
       <HintPath>Library\ScriptAssemblies\Assembly-UnityScript.dll</HintPath>

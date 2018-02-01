@@ -211,14 +211,14 @@
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>Library\UnityAssemblies\UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>Assets/JsonDotNet/Assemblies/Standalone/Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.Analytics">
       <HintPath>Library\UnityAssemblies\UnityEngine.Analytics.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Purchasing">
       <HintPath>Library\UnityAssemblies\UnityEngine.Purchasing.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Assets\JsonDotNet\Assemblies\Standalone\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -339,18 +339,17 @@
     <Compile Include="Assets\Script\AttackHit.cs" />
     <Compile Include="Assets\Script\BearAttack.cs" />
     <Compile Include="Assets\Script\Bullet.cs" />
+    <Compile Include="Assets\Script\ButtonScript.cs" />
+    <Compile Include="Assets\Script\CameraAspect.cs" />
     <Compile Include="Assets\Script\CameraScript.cs" />
     <Compile Include="Assets\Script\EnemyAI.cs" />
     <Compile Include="Assets\Script\EnemyHealth.cs" />
     <Compile Include="Assets\Script\EnemyNormalAtk.cs" />
     <Compile Include="Assets\Script\EnemyPosition.cs" />
     <Compile Include="Assets\Script\EnemyShoot.cs" />
-    <Compile Include="Assets\Script\HomePageButton.cs" />
     <Compile Include="Assets\Script\HPcontroller.cs" />
     <Compile Include="Assets\Script\HumanAttack.cs" />
-    <Compile Include="Assets\Script\IOHelper.cs" />
     <Compile Include="Assets\Script\joystick\joycontroller.cs" />
-    <Compile Include="Assets\Script\LoadData.cs" />
     <Compile Include="Assets\Script\Nouse\PossessCameraMove.cs" />
     <Compile Include="Assets\Script\Pause.cs" />
     <Compile Include="Assets\Script\PlayerAttack.cs" />
@@ -360,7 +359,12 @@
     <Compile Include="Assets\Script\PlayerTurnaround.cs" />
     <Compile Include="Assets\Script\PossessedSystem.cs" />
     <Compile Include="Assets\Script\RagdollBehavior.cs" />
-    <Compile Include="Assets\Script\SaveData.cs" />
+    <Compile Include="Assets\Script\Save&amp;LoadData\ChooseSaveData.cs" />
+    <Compile Include="Assets\Script\Save&amp;LoadData\DataName.cs" />
+    <Compile Include="Assets\Script\Save&amp;LoadData\DeletData.cs" />
+    <Compile Include="Assets\Script\Save&amp;LoadData\IOHelper.cs" />
+    <Compile Include="Assets\Script\Save&amp;LoadData\LoadData.cs" />
+    <Compile Include="Assets\Script\Save&amp;LoadData\SaveData.cs" />
     <Compile Include="Assets\Script\TypeValue.cs" />
     <Compile Include="Assets\Script\WolfAttack.cs" />
     <Compile Include="Assets\Script\WolfGuardsAi.cs" />

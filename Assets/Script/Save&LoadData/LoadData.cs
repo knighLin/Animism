@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,7 +19,7 @@ public class LoadData : MonoBehaviour {
     public Quaternion PlayerQuaternion;
     public Slider LoadingSlider;
     private AsyncOperation _async;
-    public int LoadNumber;
+    public string LoadSelectedData;
 
     // Use this for initialization
     void Awake () {
@@ -44,12 +45,21 @@ public class LoadData : MonoBehaviour {
             LoadingSlider.value = _async.progress;
             yield return null;
         }            
+
     }
     public  void SpawnAllObject()
     {
-        LoadNumber = 1;
-        SaveData.Data Load = (SaveData.Data)IOHelper.GetData(Application.persistentDataPath+"/Save/GameData"+ LoadNumber + ".sav", typeof(SaveData.Data));
-        Debug.Log("讀取了GameData" + LoadNumber);
+        if (File.Exists(Application.persistentDataPath + @"\Save\NewGame.sav"))
+            LoadSelectedData = GameObject.Find("ChooseSaveData").GetComponent<ChooseSaveData>().SelectedData;
+        else
+        {
+            LoadSelectedData = "NewGame";//測試用
+            StreamWriter streamWriter = File.CreateText(Application.persistentDataPath + @"\Save\NewGame.sav");
+            streamWriter.Write("spyWmyJSqjGq+Otk8NxMux4BVoibDvNZmOVkIUOQD6OwwAeDpjZnv/yfyHmO843kuhRN9Nzox/CPnSwQSMW8kvfrUMyi/YVtVR4ckWtqJlkgDpik5YL1hox+GEu6kBAUs0/ji4gKUtGugNTRZumLqAJ1vRwN9QnSzmSW1yh0mcjJBQUEXJvSlsiBNLNJADvdA+B6kb+jwl37WgmlgvVd2puNg+z1tbubcZ8N7MmgkHDvfFNdk0uWmY4IsfoSRlbve4INqRyOssGiqvKrzc3OYrgB5rzhqgcn+H0kfcRNDFWuHbrcKLzRTnBxjYIDkpn7ZqezFTMU4UhPYZGyFIQEaPAHMszQK/lHyEoybGKT4J5S/Ly0ptysECaZEJAE8ObB2MJvbR3gXH6FWezwAVtQdv69tvGeShYMS7Jnbn1NPvZ3RTo/hwTkhEVoHg7E/XS/cmdJzGNkSClk4hhmGVE9T/5xOarCpAxSjemloY583CMQjTJ6jKEX6N3hp10k6EDAMmJSQ8K4RDm0JxoOnv+aLUdDhKngZEdr5TNv2yD8yjWhngyvlDbWsCMmja6owjGxYGN7syrCNtsrnPn4RZfNRxuHe9qDEcVoHENwQ++SqR05Ngm5CUXGOJ0GBOL26YezZGZYInWi+X2b4u9bE0M2qWdBQA2PkEG8qbR6FP06FZ2noF4jHC7dR4Ocg87/MpnwLiUJn46J4g3LUXWK6WIjAfAHMszQK/lHyEoybGKT4J5S/Ly0ptysECaZEJAE8ObB2MJvbR3gXH6FWezwAVtQdv69tvGeShYMS7Jnbn1NPvZ3RTo/hwTkhEVoHg7E/XS/cmdJzGNkSClk4hhmGVE9T/5xOarCpAxSjemloY583CMQjTJ6jKEX6N3hp10k6EDAMmJSQ8K4RDm0JxoOnv+aLRf7Al1XOErx7nXmwCkrGnklhtntoaZU/H7CIf2ULEMpJLBDEOL9uBijddSt3hkPJ1z6Xd8Dd6qc+8+YgSTdqxruc87GWKwhDNm4asrI5PixJuMWlLuPWUT7YYy5RbeVLJOWSwmIccmNnfzM00reYHxeDbpBoxXmaTfmV5yswgEZ1kxi6Rg00ptNlNqRWAq5uwNZOEMQK8baIkofRFAvxUfX3unIu1+cSa7NzZD2oBWdkO/7Gw9jc89mc/yHKfkcI8+M6DSkd1bhzH3PHXHDIbM=");
+            streamWriter.Close();
+        }
+        SaveData.Data Load = (SaveData.Data)IOHelper.GetData(Application.persistentDataPath+ @"\Save\"+ LoadSelectedData + ".sav", typeof(SaveData.Data));
+        Debug.Log("讀取了" + LoadSelectedData);
         for (int A =0 ; A< Load.AnimalState.Count; A++)     //讀取動物數據
         {
             AnimalState.Add(Load.AnimalState[A]);           //讀取動物狀態

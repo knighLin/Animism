@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class Pause : MonoBehaviour {
 
-    public GameObject PauseCanvas;
+    public GameObject PauseCanvas,Manu1,Manu2;
+    public Button SaveButton;
     public Image FadeIn;
     public float time=1;
     private bool Fade;
@@ -20,10 +21,12 @@ public class Pause : MonoBehaviour {
  
         if (Fade && time <=1&& time>0)
         {
-            FadeIn.color = new Color(0, 0, 0, time);
             time -= Time.deltaTime * 0.8f;
+            if (time <= 0)
+                time = 0;
+            FadeIn.color = new Color(0, 0, 0, time);
         }
-        else if (time < 0)
+        else if (time <=0)
         {
             time = 0;
             Fade = false;
@@ -57,10 +60,12 @@ public class Pause : MonoBehaviour {
         PauseCanvas.SetActive(true);
         Time.timeScale = 0f;
         IsPause = true;
+        SaveButton.Select();//讓暫停畫面跳出就選擇第一個按鈕;
     }
     public void DestroyPauseCanvas()
     {
-        //Destroy(GameObject.Find("PauseCanvas"));
+        Manu2.SetActive(false);
+        Manu1.SetActive(true);
         PauseCanvas.SetActive(false);
         Time.timeScale = 1;
         IsPause = false;
