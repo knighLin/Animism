@@ -1,0 +1,196 @@
+fileFormatVersion: 2
+guid: 6f7aa0a2d2f15448aa49c4448c3bf5a4
+timeCreated: 1517906173
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: CG
+    100002: Eye L
+    100004: Eye R
+    100006: Head
+    100008: Jaw
+    100010: L Calf
+    100012: L Cheek
+    100014: L Clavicle
+    100016: L Ear
+    100018: L Foot
+    100020: L Forearm
+    100022: L Hand
+    100024: L HorseLink
+    100026: L Thigh
+    100028: L UpperArm
+    100030: M
+    100032: Neck
+    100034: Pelvis
+    100036: R Calf
+    100038: R Cheek
+    100040: R Clavicle
+    100042: R Ear
+    100044: R Foot
+    100046: R Forearm
+    100048: R Hand
+    100050: R HorseLink
+    100052: R Thigh
+    100054: R UpperArm
+    100056: //RootNode
+    100058: Spine
+    100060: Spine1
+    100062: Spine2
+    100064: Tail
+    100066: Tail1
+    100068: Tail2
+    100070: Tail3
+    100072: Tongue
+    400000: CG
+    400002: Eye L
+    400004: Eye R
+    400006: Head
+    400008: Jaw
+    400010: L Calf
+    400012: L Cheek
+    400014: L Clavicle
+    400016: L Ear
+    400018: L Foot
+    400020: L Forearm
+    400022: L Hand
+    400024: L HorseLink
+    400026: L Thigh
+    400028: L UpperArm
+    400030: M
+    400032: Neck
+    400034: Pelvis
+    400036: R Calf
+    400038: R Cheek
+    400040: R Clavicle
+    400042: R Ear
+    400044: R Foot
+    400046: R Forearm
+    400048: R Hand
+    400050: R HorseLink
+    400052: R Thigh
+    400054: R UpperArm
+    400056: //RootNode
+    400058: Spine
+    400060: Spine1
+    400062: Spine2
+    400064: Tail
+    400066: Tail1
+    400068: Tail2
+    400070: Tail3
+    400072: Tongue
+    4300000: M
+    7400000: JumpRun
+    9500000: //RootNode
+    13700000: M
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 01 - Default
+    second: {fileID: 2100000, guid: 5075bee403a87704da19ce2d7aac0db4, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: JumpRun
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 37
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
