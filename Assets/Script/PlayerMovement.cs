@@ -32,16 +32,25 @@ public class PlayerMovement : MonoBehaviour
 
     float time;
 
-    void OnEnable()
+    private void Awake()
     {
         value = GameObject.Find("PlayerManager").GetComponent<TypeValue>();
-
-        m_Rigidbody = GetComponent<Rigidbody>();
-        m_Animator = GetComponent<Animator>();
-        
         m_OrigGroundCheckDistance = m_GroundCheckDistance;//保存一下地面检查值 
     }
-    
+
+    void OnEnable()
+    {
+        m_Rigidbody = GetComponent<Rigidbody>();
+        m_Animator = GetComponent<Animator>();
+
+    }
+
+    //private void OnDisable()
+    //{
+    //    m_Rigidbody = null;
+    //    m_Animator = null;
+    //}
+
     private void Start()
     {
         // get the transform of the main camera
