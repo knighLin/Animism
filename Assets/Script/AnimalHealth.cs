@@ -14,11 +14,11 @@ public class AnimalHealth : MonoBehaviour {
     //private bool BeLifePossessed = false;
     //private Animator animator;
    
-    void Awake()
+    void Start()
     {
         HPcontroller= GameObject.Find("GameManager").GetComponent<HPcontroller>();
-        possessedSystem = GameObject.Find("Player").GetComponent<PossessedSystem>();
-        PlayerHealth = GameObject.Find("Player").GetComponent<PlayerHealth>();
+        possessedSystem = GameObject.Find("Pine").GetComponent<PossessedSystem>();
+        PlayerHealth = GameObject.Find("Pine").GetComponent<PlayerHealth>();
         currentHealth = MaxHealth;//開始時，當前ＨＰ回最大ＨＰ
        // animator = GetComponent<Animator>();
     }

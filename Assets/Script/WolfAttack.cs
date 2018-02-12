@@ -17,11 +17,11 @@ public class WolfAttack : MonoBehaviour
    
 
     // Use this for initialization
-    void Awake()
+    void Start()
     {
         Anim = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
-        typeValue = GameObject.FindWithTag("Player").GetComponent<TypeValue>();
+        typeValue = GameObject.FindWithTag("Human").GetComponent<TypeValue>();
     }
 
     int AttackRender()

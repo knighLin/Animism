@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HumanAttack : MonoBehaviour {
+public class HumanAttack : MonoBehaviour
+{
     //call other class
-  
+    private EnemyHealth enemyHealth;
+    private TypeValue typeValue;
 
     //Animator
     private Animator animator;
-    public int HumanAtk = 10;//敵人攻擊力
+    public int HumanAtk = 10;//攻擊力
     public Collider weaponCollider;
     public Collider myselfCollider;
 
@@ -16,13 +18,12 @@ public class HumanAttack : MonoBehaviour {
     private AudioSource audioSource;
     public AudioClip attack;
 
-    private float timer = 0;//攻擊時間
+   
+
     void Awake()
     {
-        //set class var
         //set Animator
         animator = GetComponent<Animator>();
-       
         audioSource = GetComponent<AudioSource>();
         //set WeaponCollider
         //weaponCollider.enabled = false;
@@ -31,12 +32,11 @@ public class HumanAttack : MonoBehaviour {
 
     private void Update()
     {
-        if ((Input.GetMouseButtonDown(0)|| Input.GetButtonDown("Fire1") ) && Time.time - timer >1)//Attack
+        if ((Input.GetMouseButtonDown(0) || Input.GetButtonDown("Fire1")))//Attack
         {
-            StartCoroutine(DamageTime());
-
-
-
+            animator.SetTrigger("Attack");
+            animator.SetInteger("Render", AttackRender());
+            audioSource.PlayOneShot(attack);
         }
     }
 
@@ -45,20 +45,7 @@ public class HumanAttack : MonoBehaviour {
         int AttackCount = Random.Range(0, 2);
         return AttackCount;
     }
-
-    IEnumerator DamageTime()//攻擊只傷害一次，之後要問老師怎麼改比較好
-    {
-        yield return new WaitForSeconds(0.2f);
-        //weaponCollider.enabled = true;
-        animator.SetTrigger("Attack");
-        animator.SetInteger("Render", AttackRender());
-        audioSource.PlayOneShot(attack);
-        timer = Time.time;
-        yield return new WaitForSeconds(1f);
-        //weaponCollider.enabled = false;
-        StopCoroutine(DamageTime());
-    }
-   //public void OnAttackTrigger()//避免走路時碰到武器，觸發事件，所以只有攻擊時，才開啟觸發
+     //void OnAttackTrigger()//避免走路時碰到武器，觸發事件，所以只有攻擊時，才開啟觸發
     //{
     //    weaponCollider.enabled = true;
     //}
@@ -68,5 +55,5 @@ public class HumanAttack : MonoBehaviour {
     //    weaponCollider.enabled = false;
 
     //}
-    
+
 }

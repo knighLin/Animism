@@ -5,16 +5,14 @@ using UnityEngine.UI;
 
 public class HomePageButton : MonoBehaviour
 {
+    public GameObject LoadingCanvas;
+    private AsyncOperation _async;
+    public AudioSource audioSource;
+    public Slider LoadingSlider;
+    public Image FadeOut;
     public float time;
     private bool Fade;
-    public Image FadeOut;
-    public AudioSource audioSource;
-    // Use this for initialization
-    void Start () {
-		
-	}
 
-    // Update is called once per frame
     void Update()
     {
 
@@ -29,12 +27,12 @@ public class HomePageButton : MonoBehaviour
             time = 0;
             Fade = false;
             Debug.Log("LoadSence");
-            Application.LoadLevelAsync("Game");
+            //Application.LoadLevelAsync("Game");
+            LoadSence();
         }
     }
     public void Click()
     {
-
         switch (this.name)
         {
             case "Start":
@@ -48,7 +46,21 @@ public class HomePageButton : MonoBehaviour
                 break;
         }
     }
+    public void LoadSence()
+    {
+        Instantiate(LoadingCanvas, Vector2.zero, Quaternion.identity).name = "LoadingCanvas";
+        StartCoroutine(LoadLevelWithBar("Game"));
+    }
 
+    IEnumerator LoadLevelWithBar(string level)
+    {
+        _async = Application.LoadLevelAsync(level);
+        while (!_async.isDone)
+        {
+            LoadingSlider.value = _async.progress;
+            yield return null;
+        }
+    }
     public static IEnumerator AudioFadeOut(AudioSource audioSource, float FadeTime)
     {
         float startVolume = audioSource.volume;

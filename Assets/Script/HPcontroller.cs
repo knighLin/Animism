@@ -13,48 +13,21 @@ public class HPcontroller : MonoBehaviour {
     public Image FaceB, FaceW, FaceR;//腳色臉圖片
     public float BlinkTime;
     public float PineHpMax, PineHpNow, WolfHpMax, WolfHpNow, BearHpMax, BearHpNow, DeerHpMax, DeerHpNow;//腳色血量數值
-    public bool Blink,CharacterSwitch;
+    public bool Blink;
 
     // Use this for initialization
     void Start () {
 
 
-        PlayerManager = GameObject.Find("Player").GetComponent<PlayerManager>();
-        PlayerHealth = GameObject.Find("Player").GetComponent<PlayerHealth>();
+        PlayerManager = GameObject.Find("Pine").GetComponent<PlayerManager>();
+        PlayerHealth = GameObject.Find("Pine").GetComponent<PlayerHealth>();
         Blink = false;
-        CharacterSwitch = false;
     }
 	
 	// Update is called once per frame
 	void Update () {
 
-        if(CharacterSwitch)//一次性切換頭像 防止干擾閃爍特效
-        {
-            switch (PlayerManager.NowType)
-            {
-                case "Human":
-                    FaceB.sprite = Resources.Load("UI/左上/Pine/PINE_BUTTOM", typeof(Sprite)) as Sprite;
-                    FaceW.sprite = Resources.Load("UI/左上/Pine/PINE_WHITE", typeof(Sprite)) as Sprite;
-                    FaceR.sprite = Resources.Load("UI/左上/Pine/PINE_WHITE", typeof(Sprite)) as Sprite;
-                    break;
-                case "Wolf":
-                    FaceB.sprite = Resources.Load("UI/左上/Wolf/WOLF_BUTTOM", typeof(Sprite)) as Sprite;
-                    FaceW.sprite = Resources.Load("UI/左上/Wolf/WOLF_WHITE", typeof(Sprite)) as Sprite;
-                    FaceR.sprite = Resources.Load("UI/左上/Wolf/WOLF_WHITE", typeof(Sprite)) as Sprite;
-                    break;
-                case "Bear":
-                    FaceB.sprite = Resources.Load("UI/左上/Bear/BEAR_BUTTOM", typeof(Sprite)) as Sprite;
-                    FaceW.sprite = Resources.Load("UI/左上/Bear/BEAR_WHITE", typeof(Sprite)) as Sprite;
-                    FaceR.sprite = Resources.Load("UI/左上/Bear/BEAR_WHITE", typeof(Sprite)) as Sprite;
-                    break;
-                case "Deer":
-                    FaceB.sprite = Resources.Load("UI/左上/Deer/DEER_BUTTOM", typeof(Sprite)) as Sprite;
-                    FaceW.sprite = Resources.Load("UI/左上/Deer/DEER_WHITE", typeof(Sprite)) as Sprite;
-                    FaceR.sprite = Resources.Load("UI/左上/Deer/DEER_WHITE", typeof(Sprite)) as Sprite;
-                    break;
-            }
-            CharacterSwitch = false;
-        }
+
 
         if (Blink)//閃爍
             UIBlink();
@@ -63,6 +36,32 @@ public class HPcontroller : MonoBehaviour {
 
     }
 
+    public void CharacterSwitch()
+    {
+        switch (PlayerManager.NowType)
+        {
+            case "Human":
+                FaceB.sprite = Resources.Load("UI/左上/Pine/PINE_BUTTOM", typeof(Sprite)) as Sprite;
+                FaceW.sprite = Resources.Load("UI/左上/Pine/PINE_WHITE", typeof(Sprite)) as Sprite;
+                FaceR.sprite = Resources.Load("UI/左上/Pine/PINE_WHITE", typeof(Sprite)) as Sprite;
+                break;
+            case "Wolf":
+                FaceB.sprite = Resources.Load("UI/左上/Wolf/WOLF_BUTTOM", typeof(Sprite)) as Sprite;
+                FaceW.sprite = Resources.Load("UI/左上/Wolf/WOLF_WHITE", typeof(Sprite)) as Sprite;
+                FaceR.sprite = Resources.Load("UI/左上/Wolf/WOLF_WHITE", typeof(Sprite)) as Sprite;
+                break;
+            case "Bear":
+                FaceB.sprite = Resources.Load("UI/左上/Bear/BEAR_BUTTOM", typeof(Sprite)) as Sprite;
+                FaceW.sprite = Resources.Load("UI/左上/Bear/BEAR_WHITE", typeof(Sprite)) as Sprite;
+                FaceR.sprite = Resources.Load("UI/左上/Bear/BEAR_WHITE", typeof(Sprite)) as Sprite;
+                break;
+            case "Deer":
+                FaceB.sprite = Resources.Load("UI/左上/Deer/DEER_BUTTOM", typeof(Sprite)) as Sprite;
+                FaceW.sprite = Resources.Load("UI/左上/Deer/DEER_WHITE", typeof(Sprite)) as Sprite;
+                FaceR.sprite = Resources.Load("UI/左上/Deer/DEER_WHITE", typeof(Sprite)) as Sprite;
+                break;
+        }
+    }
     public void UIBlink()
     {
         BlinkTime += Time.deltaTime*8;

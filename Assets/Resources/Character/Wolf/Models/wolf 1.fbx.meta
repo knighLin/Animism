@@ -1,0 +1,243 @@
+fileFormatVersion: 2
+guid: 67ecfdf26c3724b4a90fc7e47019e6dd
+timeCreated: 1517272074
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Body
+    100002: CG
+    100004: Eye L
+    100006: Eye R
+    100008: Eyes
+    100010: Hair
+    100012: Head
+    100014: Jaw
+    100016: L Calf
+    100018: L Cheek
+    100020: L Clavicle
+    100022: L Ear
+    100024: L Foot
+    100026: L Forearm
+    100028: L Hand
+    100030: L HorseLink
+    100032: L Thigh
+    100034: L UpperArm
+    100036: Mouth
+    100038: Nails
+    100040: Neck
+    100042: NeckHair01
+    100044: NeckHair02
+    100046: NeckHair03
+    100048: NeckHair04
+    100050: Pelvis
+    100052: R Calf
+    100054: R Cheek
+    100056: R Clavicle
+    100058: R Ear
+    100060: R Foot
+    100062: R Forearm
+    100064: R Hand
+    100066: R HorseLink
+    100068: R Thigh
+    100070: R UpperArm
+    100072: Spine
+    100074: Spine1
+    100076: Spine2
+    100078: Tail
+    100080: Tail1
+    100082: Tail2
+    100084: Tail3
+    100086: TailHair
+    100088: TeethBottom
+    100090: TeethTop
+    100092: Tongue
+    100094: Tongue 1
+    100096: Wolf
+    100098: //RootNode
+    400000: Body
+    400002: CG
+    400004: Eye L
+    400006: Eye R
+    400008: Eyes
+    400010: Hair
+    400012: Head
+    400014: Jaw
+    400016: L Calf
+    400018: L Cheek
+    400020: L Clavicle
+    400022: L Ear
+    400024: L Foot
+    400026: L Forearm
+    400028: L Hand
+    400030: L HorseLink
+    400032: L Thigh
+    400034: L UpperArm
+    400036: Mouth
+    400038: Nails
+    400040: Neck
+    400042: NeckHair01
+    400044: NeckHair02
+    400046: NeckHair03
+    400048: NeckHair04
+    400050: Pelvis
+    400052: R Calf
+    400054: R Cheek
+    400056: R Clavicle
+    400058: R Ear
+    400060: R Foot
+    400062: R Forearm
+    400064: R Hand
+    400066: R HorseLink
+    400068: R Thigh
+    400070: R UpperArm
+    400072: Spine
+    400074: Spine1
+    400076: Spine2
+    400078: Tail
+    400080: Tail1
+    400082: Tail2
+    400084: Tail3
+    400086: TailHair
+    400088: TeethBottom
+    400090: TeethTop
+    400092: Tongue
+    400094: Tongue 1
+    400096: Wolf
+    400098: //RootNode
+    4300000: Body
+    4300002: Eyes
+    4300004: Nails
+    4300006: NeckHair01
+    4300008: NeckHair02
+    4300010: NeckHair03
+    4300012: NeckHair04
+    4300014: TailHair
+    4300016: TeethBottom
+    4300018: TeethTop
+    4300020: Tongue
+    9500000: //RootNode
+    13700000: Body
+    13700002: Eyes
+    13700004: Nails
+    13700006: NeckHair01
+    13700008: NeckHair02
+    13700010: NeckHair03
+    13700012: NeckHair04
+    13700014: TailHair
+    13700016: TeethBottom
+    13700018: TeethTop
+    13700020: Tongue
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__Body1
+    second: {fileID: 2100000, guid: 096f122dc6fcd3d48aaabdcb3ea44b24, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__Eyes2
+    second: {fileID: 2100000, guid: fc613e21e986f0545945dbc0eeb6b54e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__Hair1
+    second: {fileID: 2100000, guid: 096f122dc6fcd3d48aaabdcb3ea44b24, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__Nails1
+    second: {fileID: 2100000, guid: 096f122dc6fcd3d48aaabdcb3ea44b24, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__TeethBottom1
+    second: {fileID: 2100000, guid: 096f122dc6fcd3d48aaabdcb3ea44b24, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__TeethTop1
+    second: {fileID: 2100000, guid: 096f122dc6fcd3d48aaabdcb3ea44b24, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__Tongue1
+    second: {fileID: 2100000, guid: 096f122dc6fcd3d48aaabdcb3ea44b24, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
