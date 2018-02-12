@@ -9,7 +9,7 @@ public class PossessedSystem : MonoBehaviour
     private PlayerManager playerManager;
     public static bool OnPossessed = false;//附身狀態
     public static GameObject AttachedBody;//附身物
-    [SerializeField] public static SphereCollider PossessedCol;//附身範圍
+    public static SphereCollider PossessedCol;//附身範圍
     public LayerMask PossessedLayerMask;//可被附身物的階層
     public static int WolfCount;//狼的連續附身次數
     private List<Collider> RangeObject = new List<Collider>();//範圍附身物
@@ -90,14 +90,9 @@ public class PossessedSystem : MonoBehaviour
         {
             if (AttachedBody != null && OnPossessed == true)//如果先前有附身物，而且正在附身
             {
-                Debug.Log("A");
                 Possessor.transform.parent = null;//將玩家物件分離出現在的被附身物
-                Debug.Log("B");
-                PossessedCol.enabled = false;
-                Debug.Log("C");
                 AttachedBody.GetComponent<PlayerMovement>().enabled = false;
                 AttachedBody.GetComponent<PossessedSystem>().enabled = false;
-                Debug.Log("D");
             }
             PreviousTag = Possessor.tag;//附身後將先前附身的tag存起來
             Possessor.tag = hit.collider.tag;//將目前人的tag轉為附身後動物的
@@ -107,14 +102,11 @@ public class PossessedSystem : MonoBehaviour
             Possessor.transform.position = new Vector3(AttachedBody.transform.position.x,
                                                     AttachedBody.transform.position.y,
                                                     AttachedBody.transform.position.z);
-            Debug.Log("1");
+            
             PossessedCol.enabled = false;//關掉當前附身範圍
-            Debug.Log("2");
             Possessor.transform.parent = AttachedBody.transform;//將附身者變為被附身物的子物件
-            Debug.Log("3");
             Possessor.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
             Possessor.SetActive(false);//關掉人型態的任何事
-            Debug.Log("4");
             AttachedBody.GetComponent<PlayerMovement>().enabled = true;//打開附身者的移動和附身
             AttachedBody.GetComponent<PossessedSystem>().enabled = true;
 
