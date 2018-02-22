@@ -53,8 +53,8 @@ public class SaveData : MonoBehaviour
         //定义存档文件路径
         filename = dirpath+ SaveDataName + ".sav";
         //儲存檔案
-        if (GameObject.FindGameObjectsWithTag("Wolf1")[0] != null)//抓現在所有狼
-            Wolf = GameObject.FindGameObjectsWithTag("Wolf1");
+        if (GameObject.FindGameObjectsWithTag("Wolf")[0] != null)//抓現在所有狼
+            Wolf = GameObject.FindGameObjectsWithTag("Wolf");
         if (GameObject.FindGameObjectsWithTag("Enemy1")[0] != null) //抓現在所有敵人
             Enemy = GameObject.FindGameObjectsWithTag("Enemy1");
         Save.AnimalState = new List<int> { };                     //創新的List用來存數值
@@ -77,7 +77,7 @@ public class SaveData : MonoBehaviour
             Save.EnemyQuaternion.Add(Enemy[E].transform.rotation);//抓敵人旋轉角度
             Debug.Log("保存了第" + (E + 1) + "個敵人," + "狀態為" + Save.EnemyState[E] + "座標為" + Save.EnemyVector3[E]);
         }
-        Save.PlayerState = GameObject.Find("Pine").GetComponent<PlayerManager>().NowType;
+        Save.PlayerState = GameObject.Find("PlayerManager").GetComponent<PlayerManager>().NowType;
         Save.PlayerVector3 = GameObject.Find("Pine").transform.position;
         Save.PlayerQuaternion = GameObject.Find("Pine").transform.rotation;
         Debug.Log("保存了派恩的位置,座標為" + Save.PlayerVector3);

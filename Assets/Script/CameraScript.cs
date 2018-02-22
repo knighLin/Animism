@@ -32,7 +32,7 @@ public class CameraScript : MonoBehaviour {
     // Use this for initialization
     void Start () {
         PossessedSystem = GameObject.Find("Pine").GetComponent<PossessedSystem>();
-        PlayerManager = GameObject.Find("Pine").GetComponent<PlayerManager>();
+        PlayerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
         PossessEffect.SetActive(false);//開始時靈視關閉
         Crosshairs.SetActive(false);//開始時準心關閉
         CameraState = "NormalState";//初始狀態為正常狀態
@@ -195,13 +195,15 @@ public class CameraScript : MonoBehaviour {
         switch (PlayerManager.NowType)
         {
             case "Human":
+                NowCharacter = GameObject.Find("Pine");
                 PlayerView = GameObject.Find("FirstPersonCamPoint");
                 MoveEnd = GameObject.Find("CamMoveEndPoint");
                 break;
             case "Wolf":
+                NowCharacter = PossessedSystem.AttachedBody;
                     AttachedBodyChildren = PossessedSystem.AttachedBody.GetComponentsInChildren<Transform>();
-                    PlayerView = AttachedBodyChildren[1].transform.gameObject;
-                    MoveEnd = AttachedBodyChildren[2].transform.gameObject;
+                    PlayerView = AttachedBodyChildren[3].transform.gameObject;
+                    MoveEnd = AttachedBodyChildren[1].transform.gameObject;
                 break;
 
         }

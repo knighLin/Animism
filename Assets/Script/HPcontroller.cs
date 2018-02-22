@@ -19,7 +19,7 @@ public class HPcontroller : MonoBehaviour {
     void Start () {
 
 
-        PlayerManager = GameObject.Find("Pine").GetComponent<PlayerManager>();
+        PlayerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
         PlayerHealth = GameObject.Find("Pine").GetComponent<PlayerHealth>();
         Blink = false;
     }

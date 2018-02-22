@@ -72,7 +72,7 @@ public class ButtonScript : MonoBehaviour
                 }
                 else if(this.tag == "SaveData")
                 {
-                    GameObject.Find("GameManager").GetComponent<SaveData>().SaveDataValue("Data1");
+                    GameObject.Find("PlayerManager").GetComponent<SaveData>().SaveDataValue("Data1");
                 }
                 break;
             case "Data2":
@@ -86,7 +86,7 @@ public class ButtonScript : MonoBehaviour
                 }
                 else if (this.tag == "SaveData")
                 {
-                    GameObject.Find("GameManager").GetComponent<SaveData>().SaveDataValue("Data2");
+                    GameObject.Find("PlayerManager").GetComponent<SaveData>().SaveDataValue("Data2");
                 }
                 break;
             case "Data3":
@@ -100,7 +100,7 @@ public class ButtonScript : MonoBehaviour
                 }
                 else if (this.tag == "SaveData")
                 {
-                    GameObject.Find("GameManager").GetComponent<SaveData>().SaveDataValue("Data3");
+                    GameObject.Find("PlayerManager").GetComponent<SaveData>().SaveDataValue("Data3");
                 }
                 break;
             case "Exit":

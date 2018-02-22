@@ -25,7 +25,7 @@ public class DataName : MonoBehaviour {
         if (File.Exists(Application.persistentDataPath + @"\Save\" + WhitchData + ".sav"))
         {
             TextName.fontSize = 41;
-            DataInfo = new FileInfo(@"C:\Users\user\AppData\LocalLow\Animism\Soul\Save\" + WhitchData + ".sav");
+            DataInfo = new FileInfo(Application.persistentDataPath + @"\Save\" + WhitchData + ".sav");
             Debug.Log(DataInfo.LastWriteTime);
             TextName.text = DataInfo.LastWriteTime.ToString();
             if (Delet!=null)
