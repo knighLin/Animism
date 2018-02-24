@@ -7,7 +7,7 @@ public class CameraScript : MonoBehaviour {
     private PossessedSystem PossessedSystem;
     private PlayerManager PlayerManager;
     public GameObject PossessTarget;
-    public GameObject PossessEffect,Crosshairs;
+    public GameObject PossessEffect,Crosshairs,Explosion,SoulPower,PineModel;
     public GameObject NowCharacter;
     public GameObject MoveEnd, PlayerView;
     public Transform[] AttachedBodyChildren;
@@ -39,7 +39,10 @@ public class CameraScript : MonoBehaviour {
         AttachedBodyChildren = new Transform[3];//只抓前四個物件(包含本身)
         PlayerView = GameObject.Find("FirstPersonCamPoint");
         MoveEnd = GameObject.Find("CamMoveEndPoint");//一開始取正確腳色位置
-        NowCharacter= GameObject.Find("Pine" );
+        NowCharacter= GameObject.Find("Pine");
+        PineModel = GameObject.Find("PineModel");
+        Explosion = GameObject.Find("Explosion");
+        SoulPower = GameObject.Find("SoulPower");
         //NormalPosition = GameObject.Find("Pine").transform.rotation * new Vector3(0, 1, -3f) + PlayerView.transform.position;//一開始取得讀取角度
     }
 	
@@ -69,6 +72,8 @@ public class CameraScript : MonoBehaviour {
     }
     public void ResetValue()//重置一些前進後退中用到的值 以防下次進入其他模式出問題
     {
+        Explosion.SetActive(false);
+        SoulPower.SetActive(false);
         CanPossess = false;//不能附身
         IsPossessing = false;//可以進入靈視
         FowardAndBackTime = 0;//前進後退的計時為0
@@ -132,6 +137,7 @@ public class CameraScript : MonoBehaviour {
             CameraState = "SoulVisionOver";
         if (FowardAndBackTime < FowardStop)//0.25秒移動到到指定位置
         {
+            SoulPower.SetActive(true);
             FowardAndBackTime += Time.deltaTime;
             VectorMoveDistance = MoveEnd.transform.position - NormalPosition;//距離為終點減正常位置
             Move = VectorMoveDistance * Time.deltaTime * 5;
@@ -151,6 +157,7 @@ public class CameraScript : MonoBehaviour {
     }
     public void SoulVisionOver()//鏡頭後退為正常狀態
     {
+        SoulPower.SetActive(false);
         PossessEffect.SetActive(false);
         Crosshairs.SetActive(false);
         CanPossess = false;
@@ -170,20 +177,28 @@ public class CameraScript : MonoBehaviour {
     {
         if (PossessTime < 0.2)//鏡頭回到正常的位置
         {
+            if (NowCharacter == GameObject.Find("Pine") && PineModel != null)
+                PineModel.SetActive(false);
+            Explosion.SetActive(true);
             PossessTime += Time.deltaTime;
             VectorMoveDistance = NormalPosition - transform.position;
             Move = VectorMoveDistance * Time.deltaTime * 5;
             transform.position += Move;
         }
-        else if (PossessTime >= 0.2 && PossessTime < 0.8)
+        else if (PossessTime >= 0.2 && PossessTime <0.8)
         {
+
             PossessTime += Time.deltaTime;
+
+            if (PossessTime >= 0.6 && PossessTime < 0.8)
+            {
+                VectorMoveDistance = PossessTarget.transform.position - NormalPosition;//距離為終點減正常位置
+                Move = VectorMoveDistance * Time.deltaTime * 3;
+                transform.position += Move;
+                CameraNowPosition = transform.position;
+            }
         }
-        else if (PossessTime >= 0.8 && PossessTime < 1)
-        {
-            PossessTime += Time.deltaTime;
-        }
-        else if (PossessTime >= 1)
+        else if (PossessTime >= 0.8)
         {
             PossessedSystem.InToPossess();
             LoadCharacterPosition();//讀取動物鏡頭位置
@@ -195,16 +210,18 @@ public class CameraScript : MonoBehaviour {
         switch (PlayerManager.NowType)
         {
             case "Human":
+                PossessedSystem = GameObject.Find("Pine").GetComponent<PossessedSystem>();
                 NowCharacter = GameObject.Find("Pine");
                 PlayerView = GameObject.Find("FirstPersonCamPoint");
                 MoveEnd = GameObject.Find("CamMoveEndPoint");
                 break;
             case "Wolf":
                 NowCharacter = PossessedSystem.AttachedBody;
-                    AttachedBodyChildren = PossessedSystem.AttachedBody.GetComponentsInChildren<Transform>();
-                    PlayerView = AttachedBodyChildren[3].transform.gameObject;
-                    MoveEnd = AttachedBodyChildren[1].transform.gameObject;
-                break;
+                AttachedBodyChildren = PossessedSystem.AttachedBody.GetComponentsInChildren<Transform>();
+                PossessedSystem = PossessedSystem.AttachedBody.GetComponent<PossessedSystem>();
+                PlayerView = AttachedBodyChildren[3].transform.gameObject;
+                MoveEnd = AttachedBodyChildren[1].transform.gameObject;
+            break;
 
         }
     }

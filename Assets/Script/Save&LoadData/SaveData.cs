@@ -6,7 +6,9 @@ public class SaveData : MonoBehaviour
 {
     public GameObject[] Wolf, Enemy;
     private PossessedSystem PossessedSystem;
+    private PlayerManager PlayerManager;
     public string filename;
+    
 
     public class Data
     {
@@ -24,7 +26,7 @@ public class SaveData : MonoBehaviour
     void Start()
     {
         PossessedSystem = GameObject.Find("Pine").GetComponent<PossessedSystem>();
-
+        PlayerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
     }
     private void Update()
     {
@@ -65,9 +67,13 @@ public class SaveData : MonoBehaviour
         Save.EnemyQuaternion = new List<Quaternion> { };          //創新的List用來存數值
         for (int A = 0; A < Wolf.Length; A++)                     //抓動物
         {
-            Save.AnimalState.Add(1);                              //抓動物狀態
-            Save.AnimalVector3.Add(Wolf[A].transform.position);   //抓動物座標
-            Save.AnimalQuaternion.Add(Wolf[A].transform.rotation);//抓動物旋轉角度
+            if ( Wolf[A] == PlayerManager.NowCharacter)//如果這隻狼是被附身的
+                Save.AnimalState.Add(2);                              //抓動物狀態
+            else
+                Save.AnimalState.Add(1);                              //抓動物狀態
+
+                Save.AnimalVector3.Add(Wolf[A].transform.position);   //抓動物座標
+                Save.AnimalQuaternion.Add(Wolf[A].transform.rotation);//抓動物旋轉角度
             Debug.Log("保存了第" + (A + 1) + "隻狼," + "狀態為" + Save.AnimalState[A] + "座標為" + Save.AnimalVector3[A]);
         }
         for (int E = 0; E < Enemy.Length; E++)                    //抓敵人
@@ -77,9 +83,18 @@ public class SaveData : MonoBehaviour
             Save.EnemyQuaternion.Add(Enemy[E].transform.rotation);//抓敵人旋轉角度
             Debug.Log("保存了第" + (E + 1) + "個敵人," + "狀態為" + Save.EnemyState[E] + "座標為" + Save.EnemyVector3[E]);
         }
-        Save.PlayerState = GameObject.Find("PlayerManager").GetComponent<PlayerManager>().NowType;
-        Save.PlayerVector3 = GameObject.Find("Pine").transform.position;
-        Save.PlayerQuaternion = GameObject.Find("Pine").transform.rotation;
+        if (GameObject.Find("Pine") != null)//如果腳色沒附身在動物身上
+        {
+            Save.PlayerState = GameObject.Find("PlayerManager").GetComponent<PlayerManager>().NowType;
+            Save.PlayerVector3 = GameObject.Find("Pine").transform.position;
+            Save.PlayerQuaternion = GameObject.Find("Pine").transform.rotation;
+        }
+        else//如果腳色附身在動物身上，抓動物的數值
+        {
+            Save.PlayerState = GameObject.Find("PlayerManager").GetComponent<PlayerManager>().NowType;
+            Save.PlayerVector3 = PlayerManager.NowCharacter.transform.position;
+            Save.PlayerQuaternion = PlayerManager.NowCharacter.transform.rotation;
+        }
         Debug.Log("保存了派恩的位置,座標為" + Save.PlayerVector3);
         //保存数据
         IOHelper.SetData(filename, Save);

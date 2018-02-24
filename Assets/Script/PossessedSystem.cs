@@ -14,8 +14,8 @@ public class PossessedSystem : MonoBehaviour
     public static SphereCollider PossessedCol;//附身範圍
     public LayerMask PossessedLayerMask;//可被附身物的階層
     public static int WolfCount;//狼的連續附身次數
-    private List<Collider> RangeObject = new List<Collider>();//範圍附身物
-    private GameObject Possessor;//人的型態
+    public List<Collider> RangeObject = new List<Collider>();//範圍附身物
+    public GameObject Possessor;//人的型態
     private RaycastHit hit;//點擊的動物物件
     private string PreviousTag;//附身前的標籤
     public bool ChooseRightObject;
@@ -62,7 +62,8 @@ public class PossessedSystem : MonoBehaviour
         }
         else
         {
-            playerMovement.enabled = true;
+            if (!CameraScript.IsPossessing)//如果正在附身不能動
+                playerMovement.enabled = true;
             clear = true;//讓下次開啟附身清理範圍物件
             PossessedCol.enabled = false;//附身範圍collider關閉
             if (Time.timeScale == 0.5f)
@@ -71,7 +72,7 @@ public class PossessedSystem : MonoBehaviour
         }
 
        
-        if (Input.GetKeyUp(KeyCode.Q) && AttachedBody != null || joycontroller.leftpossessed == true)//解除附身
+        if ((Input.GetKeyUp(KeyCode.Q) || joycontroller.leftpossessed == true)&& AttachedBody != null && !CameraScript.IsPossessing)//解除附身
         {
             LifedPossessed();//離開附身物
             //animalHealth.CancelLink();//解除與附身物的血條連動
@@ -83,6 +84,7 @@ public class PossessedSystem : MonoBehaviour
 
         if (ChooseRightObject)//如果點到可附身物件
         {
+            CameraScript.PossessTarget = hit.collider.gameObject;
             ChooseRightObject = false;//重置
             CameraScript.CanPossess = false;//重置
             CameraScript.PossessEffect.SetActive(false);//重置
@@ -90,7 +92,7 @@ public class PossessedSystem : MonoBehaviour
             CameraScript.IsPossessing = true;//正在附身模式
             CameraScript.CameraState = "GettingPossess";//轉為附身模式
         }
-        else if (((Input.GetMouseButtonUp(0) || Input.GetButtonDown("joy12")) && PossessedSystem.PossessedCol.enabled == true))
+        else if (((Input.GetMouseButtonDown(0) || Input.GetButtonDown("joy12")) && PossessedSystem.PossessedCol.enabled == true))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             Physics.Raycast(ray, out hit, 10, PossessedLayerMask);
@@ -99,9 +101,14 @@ public class PossessedSystem : MonoBehaviour
                 //if (!hit.collider.CompareTag("Player"))//如果是自己本身不執行
                 //{
                 if (hit.collider == RangeObject[i])//當點擊的物件是附身範圍裡的物件時
+                {
                     ChooseRightObject = true;
+                    break;
+                }
                 else
+                {
                     ChooseRightObject = false;
+                }
                 //}
             }
         }
@@ -117,7 +124,6 @@ public class PossessedSystem : MonoBehaviour
 
     public void EnterPossessed()//附身
     {
-
         if (hit.collider.gameObject != this.gameObject)//當下一個物件不是目前物件時，可以繼續附身
         {
             if (AttachedBody != null && OnPossessed == true)//如果先前有附身物，而且正在附身
@@ -129,8 +135,9 @@ public class PossessedSystem : MonoBehaviour
             PreviousTag = Possessor.tag;//附身後將先前附身的tag存起來
             Possessor.tag = hit.collider.tag;//將目前人的tag轉為附身後動物的
             AttachedBody = hit.collider.gameObject;//點擊到的附身物等於AttachedBody
-
+            playerManager.NowCharacter = AttachedBody;//抓附身腳色物件
             //附身者的位置到新被附身物的位置
+            AttachedBody.GetComponent<PossessedSystem>().Possessor = Possessor;//抓取腳色以免進入附身後抓不到
             Possessor.transform.position = new Vector3(AttachedBody.transform.position.x,
                                                     AttachedBody.transform.position.y,
                                                     AttachedBody.transform.position.z);
@@ -169,6 +176,7 @@ public class PossessedSystem : MonoBehaviour
             }
             Debug.Log("5");
         }
+
     }
 
     void OnTriggerEnter(Collider Object)//送出訊息
@@ -196,10 +204,15 @@ public class PossessedSystem : MonoBehaviour
         Possessor.GetComponent< PlayerMovement>().enabled = true;
         Possessor.tag = "Human";//將型態變回Human
         Possessor.SetActive(true);//打開人型態的任何事
+        CameraScript.PineModel.SetActive(true);
+        Possessor.GetComponent<PlayerMovement>().enabled = true;
+        Possessor.GetComponent<PossessedSystem>().enabled = true;
         playerManager.TurnType("Human", AttachedBody.tag);//將標籤傳至管理者，變換數值
         AttachedBody = null;//解除附身後清除附身物，防止解除附身後按Ｑ還有反應
         OnPossessed = false;//取消附身
-
+        playerManager.NowCharacter = Possessor;//抓目前腳色物件
+        CameraScript.LoadCharacterPosition();//換鏡頭位置
+        HPcontroller.CharacterSwitch();//換圖片
     }
 }
 

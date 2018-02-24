@@ -22,6 +22,7 @@ public class HPcontroller : MonoBehaviour {
         PlayerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
         PlayerHealth = GameObject.Find("Pine").GetComponent<PlayerHealth>();
         Blink = false;
+        CharacterSwitch();
     }
 	
 	// Update is called once per frame
