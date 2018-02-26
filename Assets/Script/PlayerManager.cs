@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 { 
-    public string NowType,PossessType;
-    public GameObject NowCharacter;
+    public string NowType;
     private string PreviousType;
 	private TypeValue typevalue;
 	
@@ -18,11 +17,7 @@ public class PlayerManager : MonoBehaviour
 		typevalue = GetComponent<TypeValue> ();
 	}
 
-    private void Start()
-    {
-        NowCharacter = GameObject.Find("Pine");
-    }
-    void Update ()
+	void Update ()
 	{
         if(NowType != PreviousType)//如果數值沒有變化就不做數值改變，反之則要
         {
