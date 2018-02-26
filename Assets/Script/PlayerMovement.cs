@@ -66,12 +66,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (m_IsGrounded == false)
-            Debug.Log(m_Rigidbody.velocity.y) ;
-
-    }
+ 
 
     //固定更新與物理同步調用
     private void FixedUpdate()
@@ -141,17 +136,12 @@ public class PlayerMovement : MonoBehaviour
         {//乘數增加重力：
             //Vector3 extraGravityForce = (Physics.gravity * m_GravityMultiplier) - Physics.gravity;
             m_Rigidbody.AddForce(Physics.gravity);
-           
             m_GroundCheckDistance = m_Rigidbody.velocity.y < 0 ? m_OrigGroundCheckDistance : 0.01f;//上升的时候不判断是否在地面上   
         }
-
         // 将输入和其他状态传递给动画组件  
         UpdateAnimator(move);
-
     }
-
-   
-
+    
     // 更新动画组件 
     void UpdateAnimator(Vector3 move)
     {
@@ -163,7 +153,6 @@ public class PlayerMovement : MonoBehaviour
         {
             m_Animator.SetFloat("Jump", m_Rigidbody.velocity.y);
         }
-
         // 计算哪只脚是在后面的，所以可以判断跳跃动画中哪只脚先离开地面  
         // 这里的代码依赖于特殊的跑步循环，假设某只脚会在未来的0到0.5秒内超越另一只脚  获取当前是在哪个脚，Repeat相当于取模
         float runCycle =
