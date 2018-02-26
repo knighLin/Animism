@@ -8,7 +8,7 @@ public class HPcontroller : MonoBehaviour {
 
     private PlayerHealth PlayerHealth;
     private AnimalHealth AnimalHealth;
-    private PlayerManager PlayerManager;
+    private PlayerManager playerManager;
     public Image HpB, HpW, HpR;//腳色血條圖片
     public Image FaceB, FaceW, FaceR;//腳色臉圖片
     public float BlinkTime;
@@ -19,9 +19,10 @@ public class HPcontroller : MonoBehaviour {
     void Start () {
 
 
-        PlayerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
+        playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
         PlayerHealth = GameObject.Find("Pine").GetComponent<PlayerHealth>();
         Blink = false;
+        CharacterSwitch();
     }
 	
 	// Update is called once per frame
@@ -38,7 +39,7 @@ public class HPcontroller : MonoBehaviour {
 
     public void CharacterSwitch()
     {
-        switch (PlayerManager.NowType)
+        switch (playerManager.PossessType)
         {
             case "Human":
                 FaceB.sprite = Resources.Load("UI/左上/Pine/PINE_BUTTOM", typeof(Sprite)) as Sprite;
@@ -70,7 +71,7 @@ public class HPcontroller : MonoBehaviour {
             if (BlinkTime % 2 < 1)
             {
                 HpR.sprite = Resources.Load("UI/左上/Hp/HP_WHITE", typeof(Sprite)) as Sprite;
-                switch (PlayerManager.NowType)
+                switch (playerManager.PossessType)
                 {
                     case "Human":
                         FaceR.sprite = Resources.Load("UI/左上/Pine/PINE_WHITE", typeof(Sprite)) as Sprite;
@@ -89,7 +90,7 @@ public class HPcontroller : MonoBehaviour {
             else
             {
                 HpR.sprite = Resources.Load("UI/左上/Hp/HP_RED", typeof(Sprite)) as Sprite;
-                switch (PlayerManager.NowType)
+                switch (playerManager.PossessType)
                 {
                     case "Human":
                         FaceR.sprite = Resources.Load("UI/左上/Pine/PINE_RED", typeof(Sprite)) as Sprite;
@@ -111,7 +112,7 @@ public class HPcontroller : MonoBehaviour {
     public void CharacterHpControll()
     {
        
-        switch (PlayerManager.NowType)
+        switch (playerManager.PossessType)
         {
             case "Human":
                 PineHpMax = PlayerHealth.MaxHealth;

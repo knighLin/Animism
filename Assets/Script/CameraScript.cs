@@ -5,9 +5,9 @@ using UnityEngine;
 public class CameraScript : MonoBehaviour {
 
     private PossessedSystem PossessedSystem;
-    private PlayerManager PlayerManager;
+    private PlayerManager playerManager;
     public GameObject PossessTarget;
-    public GameObject PossessEffect,Crosshairs;
+    public GameObject PossessEffect, Crosshairs;
     public GameObject NowCharacter;
     public GameObject MoveEnd, PlayerView;
     public Transform[] AttachedBodyChildren;
@@ -28,11 +28,10 @@ public class CameraScript : MonoBehaviour {
     public bool CanPossess = false;//靈視狀態下才會為true 代表可以附身;
     public bool IsPossessing = false;//附身中為true直到附身結束切回正常狀態才會被重置為false
 
-
     // Use this for initialization
     void Start () {
         PossessedSystem = GameObject.Find("Pine").GetComponent<PossessedSystem>();
-        PlayerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
+        playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
         PossessEffect.SetActive(false);//開始時靈視關閉
         Crosshairs.SetActive(false);//開始時準心關閉
         CameraState = "NormalState";//初始狀態為正常狀態
@@ -177,22 +176,27 @@ public class CameraScript : MonoBehaviour {
         }
         else if (PossessTime >= 0.2 && PossessTime < 0.8)
         {
+
             PossessTime += Time.deltaTime;
+
+            if (PossessTime >= 0.6 && PossessTime < 0.8)
+            {
+                VectorMoveDistance = PossessTarget.transform.position - NormalPosition;//距離為終點減正常位置
+                Move = VectorMoveDistance * Time.deltaTime * 3;
+                transform.position += Move;
+                CameraNowPosition = transform.position;
+            }
         }
-        else if (PossessTime >= 0.8 && PossessTime < 1)
+        else if (PossessTime >= 0.8)
         {
-            PossessTime += Time.deltaTime;
-        }
-        else if (PossessTime >= 1)
-        {
-           // PossessedSystem.InToPossess();
+            PossessedSystem.InToPossess();
             LoadCharacterPosition();//讀取動物鏡頭位置
             CameraState = "NormalState";
         }
     }
     public void LoadCharacterPosition()
     {
-        switch (PlayerManager.NowType)
+        switch (playerManager.PossessType)
         {
             case "Human":
                 NowCharacter = GameObject.Find("Pine");
@@ -200,9 +204,9 @@ public class CameraScript : MonoBehaviour {
                 MoveEnd = GameObject.Find("CamMoveEndPoint");
                 break;
             case "Wolf":
-                NowCharacter = PossessedSystem.AttachedBody;
+                    NowCharacter = PossessTarget;
                     AttachedBodyChildren = PossessedSystem.AttachedBody.GetComponentsInChildren<Transform>();
-                    PlayerView = AttachedBodyChildren[3].transform.gameObject;
+                    PlayerView = AttachedBodyChildren[2].transform.gameObject;
                     MoveEnd = AttachedBodyChildren[1].transform.gameObject;
                 break;
 

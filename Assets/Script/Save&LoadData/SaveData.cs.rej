@@ -1,0 +1,10 @@
+diff a/Assets/Script/Save&LoadData/SaveData.cs b/Assets/Script/Save&LoadData/SaveData.cs	(rejected hunks)
+@@ -26,7 +26,7 @@
+     void Start()
+     {
+         PossessedSystem = GameObject.Find("Pine").GetComponent<PossessedSystem>();
+-
++        PlayerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
+     }
+     private void Update()
+     {
