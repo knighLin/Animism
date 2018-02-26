@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraScript : MonoBehaviour {
+public class CameraScript : MonoBehaviour
+{
 
     private PossessedSystem PossessedSystem;
-    private PlayerManager PlayerManager;
+    private PlayerManager playerManager;
     public GameObject PossessTarget;
-    public GameObject PossessEffect,Crosshairs;
+    public GameObject PossessEffect, Crosshairs;
     public GameObject NowCharacter;
     public GameObject MoveEnd, PlayerView;
     public Transform[] AttachedBodyChildren;
@@ -28,30 +29,31 @@ public class CameraScript : MonoBehaviour {
     public bool CanPossess = false;//靈視狀態下才會為true 代表可以附身;
     public bool IsPossessing = false;//附身中為true直到附身結束切回正常狀態才會被重置為false
 
-
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         PossessedSystem = GameObject.Find("Pine").GetComponent<PossessedSystem>();
-        PlayerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
+        playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
         PossessEffect.SetActive(false);//開始時靈視關閉
         Crosshairs.SetActive(false);//開始時準心關閉
         CameraState = "NormalState";//初始狀態為正常狀態
         AttachedBodyChildren = new Transform[3];//只抓前四個物件(包含本身)
         PlayerView = GameObject.Find("FirstPersonCamPoint");
         MoveEnd = GameObject.Find("CamMoveEndPoint");//一開始取正確腳色位置
-        NowCharacter= GameObject.Find("Pine" );
+        NowCharacter = GameObject.Find("Pine");
         //NormalPosition = GameObject.Find("Pine").transform.rotation * new Vector3(0, 1, -3f) + PlayerView.transform.position;//一開始取得讀取角度
     }
-	
-	// Update is called once per frame
-	void FixedUpdate () {
+
+    // Update is called once per frame
+    void FixedUpdate()
+    {
         if (!IsPossessing) CameraRotate();//如果不是附身模式讓鏡頭可以轉
         NormalPosition = RotationEuler * new Vector3(0, 1, -3f) + PlayerView.transform.position;//每幀確認鏡頭正常的位置 讓前進後退順暢
         switch (CameraState)
         {
             case "NormalState":
                 NormalState();
-                    break;
+                break;
             case "SoulVision":
                 SoulVision();
                 break;
@@ -63,7 +65,7 @@ public class CameraScript : MonoBehaviour {
                 break;
         }
 
-        if (Input.GetKey(KeyCode.E)&& !IsPossessing)//持續按著靈視鍵可以進入靈視 但附身過程或附身後還按著無效(IsPossessing為true)
+        if (Input.GetKey(KeyCode.E) && !IsPossessing)//持續按著靈視鍵可以進入靈視 但附身過程或附身後還按著無效(IsPossessing為true)
             CameraState = "SoulVision";
 
     }
@@ -87,16 +89,16 @@ public class CameraScript : MonoBehaviour {
         else if (Time.timeScale == 0.5f)
         {
             //讀取滑鼠的X、Y軸移動訊息
-            rotX += Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime*2;
-            rotY -= Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime*2;
+            rotX += Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime * 2;
+            rotY -= Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime * 2;
             rotX -= Input.GetAxis("joy3") * sensitivity * Time.deltaTime * 10;
             rotY -= Input.GetAxis("joy4") * sensitivity * Time.deltaTime * 10;
         }
         //保證X在360度以內
-        if      (rotX > 360)rotX -= 360;
-        else if (rotX < 0)  rotX += 360;
-        if      (rotY > 45) rotY = 45;
-        else if (rotY < -45)rotY =-45;
+        if (rotX > 360) rotX -= 360;
+        else if (rotX < 0) rotX += 360;
+        if (rotY > 45) rotY = 45;
+        else if (rotY < -45) rotY = -45;
         //運算攝影機旋轉
         RotationEuler = Quaternion.Euler(rotY, rotX, 0);
         transform.rotation = RotationEuler; //鏡頭轉動
@@ -109,7 +111,7 @@ public class CameraScript : MonoBehaviour {
         if (Physics.Linecast(PlayerView.transform.position, NormalPosition, out hit))
         {
             int HitTag = hit.collider.gameObject.layer;//撞到的物件的layer
-            if (HitTag !=9 && HitTag != 11  )//9為player 11為ragdoll
+            if (HitTag != 9 && HitTag != 11)//9為player 11為ragdoll
             {
                 RedressVector = NormalPosition - hit.point;//如果撞到物件 設一個向量為 撞到的位置和原來鏡頭位置之差
                 transform.position = NormalPosition - RedressVector;//減掉位置差 讓鏡頭移動到撞到的位置 其實值等於 hit.point即可 只是變數留著可以做變化 先不做優化
@@ -164,7 +166,7 @@ public class CameraScript : MonoBehaviour {
         else if (FowardAndBackTime <= 0)
         {
             CameraState = "NormalState";
-        } 
+        }
     }
     public void GettingPossess()
     {
@@ -177,22 +179,27 @@ public class CameraScript : MonoBehaviour {
         }
         else if (PossessTime >= 0.2 && PossessTime < 0.8)
         {
+
             PossessTime += Time.deltaTime;
+
+            if (PossessTime >= 0.6 && PossessTime < 0.8)
+            {
+                VectorMoveDistance = PossessTarget.transform.position - NormalPosition;//距離為終點減正常位置
+                Move = VectorMoveDistance * Time.deltaTime * 3;
+                transform.position += Move;
+                CameraNowPosition = transform.position;
+            }
         }
-        else if (PossessTime >= 0.8 && PossessTime < 1)
+        else if (PossessTime >= 0.8)
         {
-            PossessTime += Time.deltaTime;
-        }
-        else if (PossessTime >= 1)
-        {
-           // PossessedSystem.InToPossess();
+            PossessedSystem.InToPossess();
             LoadCharacterPosition();//讀取動物鏡頭位置
             CameraState = "NormalState";
         }
     }
     public void LoadCharacterPosition()
     {
-        switch (PlayerManager.NowType)
+        switch (playerManager.PossessType)
         {
             case "Human":
                 NowCharacter = GameObject.Find("Pine");
@@ -200,10 +207,10 @@ public class CameraScript : MonoBehaviour {
                 MoveEnd = GameObject.Find("CamMoveEndPoint");
                 break;
             case "Wolf":
-                NowCharacter = PossessedSystem.AttachedBody;
-                    AttachedBodyChildren = PossessedSystem.AttachedBody.GetComponentsInChildren<Transform>();
-                    PlayerView = AttachedBodyChildren[3].transform.gameObject;
-                    MoveEnd = AttachedBodyChildren[1].transform.gameObject;
+                NowCharacter = PossessTarget;
+                AttachedBodyChildren = PossessedSystem.AttachedBody.GetComponentsInChildren<Transform>();
+                PlayerView = AttachedBodyChildren[2].transform.gameObject;
+                MoveEnd = AttachedBodyChildren[1].transform.gameObject;
                 break;
 
         }
