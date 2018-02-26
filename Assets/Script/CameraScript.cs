@@ -111,7 +111,7 @@ public class CameraScript : MonoBehaviour
         if (Physics.Linecast(PlayerView.transform.position, NormalPosition, out hit))
         {
             int HitTag = hit.collider.gameObject.layer;//撞到的物件的layer
-            if (HitTag != 9 && HitTag != 11)//9為player 11為ragdoll
+            if (HitTag != 9 && HitTag != 11&&HitTag!=8)//9為player 11為ragdoll 8為CanPossess
             {
                 RedressVector = NormalPosition - hit.point;//如果撞到物件 設一個向量為 撞到的位置和原來鏡頭位置之差
                 transform.position = NormalPosition - RedressVector;//減掉位置差 讓鏡頭移動到撞到的位置 其實值等於 hit.point即可 只是變數留著可以做變化 先不做優化
@@ -206,7 +206,7 @@ public class CameraScript : MonoBehaviour
                 PlayerView = GameObject.Find("FirstPersonCamPoint");
                 MoveEnd = GameObject.Find("CamMoveEndPoint");
                 break;
-            case "Wolf":
+            case "WolfMaster":
                 NowCharacter = PossessTarget;
                 AttachedBodyChildren = PossessedSystem.AttachedBody.GetComponentsInChildren<Transform>();
                 PlayerView = AttachedBodyChildren[2].transform.gameObject;

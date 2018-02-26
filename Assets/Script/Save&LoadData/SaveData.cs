@@ -53,8 +53,8 @@ public class SaveData : MonoBehaviour
         //定义存档文件路径
         filename = dirpath+ SaveDataName + ".sav";
         //儲存檔案
-        if (GameObject.FindGameObjectsWithTag("Wolf")[0] != null)//抓現在所有狼
-            Wolf = GameObject.FindGameObjectsWithTag("Wolf");
+        if (GameObject.FindGameObjectsWithTag("WolfMaster")[0] != null)//抓現在所有狼
+            Wolf = GameObject.FindGameObjectsWithTag("WolfMaster");
         if (GameObject.FindGameObjectsWithTag("Enemy1")[0] != null) //抓現在所有敵人
             Enemy = GameObject.FindGameObjectsWithTag("Enemy1");
         Save.AnimalState = new List<int> { };                     //創新的List用來存數值
