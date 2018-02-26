@@ -11,7 +11,7 @@ public class AttackHit : MonoBehaviour {
 
     void Awake()
     {
-        typeValue = GameObject.FindWithTag("Human").GetComponent<TypeValue>();
+        typeValue = GameObject.FindWithTag("Player").GetComponent<TypeValue>();
     }
     void OnTriggerEnter(Collider other)//當進入範圍的物件為主角///只後要做範圍的距離判斷，改變敵人攻擊方式
     {
